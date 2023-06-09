@@ -270,11 +270,7 @@ input:focus ~ label {
   background-color: rgba(236, 236, 239, 0.5) !important;
   scale: 1.2;
 }
-.btn{
-  width: 50% !important;
-  display: inline !important;
 
-}
 .btn:hover{
   cursor: pointer;
 
@@ -282,4 +278,11 @@ input:focus ~ label {
 .toggle{
   margin-top: -34%;
   width: 100%;
+}
+.social-links{
+  text-align: center;
+}
+.social-links> a{
+  padding: 5px;
+  font-size:1.5rem
 }

@@ -1,12 +1,12 @@
-const UserController = require("../Controllers/UserController");
+//Registration
+const AuthController = require("../Controllers/AuthController");
 
-const userModel = require("../Models/usersModel");
-
-const userValid = require("../Utils/AuthValidate");
 
 const express = require("express");
 const router = new express.Router();
+const bcrypt = require("bcrypt");
 
-router.get("/", UserController.GetAllUsers);
+
+
 
 module.exports = router;
