@@ -1,11 +1,14 @@
 <img class="clouds" src="https://images.unsplash.com/photo-1467887633195-23e82423e499?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
 		<div class="signup-form">
-      <div  style="display: flex;">
-        <button class="btn"  (click)="filter($event,'signup')">SIGN-UP</button>
+      <div class="toggle " >
+
+        <button class="btn active"  (click)="filter($event,'signup')">SIGN-UP</button>
+
         <button class="btn" (click)="filter($event,'login')">LOGIN</button>
+
       </div>
       <div *ngIf="signup">
-			<header class="signup-header">
+			<header class="signup-header" style="margin-top: 20%;">
 				<h2>Sign Up</h2>
 			</header>
 			<form action="#" class="form">
