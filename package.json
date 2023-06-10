@@ -6,7 +6,6 @@
   "scripts": {
     "test": "jest",
     "start": " node backend/main.js && cd frontend && ng serve"
-
   },
   "repository": {
     "type": "git",
@@ -23,5 +22,6 @@
   },
   "homepage": "https://github.com/omar456-asc/MealPlanner#readme",
   "dependencies": {
+    "jwt-decode": "^3.1.2"
   }
 }
