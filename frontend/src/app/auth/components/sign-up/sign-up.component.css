@@ -1,27 +1,5 @@
 
 
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing : border-box;
-	text-decoration: none;
-	outline: none;
-	list-style: none;
-}
-
-
-*,
-*::before,
-*::after {
-    margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	text-decoration: none;
-	outline: none;
-	list-style: none;
-}
-
-
 /* Remove default margin */
 body,
 h1,
@@ -38,24 +16,6 @@ dd {
 
 
 
-/* Set core root defaults */
-html:focus-within {
-  scroll-behavior: smooth;
-}
-
-/* Set core body defaults */
-body {
-  min-height:  100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font-family: var(--ff-primary);
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
- text-decoration-skip-ink: auto;
-}
-
 /* Make images easier to work with */
 img,
 picture {
@@ -71,44 +31,23 @@ select {
   font: inherit;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-   scroll-behavior: auto;
-  }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
 
 html, body {
 	height: 100%;
 }
-
-
-
-/* ======================================================================== */
-
- /*                      RELATED TO THE TTUTORIAL                        */
-
-/* ======================================================================== */
-
-
-
-
-body {
-	display: grid;
-	place-items: center;
-	background: #3284ce;
-	margin: 0;
-	padding: 0 1.5rem;
+@media (max-width: 2500px) {
+  img{
+    height: 120% !important;
+  }
+  .clouds{
+    transform: translate(0, 20%);
+    animation: 2s infinite alternate linear;
 }
+}
+
+
+
 
 :is(input, button) {
 	width: 100%;
@@ -120,22 +59,6 @@ body {
 	outline: 0;
 }
 
-.clouds {
-	position: fixed;
-	top: 5%;
-	left: 0;
-	width: 3000px;
-	/* height: 1500px; */
-	transform: translate(0, -20%);
-	animation: clouds 5s infinite alternate linear;
-}
-
-@keyframes clouds {
-	100% {
-		transform: translate(-50vw, -55%);
-		transform: scale(1, 1.1);
-	}
-}
 
 .signup-form {
 	position: fixed;
@@ -199,17 +122,7 @@ input:focus ~ label {
 	color: #ffffff;
 }
 
-.input-group img {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	transform: translate(0, -50%);
-	width: 20px;
-	height: 20px;
-	font-size: var(--step--1);
-	color: rgba(0, 0, 0, 0.4);
-	pointer-events: none;
-}
+
 
 :is(input:focus, input:valid) ~ img {
 	color: #2e394d;
@@ -263,22 +176,8 @@ input:focus ~ label {
 	color: #111820;
 	font-size: var(--step--1);
 }
-.active{
-  color: #021d4a !important;
-  /* border-radius: 10px; */
-  box-shadow: 0px 0px 10px 2px rgba(214, 207, 207, 0.4);
-  background-color: rgba(236, 236, 239, 0.5) !important;
-  scale: 1.2;
-}
 
-.btn:hover{
-  cursor: pointer;
 
-}
-.toggle{
-  margin-top: -34%;
-  width: 100%;
-}
 .social-links{
   text-align: center;
 }
