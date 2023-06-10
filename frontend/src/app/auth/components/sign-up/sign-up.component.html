@@ -1,25 +1,28 @@
 
     <div class="">
 			<header class="signup-header" style="margin-top: 20%;">
+        <div class="text-danger" *ngIf="!Validation">
+          {{ validationMessage }}
+        </div>
 				<h2>Sign Up</h2>
+
 			</header>
-			<form action="#" class="form">
+			<form (ngSubmit)="AddNewUser(username.value,email.value,password.value)"
+      [formGroup]="validationForm"   class="form"
+      >
 				<div class="input-group">
-					<input type="text" required>
+					<input #username type="text" required>
 					<label>Username</label>
 				</div>
-				<div class="input-group">
-					<input type="email" required>
+				<div class="input-group" style="background-color: transparent;">
+					<input #email type="email" required>
 					<label>Email</label>
 				</div>
 				<div class="input-group">
-					<input type="password" required pattern=".{8,}">
+					<input #password type="password" required pattern=".{8,}">
 					<label>Password</label>
 				</div>
-			<p>
-				Signed up already? <a href="#">Login here</a>
-			</p>
-			<button type="button">
+			<button type="submit" >
 				Join Us
 			</button>
 			</form>

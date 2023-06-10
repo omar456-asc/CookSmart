@@ -32,11 +32,11 @@ const handleErrors = (e) => {
     return errors;
   }
 
-  if (e.code == 11000) {
-    //Another error if email is already exists
-    errors.username = "this username exists, please try another one";
-    return errors;
-  }
+  // if (e.code == 11000) {
+  //   //Another error if email is already exists
+  //   errors.username = "this username exists, please try another one";
+  //   return errors;
+  // }
   
   //#endregion
 

@@ -4,7 +4,6 @@ const bcrybt = require("bcrypt");
 var path = require("path");
 // const cloudinary = require("cloudinary");
 const dotenv = require("dotenv");
-const usersModel = require("../Models/usersModel");
 
 dotenv.config();
 

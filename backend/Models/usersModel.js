@@ -12,12 +12,12 @@ if (mongoose.connect(DB_URL, { useNewUrlParser: true })) {
 var userSchema = new mongoose.Schema({
   username:{
     type: String, 
-    required: [true, "please enter a username"],
-    unique: [true, "this username exists, please try another one"],
+    required: [true, "Please enter a username"],
+    unique: [true, ],
     lowercase: true,
     minlength: 4,
     maxlength: 16,
-    match: [/^[a-zA-Z0-9]+$/, "please enter a valid username"]}, 
+    match: [/^[a-zA-Z0-9]+$/ ,"please enter a valid username"]}, 
   // cart: { type: Array },
   // favorite: { type: Array , ref:'meals' },
   email: {
