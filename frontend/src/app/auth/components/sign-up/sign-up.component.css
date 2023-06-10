@@ -191,7 +191,7 @@ form {
 }
 
 :is(input:focus, input:valid) ~ label {
-	transform: translate(-30px, -25px);
+	transform: translate(-30px, -35px);
 	scale: .875;
 }
 

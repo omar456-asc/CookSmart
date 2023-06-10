@@ -11,14 +11,14 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 require("dotenv").config();
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 //#region user
 const UserRoutes = require("./Routes/usersRoutes");
-
 const logging = require("./MiddleWares/logging");
 app.use("/", logging);
-
 app.use("/api/users", UserRoutes);
 //#endregion
+
 
 app.listen(PORT, () => {
   console.log("http://localhost:" + PORT);
