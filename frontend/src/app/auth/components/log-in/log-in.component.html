@@ -2,10 +2,15 @@
   <header class="signup-header" style="margin-top: 20%;">
     <h2>Login</h2>
   </header>
-  <form   action="#" class="form">
+  <form (ngSubmit)="Login(email.value, password.value)"
+  [formGroup]="validationForm"   class="form">
     <div class="input-group">
-      <input #email type="email" required>
-      <label>Email</label>
+      <input #email
+      type="email"
+      id="form3Example3"
+      class="form-control"
+      required>
+      <label  for="form3Example3">Email</label>
       <p
       class="text-danger float-start error"
       *ngIf="!isEmailValid"
@@ -16,8 +21,12 @@
 
     <div class="input-group">
 
-      <input #password type="password" required>
-      <label>Password</label>
+      <input #password
+       type="password"
+       id="form3Example4"
+      class="form-control"
+       required>
+      <label for="form3Example4">Password</label>
       <p
       class="text-danger float-start error"
       *ngIf="!isPasswordValid"
@@ -31,7 +40,7 @@
       <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
       <a href="#" class="github"><i class="fa fa-brands fa-github"></i></a>
     </div>
-  <button type="button"  style="margin-top: 10%;">
+  <button type="submit"  style="margin-top: 10%;">
   Login
 
   </button>

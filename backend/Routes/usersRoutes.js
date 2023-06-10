@@ -7,6 +7,7 @@ const router = new express.Router();
 const bcrypt = require("bcrypt");
 
 //#region Authentication
+router.post("/login", AuthController.logIn);
 router.post("/signup", AuthController.AddNewUser);
 //#endregion
 

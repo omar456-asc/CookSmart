@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
 const secret = process.env.SECRET_KEY;
-usersmodel.collection.createIndex({ username: 1 }, { unique: true });
+// usersmodel.collection.createIndex({ username: 1 }, { unique: true });
 
 //#region Errors
 const handleErrors = (e) => {
@@ -82,6 +82,7 @@ const createToken = (id, is_admin) => {
 
 //#region LogIn
 var logIn = async (req, res) => {
+  console.log(req.body);
   const { email, password } = req.body;
   try {
     const user = await usersmodel.login(email, password);

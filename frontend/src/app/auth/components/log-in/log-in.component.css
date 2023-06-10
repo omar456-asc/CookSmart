@@ -177,7 +177,9 @@ input:focus ~ label {
 	font-size: var(--step--1);
 }
 
-
+input :active{
+  border: none;
+}
 .social-links{
   text-align: center;
 }

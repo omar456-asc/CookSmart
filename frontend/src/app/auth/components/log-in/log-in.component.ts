@@ -40,12 +40,13 @@ export class LogInComponent {
   ) {}
   cart: any;
   Login(email: any, password: any) {
-
+console.log(email);
     let logInUser = { email, password };
+    console.log(logInUser);
     this.myService.LOGIN(logInUser).subscribe((response: any) => {
       this.authService.setToken(response.token);
       this.authService.setUserID(response.id);
-      this.router.navigateByUrl('');
+      // this.router.navigateByUrl('');
       // this.getcart();
       // this.checkRole();
     },
