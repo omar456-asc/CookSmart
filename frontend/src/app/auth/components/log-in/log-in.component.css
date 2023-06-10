@@ -1,0 +1,187 @@
+
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+
+
+html, body {
+	height: 100%;
+}
+@media (max-width: 2500px) {
+  img{
+    height: 120% !important;
+  }
+  .clouds{
+    transform: translate(0, 20%);
+    animation: 2s infinite alternate linear;
+}
+}
+
+
+
+
+:is(input, button) {
+	width: 100%;
+	height: 60px;
+	background: transparent;
+	font-family: inherit;
+	font-size: var(--step--1);
+	border: 0;
+	outline: 0;
+}
+
+
+.signup-form {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: min(70%, 390px);
+	height: 100%;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5.8rem 4.2rem;
+}
+
+.signup-form header > h2 {
+	color: #2e394d;
+	font-size: var(--step-1);
+	font-weight: 600;
+	margin: 0 0 .8rem;
+}
+
+form {
+	display: grid;
+	grid-gap: .9rem;
+	margin: 0;
+}
+
+.input-group {
+	position: relative;
+}
+
+.input-group:not(:last-of-type) {
+	margin-bottom: 1rem;
+}
+
+.input-group input {
+	height: 72px;
+	color: rgba(0, 0, 0, 0.96);
+	border-bottom: 2px solid #2e394d;
+	padding: 0 1.8rem 0 2.2rem;
+}
+
+.input-group input:focus {
+	border-bottom-color: #778395;
+	transition: .2s;
+}
+
+.input-group label {
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	transform: translate(0, -50%);
+	color: #2e394d;
+	pointer-events: none;
+	transition: .4s;
+}
+
+:is(input:focus, input:valid) ~ label {
+	transform: translate(-30px, -25px);
+	scale: .875;
+}
+
+input:focus ~ label {
+	color: #ffffff;
+}
+
+
+
+:is(input:focus, input:valid) ~ img {
+	color: #2e394d;
+}
+
+.form button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: white;
+	background: #1a2639;
+	font-family: inherit;
+	font-weight: 400;
+	border-radius: .4rem;
+	padding: 0 40%;
+	cursor: pointer;
+}
+
+.form button i {
+	color: rgb(255 255 255 / 96%);
+}
+
+.signup-form p {
+	color: #778395;
+	margin-bottom: 1rem;
+}
+
+.signup-form p > a {
+	color: #2e394d;
+	padding-left: .3rem;
+  text-decoration: underline;
+  font-size:smaller;
+
+}
+
+
+.copy {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-30%, -50%);
+	font-size: var(--step-0);
+	font-weight: 200;
+}
+
+.copy p {
+	color: #2b3442;
+}
+
+.copy a {
+	color: #111820;
+	font-size: var(--step--1);
+}
+
+
+.social-links{
+  text-align: center;
+}
+.social-links> a{
+  padding: 5px;
+  font-size:1.5rem
+}

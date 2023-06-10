@@ -1,14 +1,5 @@
-<img class="clouds" src="https://images.unsplash.com/photo-1467887633195-23e82423e499?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
-		<div class="signup-form">
-      <div class="toggle row" >
-<div class="col-6">
-        <button class="btn active"  (click)="filter($event,'signup')">SIGN-UP</button>
-</div>
-<div class="col-6">
-        <button class="btn" (click)="filter($event,'login')">LOGIN</button>
-</div>
-      </div>
-      <div *ngIf="signup">
+
+    <div class="">
 			<header class="signup-header" style="margin-top: 20%;">
 				<h2>Sign Up</h2>
 			</header>
@@ -30,37 +21,6 @@
 			</p>
 			<button type="button">
 				Join Us
-
 			</button>
 			</form>
     </div>
-
-    <div *ngIf="login">
-			<header class="signup-header " style="margin-top: 20%;">
-				<h2>Login</h2>
-			</header>
-			<form action="#" class="form">
-				<div class="input-group">
-					<input type="email" required>
-					<label>Email</label>
-				</div>
-				<div class="input-group">
-
-					<input type="password" required pattern=".{8,}">
-					<label>Password</label>
-				</div>
-        <div class="social-links">
-          <a href="#" class="facebook"><i class="fa fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="google"><i class="fa fa-brands fa-google"></i></a>
-          <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
-          <a href="#" class="github"><i class="fa fa-brands fa-github"></i></a>
-        </div>
-			<button type="button"  style="margin-top: 10%;">
-			Login
-
-			</button>
-			</form>
-    </div>
-		</div>
-
-
