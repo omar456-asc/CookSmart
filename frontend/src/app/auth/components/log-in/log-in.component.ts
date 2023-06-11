@@ -71,15 +71,21 @@ console.log(email);
     );
   }
   sendEmail(email:any){
+    if(email){
     let resetemail = { email };
-    console.log(resetemail);
     this.reset.sendresetemail(resetemail).subscribe((response: any) => {
      console.log(response);
     },
     (err) => {
-      console.log(err);
+      console.log(err)
+     if(err.error.message =='User not found'){
+      this.emailMsg='this email isn\'t registered'
+     }
     }
-    );
+    );}
+    else{
+      this.emailMsg = 'please enter your email';
+    }
   }
 
 //   getcart() {
