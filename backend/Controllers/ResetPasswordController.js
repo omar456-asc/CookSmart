@@ -3,7 +3,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-const usersModel = require("../Models/usersModel");
 const bcrybt = require("bcrypt");
 const secret = process.env.SECRET_KEY;
 const transporter = nodemailer.createTransport({
