@@ -20,7 +20,7 @@ export class SignUpComponent {
       (data)=>{
         this.authUser=data;
         console.log(this.authUser);
-          this.router.navigateByUrl('/login');
+          // this.router.navigateByUrl('/login');
       },
       (err)=>{
         if(err.error.message.username != ''){
