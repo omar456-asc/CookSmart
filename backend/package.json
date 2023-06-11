@@ -12,6 +12,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.1",
     "nodemailer": "^6.9.3",
+    "salt": "^0.5.5",
     "validator": "^13.9.0"
   }
 }

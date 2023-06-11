@@ -1,7 +1,11 @@
-
+let usersmodel = require("../Models/usersModel");
+const dotenv = require("dotenv");
+dotenv.config();
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-
+const usersModel = require("../Models/usersModel");
+const bcrybt = require("bcrypt");
+const secret = process.env.SECRET_KEY;
 const transporter = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
   port: 2525,
@@ -11,26 +15,29 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-app.post('/api/reset-password', async (req, res) => {
+var resetpw= async (req, res) => {
   const { email } = req.body;
 
   // Check if the user exists in the database
-  const user = await User.findOne({ email });
+  const user = await usersmodel.findOne({ email });
 
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
 
   // Generate a unique token
-  const token = jwt.sign({ userId: user._id }, secret, { expiresIn: '24h' });
+  const id= user._id
 
   // Send an email to the user with a link to the password reset page
-  const resetUrl = `https://your-domain.com/reset-password/${token}`;
+  const resetUrl = `http://localhost:4200/reset-password/${email}`;
   const mailOptions = {
-    from: 'Your Name <your-email-address@gmail.com>',
+    from: 'cookSmart@gmail.com',
     to: email,
     subject: 'Password Reset Request',
-    text: `Please click the following link to reset your password: ${resetUrl}`
+    html: `
+    <p>Please click the following button to reset your password:</p>
+    <a href="${resetUrl}"><button>Reset Password</button></a>
+  `
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -42,58 +49,35 @@ app.post('/api/reset-password', async (req, res) => {
     console.log(`Email sent: ${info.response}`);
     return res.status(200).json({ message: 'Password reset email sent' });
   });
-});
+}
 
-app.get('/api/reset-password/:token', async (req, res) => {
-  const { token } = req.params;
-
-  // Verify the token
-  try {
-    const decoded = jwt.verify(token, secret);
-    const userId = decoded.userId;
-
-    // Render the password reset page with the token and user ID in the URL
-    res.render('reset-password', { token, userId });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ message: 'Invalid token' });
+ var getToken=async (req, res) => {
+  const email  = req.params.email;
+ 
+try{
+    const user = await usersmodel.findOne({ email });
+    console.log(user)
+    console.log(user._id)
+    var updatedUser = req.body;
+    console.log(updatedUser)
+    const salt = await bcrybt.genSalt();
+    await usersmodel.updateOne(
+      { _id: user._id },
+      {
+        password: await bcrybt.hash(updatedUser.password, salt),
+      }
+    );
+    await res.send(updatedUser);
+}catch (e) {
+    console.log(e);
+    res.status(400).send("failed to update new user");
   }
-});
 
-app.post('/api/reset-password/:token', async (req, res) => {
-  const { token } = req.params;
-  const { userId, password } = req.body;
+}
 
-  // Verify the token
-  try {
-    const decoded = jwt.verify(token, secret);
 
-    if (decoded.userId !== userId) {
-      return res.status(400).json({ message: 'Invalid token' });
-    }
 
-    // Update the user's password
-    const user = await User.findById(userId);
-
-    // if (!user)(Note: This is the continuation of the Node.js code from the previous message due to character limit)
-
-    // Update the user's password
-    const User = await User.findById(userId);
-
-    if (!User) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    user.password = newPassword;
-    await user.save();
-
-    return res.status(200).json({ message: 'Password updated successfully' });
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({ message: 'Invalid token' });
-  }
-});
-
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
-});
+module.exports={
+    resetpw,
+    getToken
+}

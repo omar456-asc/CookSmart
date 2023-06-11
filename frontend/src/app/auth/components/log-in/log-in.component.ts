@@ -3,6 +3,7 @@ import { LogInService } from '../../services/log-in/log-in.service';
 import { AuthService } from '../../services/log-in/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResetPasswordService } from './reset-password/service/reset-password.service';
 // import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { SharedService } from 'src/app/shared/services/shared.service';
 
@@ -35,6 +36,7 @@ export class LogInComponent {
     private myService: LogInService,
     private authService: AuthService,
     private router: Router,
+    private reset: ResetPasswordService
     // private usercart: AllMealsService,
     // private shared: SharedService
   ) {}
@@ -65,6 +67,17 @@ console.log(email);
       } else {
         this.passwordMsg = 'Incorrect password , please try again';
       }
+    }
+    );
+  }
+  sendEmail(email:any){
+    let resetemail = { email };
+    console.log(resetemail);
+    this.reset.sendresetemail(resetemail).subscribe((response: any) => {
+     console.log(response);
+    },
+    (err) => {
+      console.log(err);
     }
     );
   }
