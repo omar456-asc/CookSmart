@@ -187,3 +187,7 @@ input :active{
   padding: 5px;
   font-size:1.5rem
 }
+.onhover:hover{
+  color: #1a2639 !important;
+  cursor: pointer;
+}
