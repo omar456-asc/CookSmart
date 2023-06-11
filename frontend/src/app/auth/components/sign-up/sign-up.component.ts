@@ -20,11 +20,16 @@ export class SignUpComponent {
       (data)=>{
         this.authUser=data;
         console.log(this.authUser);
-          this.router.navigateByUrl('/login');
+          // this.router.navigateByUrl('/login');
       },
       (err)=>{
         if(err.error.message.username != ''){
-            this.validationMessage = err.error.message.username;
+          if(err.error.message.username == 'Path `username` is required.'){
+            this.validationMessage = 'Please enter a username'
+          }
+          else{
+            // this.validationMessage = 'First name must be longer than 3 letters'
+          }
         }
         else if(err.error.message.email != ''){ //
           this.validationMessage = err.error.message.email;

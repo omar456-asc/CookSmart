@@ -73,8 +73,8 @@ var AddNewUser = async (req, res) => {
 
 //#region JWT
 const maxDay = 3 * 24 * 60 * 60; // The days i logged in then expires
-const createToken = (id, is_admin) => {
-  return jwt.sign({ id, is_admin }, secret, {
+const createToken = (id) => {
+  return jwt.sign({ id }, secret, {
     expiresIn: maxDay,
   }); //id, secret
 };
@@ -86,8 +86,8 @@ var logIn = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await usersmodel.login(email, password);
-    console.log("role and id", user.id, user.is_admin);
-    const token = createToken(user.id, user.is_admin);
+    console.log("id", user.id);
+    const token = createToken(user.id);
     res.cookie("token", token, { maxAge: maxDay * 1000 });
 
     res.status(200);

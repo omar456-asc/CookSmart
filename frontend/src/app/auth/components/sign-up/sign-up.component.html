@@ -11,15 +11,15 @@
       [formGroup]="validationForm"   class="form"
       >
 				<div class="input-group">
-					<input #username type="text" required>
+					<input class="form-control" #username type="text" required>
 					<label>Username</label>
 				</div>
 				<div class="input-group" style="background-color: transparent;">
-					<input #email type="email" required>
+					<input class="form-control" #email type="email" required>
 					<label>Email</label>
 				</div>
 				<div class="input-group">
-					<input #password type="password" required pattern=".{8,}">
+					<input  class="form-control" #password type="password" required pattern=".{8,}">
 					<label>Password</label>
 				</div>
 			<button type="submit" >
