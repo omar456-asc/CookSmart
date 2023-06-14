@@ -8,9 +8,10 @@ import { TeamMemberComponent } from './components/team-member/team-member.compon
 import { LatestBlogComponent } from './components/latest-blog/latest-blog.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent, LatestBlogComponent, ContactUsComponent, ContactFormComponent],
+  declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent, LatestBlogComponent, ContactUsComponent, ContactFormComponent, FooterComponent],
   imports: [CommonModule],
   exports: [HomeComponent, HeroComponent],
 })
