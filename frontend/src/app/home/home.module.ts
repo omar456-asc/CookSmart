@@ -5,9 +5,10 @@ import { HeroComponent } from './components/hero/hero.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WhyUsComponent } from './components/why-us/why-us.component';
 import { TeamMemberComponent } from './components/team-member/team-member.component';
+import { LatestBlogComponent } from './components/latest-blog/latest-blog.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent],
+  declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent, LatestBlogComponent],
   imports: [CommonModule],
   exports: [HomeComponent, HeroComponent],
 })
