@@ -127,12 +127,12 @@
     margin: 0 10px;
     animation-delay: 0.8s;
     color: #fff;
-    border: 2px solid #bc3b2c;
+    border: 2px solid #303b50;
 }
 
 #hero .btn-menu:hover,
 #hero .btn-book:hover {
-    background: #bc3b2c;
+    background: #303b50;
     color: #fff;
 }
 
