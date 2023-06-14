@@ -43,7 +43,7 @@ section {
   margin: 15px 0 0 0;
   font-size: 32px;
   font-weight: 700;
-  color: rgb(224, 224, 225);
+  color: #afbacf;
 }
 
 .section-title h2 span {
@@ -53,7 +53,7 @@ section {
 .section-title p {
   margin: 15px auto 0 auto;
   font-weight: 300;
-  color: rgb(224, 224, 225);
+  color: #303b50;
 }
 
 @media (min-width: 1024px) {
