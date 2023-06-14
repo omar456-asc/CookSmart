@@ -7,14 +7,19 @@ import { AuthModule } from './auth/auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { HomeModule } from './home/home.module';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,
-     AppRoutingModule,
-     AuthModule ,
-     FormsModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    FormsModule,
     ReactiveFormsModule,
-    HttpClientModule],
+    HttpClientModule,
+    HomeModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
