@@ -55,12 +55,15 @@ const handleErrors = (e) => {
 //#region SignUp
 var AddNewUser = async (req, res) => {
   const { username, email, password } = req.body;
+  const verificationCode = Math.floor(100000 + Math.random() * 900000)
+
   try {
     const usersModelCreate = await usersmodel.create({
       username ,
       unique: true ,
       email,
       password,
+      verificationCode
     });
     const token = createToken(usersModelCreate);
     res.json({ status: "success" });
