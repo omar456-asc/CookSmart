@@ -1,55 +1,8 @@
-.why-us {
-    background-color: rgb(255, 255, 255);
+.btn-outline-primary {
+    color: #990000;
+    border-color: #990000;
 }
 
-.why-us .box {
-    background: #303b50;
-    padding: 50px 30px;
-    box-shadow: 7px 7px 15px rgba(255, 224, 224, 0.1);
-    transition: all ease-in-out 0.3s;
-    height: 100%;
-}
-
-.why-us .box span {
-    display: block;
-    font-size: 28px;
-    font-weight: 700;
-    color: #303b50;
-}
-
-.why-us .box h4 {
-    font-size: 24px;
-    font-weight: 600;
-    padding: 0;
-    margin: 20px 0;
-    color: rgb(224, 224, 225);
-}
-
-.why-us .box p {
-    color: rgb(224, 224, 225);
-    font-size: 15px;
-    margin: 0;
-    padding: 0;
-}
-
-.why-us .box:hover {
-    background: #afbacf;
-    padding: 30px 30px 70px 30px;
-    box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.18);
-}
-
-.why-us .box:hover span,
-.why-us .box:hover h4,
-.why-us .box:hover p {
-    color: #303b50;
-}
-
-@media (max-width: 1024px) {
-    .section-title p {
-        margin-left: 5px;
-    }
-
-    .row .box {
-        margin-left: 5px;
-    }
+.btn-outline-primary:hover {
+    background-color: #990000;
 }

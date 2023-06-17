@@ -1,154 +1,96 @@
-#hero {
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.8);
-    overflow: hidden;
-    padding: 0;
-}
-
-#hero .carousel-item {
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-
-}
-
-#hero .carousel-item::before {
-    content: "";
-    background-color: rgba(12, 11, 10, 0.5);
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
-#hero .carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
+/*** Header ***/
+.carousel-caption {
     top: 0;
     left: 0;
     right: 0;
-}
-
-#hero .carousel-content {
-    text-align: center;
-}
-
-#hero h2 {
-    color: #fff;
-    margin-bottom: 30px;
-    font-size: 48px;
-    font-weight: 700;
-}
-
-#hero h2 span {
-    color: #2e394d;
-}
-
-#hero p {
-    width: 80%;
-    animation-delay: 0.4s;
-    margin: 0 auto 30px auto;
-    color: #fff;
-}
-
-#hero .carousel-inner .carousel-item {
-    transition-property: opacity;
-    background-position: center top;
-}
-
-#hero .carousel-inner .carousel-item,
-#hero .carousel-inner .active.carousel-item-start,
-#hero .carousel-inner .active.carousel-item-end {
-    opacity: 0;
-}
-
-#hero .carousel-inner .active,
-#hero .carousel-inner .carousel-item-next.carousel-item-start,
-#hero .carousel-inner .carousel-item-prev.carousel-item-end {
-    opacity: 1;
-    transition: 0.5s;
-}
-
-#hero .carousel-inner .carousel-item-next,
-#hero .carousel-inner .carousel-item-prev,
-#hero .carousel-inner .active.carousel-item-start,
-#hero .carousel-inner .active.carousel-item-end {
-    left: 0;
-    transform: translate3d(0, 0, 0);
-}
-
-#hero .carousel-control-next-icon,
-#hero .carousel-control-prev-icon {
-    background: none;
-    font-size: 30px;
-    line-height: 0;
-    width: auto;
-    height: auto;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
-    transition: 0.3s;
-    color: rgba(255, 255, 255, 0.5);
-    width: 54px;
-    height: 54px;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: start;
+    z-index: 1;
 }
 
-#hero .carousel-control-next-icon:hover,
-#hero .carousel-control-prev-icon:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.8);
+.carousel-control-prev,
+.carousel-control-next {
+    width: 15%;
 }
 
-#hero .carousel-indicators li {
-    cursor: pointer;
-}
-
-#hero .btn-menu,
-#hero .btn-book {
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 50px;
-    transition: 0.5s;
-    line-height: 1;
-    margin: 0 10px;
-    animation-delay: 0.8s;
-    color: #fff;
-    border: 2px solid #303b50;
-}
-
-#hero .btn-menu:hover,
-#hero .btn-book:hover {
-    background: #303b50;
-    color: #fff;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: #2e394d;
+    border: 10px solid #2e394d;
+    border-radius: 3rem;
 }
 
 @media (max-width: 768px) {
-    #hero h2 {
-        font-size: 28px;
+    #header-carousel .carousel-item {
+        position: relative;
+        min-height: 450px;
+    }
+
+    #header-carousel .carousel-item img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
-@media (min-width: 1024px) {
-    #hero p {
-        width: 50%;
-    }
+.page-header {
+    padding-top: 12rem;
+    padding-bottom: 6rem;
+    background: url(../../../../assets/img/carousel-1.jpg) top right no-repeat;
+    background-size: cover;
+}
 
-    #hero .carousel-control-prev,
-    #hero .carousel-control-next {
-        width: 5%;
-    }
+.breadcrumb-item+.breadcrumb-item::before {
+    color: #999999;
+}
+
+
+/*** Section Header ***/
+.section-header {
+    position: relative;
+    padding-top: 25px;
+}
+
+.section-header::before {
+    position: absolute;
+    content: "";
+    width: 60px;
+    height: 2px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2e394d;
+}
+
+.section-header::after {
+    position: absolute;
+    content: "";
+    width: 90px;
+    height: 2px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #990000;
+}
+
+.section-header.text-start::before,
+.section-header.text-start::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+.btn-primary {
+    background-color: #2e394d;
+    border-color: #2e394d;
+}
+
+.btn-secondary {
+    background-color: #990000;
+    border-color: #990000;
 }

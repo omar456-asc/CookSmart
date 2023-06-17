@@ -1,96 +1,105 @@
-<!-- ======= Contact Section ======= -->
-<main id="main">
-  <section id="contact" class="contact">
-    <div class="cont-form container mt-5">
-      <div class="info-wrap">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 info">
-            <i class="bi bi-geo-alt"></i>
-            <h4>Location:</h4>
-            <p>
-              Mahmoud Salamah, Kom Ad Dakah Gharb, Al Attarin<br />Alexandria
-              Governorate
-            </p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
-            <i class="bi bi-clock"></i>
-            <h4>Open Hours:</h4>
-            <p>Friday-Saturday:<br />24 hours</p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
-            <i class="bi bi-envelope"></i>
-            <h4>Email:</h4>
-            <p>info@example.com<br />contact@example.com</p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
-            <i class="bi bi-phone"></i>
-            <h4>Call:</h4>
-            <p>+1 5589 55488 51<br />+1 5589 22475 14</p>
+<!-- Contact Start -->
+<div class="container-xxl py-6">
+  <div class="container">
+    <div class="row g-5 justify-content-center">
+      <div class="col-lg-5 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+        <div
+          class="table text-white d-flex flex-column justify-content-center h-100 p-5"
+        >
+          <h5 class="text-white">Call Us</h5>
+          <p class="mb-5"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+          <h5 class="text-white">Email Us</h5>
+          <p class="mb-5">
+            <i class="fa fa-envelope me-3"></i>info@example.com
+          </p>
+          <h5 class="text-white">Office Address</h5>
+          <p class="mb-5">
+            <i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA
+          </p>
+          <h5 class="text-white">Follow Us</h5>
+          <div class="d-flex pt-2">
+            <a
+              class="btn btn-square btn-outline-light rounded-circle me-1"
+              href=""
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              class="btn btn-square btn-outline-light rounded-circle me-1"
+              href=""
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              class="btn btn-square btn-outline-light rounded-circle me-1"
+              href=""
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a
+              class="btn btn-square btn-outline-light rounded-circle me-0"
+              href=""
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
           </div>
         </div>
       </div>
-
-      <form
-        action="forms/contact.php"
-        method="post"
-        role="form"
-        class="php-email-form"
-      >
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <input
-              type="text"
-              name="name"
-              class="form-control"
-              id="name"
-              placeholder="Your Name"
-              required
-            />
+      <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Your Name"
+                />
+                <label for="name">Your Name</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Your Email"
+                />
+                <label for="email">Your Email</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subject"
+                  placeholder="Subject"
+                />
+                <label for="subject">Subject</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  placeholder="Leave a message here"
+                  id="message"
+                  style="height: 200px"
+                ></textarea>
+                <label for="message">Message</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button
+                class="btnn btn btn-primary rounded-pill py-3 px-5"
+                type="submit"
+              >
+                Send Message
+              </button>
+            </div>
           </div>
-          <div class="col-md-6 form-group mt-3 mt-md-0">
-            <input
-              type="email"
-              class="form-control"
-              name="email"
-              id="email"
-              placeholder="Your Email"
-              required
-            />
-          </div>
-        </div>
-        <div class="form-group mt-3">
-          <input
-            type="text"
-            class="form-control"
-            name="subject"
-            id="subject"
-            placeholder="Subject"
-            required
-          />
-        </div>
-        <div class="form-group mt-3">
-          <textarea
-            class="form-control"
-            name="message"
-            rows="5"
-            placeholder="Message"
-            required
-          ></textarea>
-        </div>
-        <div class="my-3">
-          <div class="loading">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message">Your message has been sent. Thank you!</div>
-        </div>
-        <div class="text-center">
-          <button type="submit">Send Message</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </section>
-  <!-- End Contact Section -->
-</main>
-<!-- End #main -->
+  </div>
+</div>
+<!-- Contact End -->

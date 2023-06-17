@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css";
+/* @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 
 .preloader {
@@ -10,8 +10,13 @@
     display: none;
 }
 
+
 @media (max-width: 1024px) {
     body {
         overflow-x: hidden !important;
     }
+} */
+
+.spinner-border {
+    color: #990000;
 }

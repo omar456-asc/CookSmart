@@ -1,63 +1,90 @@
-body {
-  font-family: "Poppins", sans-serif;
-  color: #444444;
+/********** Template CSS **********/
+:root {
+    --primary: #2e394d;
+    --secondary: #990000;
+    --light: #F7F8FC;
+    --dark: #111111;
 }
 
-a {
-  text-decoration: none;
-  color: #303b50;
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 30px;
+    bottom: 30px;
+    z-index: 99;
+    background-color: #2e394d;
+    border-color: #2e394d;
 }
 
-a:hover {
-  color: #303b50;
-  text-decoration: none;
+.back-to-top:hover {
+    background-color: #990000;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Satisfy", sans-serif;
+.my-6 {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.py-6 {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.bg-icon {
+    background: url(../img/bg-icon.png) center center repeat;
+    background-size: contain;
 }
 
 
-/*--------------------------------------------------------------
-# Sections General
---------------------------------------------------------------*/
-section {
-  padding: 60px 0;
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
 }
 
-.section-bg {
-  background-color: white;
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
 }
 
-.section-title {
-  text-align: center;
-  padding-bottom: 30px;
+
+/*** Button ***/
+.btn {
+    font-weight: 500;
+    transition: .5s;
 }
 
-.section-title h2 {
-  margin: 15px 0 0 0;
-  font-size: 32px;
-  font-weight: 700;
-  color: #afbacf;
+.btn.btn-primary,
+.btn.btn-secondary,
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-secondary:hover {
+    color: #FFFFFF;
 }
 
-.section-title h2 span {
-  color: #303b50;
+.btn-square {
+    width: 38px;
+    height: 38px;
 }
 
-.section-title p {
-  margin: 15px auto 0 auto;
-  font-weight: 300;
-  color: #303b50;
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
 }
 
-@media (min-width: 1024px) {
-  .section-title p {
-    width: 50%;
-  }
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
 }

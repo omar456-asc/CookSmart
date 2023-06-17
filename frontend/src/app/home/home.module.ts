@@ -9,9 +9,12 @@ import { LatestBlogComponent } from './components/latest-blog/latest-blog.compon
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ProductsComponent } from './components/products/products.component';
+import { RecommendationComponent } from './components/recommendation/recommendation.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent, LatestBlogComponent, ContactUsComponent, ContactFormComponent, FooterComponent],
+  declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent, LatestBlogComponent, ContactUsComponent, ContactFormComponent, FooterComponent, AboutUsComponent, ProductsComponent, RecommendationComponent],
   imports: [CommonModule],
   exports: [HomeComponent, HeroComponent],
 })
