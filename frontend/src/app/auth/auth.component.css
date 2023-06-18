@@ -1,0 +1,297 @@
+
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing : border-box;
+	text-decoration: none;
+	outline: none;
+	list-style: none;
+}
+
+
+*,
+*::before,
+*::after {
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	outline: none;
+	list-style: none;
+}
+
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height:  100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: var(--ff-primary);
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+ text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+}
+
+html, body {
+	height: 100%;
+}
+@media (max-width: 2500px) {
+  img{
+    height: 120% !important;
+  }
+  .clouds{
+    transform: translate(0, 20%);
+    animation: 2s infinite alternate linear;
+}
+}
+
+
+/* ======================================================================== */
+
+ /*                      RELATED TO THE TTUTORIAL                        */
+
+/* ======================================================================== */
+
+
+
+
+body {
+	display: grid;
+	place-items: center;
+	background: #3284ce;
+	margin: 0;
+	padding: 0 1.5rem;
+}
+
+:is(input, button) {
+	width: 100%;
+	height: 60px;
+	background: transparent;
+	font-family: inherit;
+	font-size: var(--step--1);
+	border: 0;
+	outline: 0;
+}
+
+.clouds {
+	position: fixed;
+	top: 5%;
+	left: 0;
+	width: 3000px;
+	/* height: 1500px; */
+	transform: translate(0, -20%);
+	animation: clouds 5s infinite alternate linear;
+}
+
+@keyframes clouds {
+	100% {
+		transform: translate(-50vw, -55%);
+		transform: scale(1, 1.1);
+	}
+}
+
+.signup-form {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: min(70%, 390px);
+	height: 100%;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5.8rem 4.2rem;
+}
+
+.signup-form header > h2 {
+	color: #2e394d;
+	font-size: var(--step-1);
+	font-weight: 600;
+	margin: 0 0 .8rem;
+}
+
+form {
+	display: grid;
+	grid-gap: .9rem;
+	margin: 0;
+}
+
+.input-group {
+	position: relative;
+}
+
+.input-group:not(:last-of-type) {
+	margin-bottom: 1rem;
+}
+
+.input-group input {
+	height: 72px;
+	color: rgba(0, 0, 0, 0.96);
+	border-bottom: 2px solid #2e394d;
+	padding: 0 1.8rem 0 2.2rem;
+}
+
+.input-group input:focus {
+	border-bottom-color: #778395;
+	transition: .2s;
+}
+
+.input-group label {
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	transform: translate(0, -50%);
+	color: #2e394d;
+	pointer-events: none;
+	transition: .4s;
+}
+
+:is(input:focus, input:valid) ~ label {
+	transform: translate(-30px, -25px);
+	scale: .875;
+}
+
+input:focus ~ label {
+	color: #ffffff;
+}
+
+.input-group img {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(0, -50%);
+	width: 20px;
+	height: 20px;
+	font-size: var(--step--1);
+	color: rgba(0, 0, 0, 0.4);
+	pointer-events: none;
+}
+
+:is(input:focus, input:valid) ~ img {
+	color: #2e394d;
+}
+
+.form button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: white;
+	background: #1a2639;
+	font-family: inherit;
+	font-weight: 400;
+	border-radius: .4rem;
+	padding: 0 40%;
+	cursor: pointer;
+}
+
+.form button i {
+	color: rgb(255 255 255 / 96%);
+}
+
+.signup-form p {
+	color: #778395;
+	margin-bottom: 1rem;
+}
+
+.signup-form p > a {
+	color: #2e394d;
+	padding-left: .3rem;
+  text-decoration: underline;
+  font-size:smaller;
+
+}
+
+
+.copy {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-30%, -50%);
+	font-size: var(--step-0);
+	font-weight: 200;
+}
+
+.copy p {
+	color: #2b3442;
+}
+
+.copy a {
+	color: #111820;
+	font-size: var(--step--1);
+}
+.active{
+  color: #021d4a !important;
+  /* border-radius: 10px; */
+  box-shadow: 0px 0px 10px 2px rgba(214, 207, 207, 0.4);
+  background-color: rgba(236, 236, 239, 0.5) !important;
+  scale: 1.2;
+}
+
+.btn:hover{
+  cursor: pointer;
+
+}
+.toggle{
+  margin-top: -34%;
+  width: 100%;
+}
+.social-links{
+  text-align: center;
+}
+.social-links> a{
+  padding: 5px;
+  font-size:1.5rem
+}

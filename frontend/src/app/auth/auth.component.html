@@ -1,0 +1,13 @@
+<img class="clouds" src="https://images.unsplash.com/photo-1467887633195-23e82423e499?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+		<div class="signup-form ">
+      <div class="toggle row" >
+<div class="col-6">
+        <button class="btn active"  (click)="filter($event,'signup')">SIGN-UP</button>
+</div>
+<div class="col-6">
+        <button class="btn" (click)="filter($event,'login')">LOGIN</button>
+</div>
+      </div>
+<app-sign-up *ngIf="signup" ></app-sign-up>
+<app-log-in *ngIf="login"></app-log-in>
+		</div>

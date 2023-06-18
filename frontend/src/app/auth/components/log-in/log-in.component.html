@@ -1,0 +1,49 @@
+<div >
+  <header class="signup-header" style="margin-top: 20%;">
+    <h2>Login</h2>
+  </header>
+  <form (ngSubmit)="Login(email.value, password.value)"
+  [formGroup]="validationForm"   class="form">
+    <div class="input-group">
+      <input #email
+      type="email"
+      id="form3Example3"
+      class="form-control"
+      required>
+      <label  for="form3Example3">Email</label>
+      <p
+      class="text-danger float-start error"
+      *ngIf="!isEmailValid"
+    >
+      {{ emailMsg }}
+    </p>
+    </div>
+
+    <div class="input-group">
+
+      <input #password
+       type="password"
+       id="form3Example4"
+      class="form-control"
+       required>
+      <label for="form3Example4">Password</label>
+      <p
+      class="text-danger float-start error"
+      *ngIf="!isPasswordValid"
+    >
+      {{ passwordMsg }}
+    </p>
+    </div>
+
+  <button type="submit"  style="margin-top: 10%;">
+  Login
+
+  </button>
+  <div class="social-links" >
+    <a href="#" class="facebook" style="color: #778395;"><i class="fa fa-brands fa-facebook-f"></i></a>
+    <a href="#" class="google" style="color: #778395;"><i class="fa fa-brands fa-google"></i></a>
+    <a href="#" class="twitter" style="color: #778395;"><i class="fa fa-brands fa-twitter"></i></a>
+    <a href="#" class="github" style="color: #778395;"><i class="fa fa-brands fa-github"></i></a>
+  </div>
+  </form>
+</div>
