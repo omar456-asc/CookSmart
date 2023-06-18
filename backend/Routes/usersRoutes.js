@@ -11,6 +11,10 @@ router.post("/login", AuthController.logIn);
 router.post("/signup", AuthController.AddNewUser);
 //#endregion
 
+//#region verification
+router.get('/verify/:code', AuthController.getVerificationCode);
+//#endregion
+
 //#region User
 // router.get("/latest8users", authuserMiddleware, UserController.getLatest8users);
 router.get("/",  UserController.GetAllUsers);

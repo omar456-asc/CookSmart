@@ -101,22 +101,25 @@ var AddNewUser = async (req, res) => {
 };
 //#endregion
 //#region get verification code
-getVerificationCode= async (req, res) => {
+var getVerificationCode= async (req, res) => {
   const { code } = req.params;
+ 
    // Check if the user exists in the database
-   const user = await usersmodel.findOne({ code });
+   const user = await usersmodel.findOne({verificationCode:code});
    if (user) {
+
     await usersmodel.updateOne(
       { _id: user._id },
       {
         isVerified: true,
       }
     );
-    await res.send(updatedUser);
+  
 
-    res.send(`<h1>Email address verified</h1><p>Thank you for verifying your email address.</p>`);
+    res.send("done");
   } else {
-    res.status(404).send(`<h1>Invalid verification code</h1><p>The verification code you provided is invalid.</p>`);
+     console.log('error')
+    res.status(404).send("invalid");
   }
 
 }
