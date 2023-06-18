@@ -1,6 +1,8 @@
 let usersmodel = require("../Models/usersModel");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const nodemailer = require('nodemailer');
+const uuid = require('uuid');
 dotenv.config();
 const secret = process.env.SECRET_KEY;
 // usersmodel.collection.createIndex({ username: 1 }, { unique: true });
@@ -55,7 +57,7 @@ const handleErrors = (e) => {
 //#region SignUp
 var AddNewUser = async (req, res) => {
   const { username, email, password } = req.body;
-  const verificationCode = Math.floor(100000 + Math.random() * 900000)
+  const verificationCode = uuid.v4();
 
   try {
     const usersModelCreate = await usersmodel.create({
@@ -65,13 +67,59 @@ var AddNewUser = async (req, res) => {
       password,
       verificationCode
     });
-    const token = createToken(usersModelCreate);
+    // const token = createToken(usersModelCreate);
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.mailtrap.io',
+      port: 2525,
+      auth: {
+        user: process.env.MAILTRAP_USERNAME,
+        pass: process.env.MAILTRAP_PASSWORD
+    }
+    });
+    const resetUrl = `http://localhost:4200/verify/${verificationCode}`;
+    const mailOptions = {
+      from: 'cooksmart@gmail.com',
+      to: email,
+      subject: 'Verify your email address',
+      html: `<p>Hello ${username},</p><p>Thank you for signing up! Please click the following link to verify your email address:</p><p><a href="${resetUrl}">Verify Email</a></p>`
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to send verification email.' });
+      } else {
+        console.log(`Verification email sent to ${email}: ${info.response}`);
+        res.json({ message: 'Verification email sent.' });
+      }})
+  
     res.json({ status: "success" });
   } catch (e) {
     const errors = handleErrors(e);
     res.status(400).json({ status: "failed", message: errors });
   }
 };
+//#endregion
+//#region get verification code
+getVerificationCode= async (req, res) => {
+  const { code } = req.params;
+   // Check if the user exists in the database
+   const user = await usersmodel.findOne({ code });
+   if (user) {
+    await usersmodel.updateOne(
+      { _id: user._id },
+      {
+        isVerified: true,
+      }
+    );
+    await res.send(updatedUser);
+
+    res.send(`<h1>Email address verified</h1><p>Thank you for verifying your email address.</p>`);
+  } else {
+    res.status(404).send(`<h1>Invalid verification code</h1><p>The verification code you provided is invalid.</p>`);
+  }
+
+}
 //#endregion
 
 //#region JWT
@@ -107,6 +155,7 @@ var logIn = async (req, res) => {
 module.exports = {
 
     logIn,
-    AddNewUser
+    AddNewUser,
+    getVerificationCode
   };
   
