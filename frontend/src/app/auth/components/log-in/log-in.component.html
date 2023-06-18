@@ -32,8 +32,10 @@
       *ngIf="!isPasswordValid"
     >
       {{ passwordMsg }}
+
     </p>
     </div>
+    <p class="reset">{{resetpw}}</p>
 <a type="button" class="text-center small" (click)="sendEmail(email.value)">Forget Your Password?</a>
   <button type="submit"  style="margin-top: 8%;">
   Login

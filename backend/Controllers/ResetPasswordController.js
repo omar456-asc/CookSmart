@@ -28,7 +28,7 @@ var resetpw= async (req, res) => {
   const id= user._id
 
   // Send an email to the user with a link to the password reset page
-  const resetUrl = `http://localhost:4200/reset-password/${email}`;
+  const resetUrl = process.env.FRONT_URL+`/reset-password/${email}`;
   const mailOptions = {
     from: 'cookSmart@gmail.com',
     to: email,

@@ -191,3 +191,7 @@ input :active{
   color: #1a2639 !important;
   cursor: pointer;
 }
+.reset{
+  font-size: small;
+  color: green;
+}

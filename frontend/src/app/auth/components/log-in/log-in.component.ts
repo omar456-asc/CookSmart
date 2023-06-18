@@ -16,6 +16,7 @@ export class LogInComponent {
   isRegistred: boolean = false;
   emailMsg: string = '';
   passwordMsg: string = '';
+  resetpw:string='';
   validationForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [Validators.required]),
@@ -46,8 +47,13 @@ console.log(email);
     let logInUser = { email, password };
     console.log(logInUser);
     this.myService.LOGIN(logInUser).subscribe((response: any) => {
-      this.authService.setToken(response.token);
+
+      if(response.isVerified==false){
+        this.passwordMsg = 'Please verify your email first, check your email';
+      }else{
+        this.authService.setToken(response.token);
       this.authService.setUserID(response.id);
+      }
       // this.router.navigateByUrl('');
       // this.getcart();
       // this.checkRole();
@@ -72,6 +78,8 @@ console.log(email);
   }
   sendEmail(email:any){
     if(email){
+      this.resetpw="check your email, password reset link sent"
+      console.log(this.resetpw)
     let resetemail = { email };
     this.reset.sendresetemail(resetemail).subscribe((response: any) => {
      console.log(response);

@@ -76,7 +76,7 @@ var AddNewUser = async (req, res) => {
         pass: process.env.MAILTRAP_PASSWORD
     }
     });
-    const resetUrl = `http://localhost:4200/verify/${verificationCode}`;
+    const resetUrl = process.env.FRONT_URL+`/verify/${verificationCode}`;
     const mailOptions = {
       from: 'cooksmart@gmail.com',
       to: email,
@@ -145,7 +145,7 @@ var logIn = async (req, res) => {
     res.cookie("token", token, { maxAge: maxDay * 1000 });
 
     res.status(200);
-    res.json({ status: "success", token: token,id:user._id });
+    res.json({ status: "success", token: token,id:user._id ,isVerified:user.isVerified});
   } catch (e) {
     var errors = handleErrors(e);
     res.status(400);
