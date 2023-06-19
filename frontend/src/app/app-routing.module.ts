@@ -4,11 +4,16 @@ import { AuthComponent } from './auth/auth.component';
 
 import { HomeComponent } from './home/home.component';
 import { AboutusComponent } from './about-us/about-us.component';
+import { ErrorComponent } from './shared/components/error/error.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutusComponent },
+
+
+  { path: '**', component: ErrorComponent }
+
 ];
 
 @NgModule({
