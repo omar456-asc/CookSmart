@@ -29,7 +29,7 @@ export class DashboardComponent implements AfterViewInit {
         {
           label: 'Total Price Per Orader',
           data: [200, 150, 600, 755, 400, 399, 1000],
-          backgroundColor: '#2e394d;',
+          backgroundColor: '#2e394d',
         },
       ],
     };
