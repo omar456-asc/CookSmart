@@ -16,39 +16,39 @@ export class DashboardComponent implements AfterViewInit {
     const salesRevenueCanvas = this.salesRevenueCanvas.nativeElement;
 
     const worldwideSalesData = {
-      labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+      labels: [
+        'order1',
+        'order2',
+        'order3',
+        'order4',
+        'order5',
+        'order6',
+        'order7',
+      ],
       datasets: [
         {
-          label: 'USA',
-          data: [15, 30, 55, 65, 60, 80, 95],
-          backgroundColor: 'rgba(0, 156, 255, .7)',
-        },
-        {
-          label: 'UK',
-          data: [8, 35, 40, 60, 70, 55, 75],
-          backgroundColor: 'rgba(0, 156, 255, .5)',
-        },
-        {
-          label: 'AU',
-          data: [12, 25, 45, 55, 65, 70, 60],
-          backgroundColor: 'rgba(0, 156, 255, .3)',
+          label: 'Total Price Per Orader',
+          data: [200, 150, 600, 755, 400, 399, 1000],
+          backgroundColor: '#2e394d;',
         },
       ],
     };
 
     const salesRevenueData = {
-      labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+      labels: [
+        'Pizza-category',
+        'Pasta-category',
+        'Fish-category',
+        'Pizza-category',
+        'Pizza-category',
+        'Pizza-category',
+        'Pizza-category',
+      ],
       datasets: [
         {
-          label: 'Sales',
-          data: [15, 30, 55, 45, 70, 65, 85],
-          backgroundColor: 'rgba(0, 156, 255, .5)',
-          fill: true,
-        },
-        {
-          label: 'Revenue',
-          data: [99, 135, 170, 130, 190, 180, 270],
-          backgroundColor: 'rgba(0, 156, 255, .3)',
+          label: 'Category Per Rate',
+          data: [3.0, 2.5, 4, 2, 3.5, 4, 4],
+          backgroundColor: '#990000',
           fill: true,
         },
       ],
