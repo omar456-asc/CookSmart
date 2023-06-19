@@ -11,16 +11,34 @@
       [formGroup]="validationForm"   class="form"
       >
 				<div class="input-group">
-					<input class="form-control" #username type="text" required>
+					<input class="form-control" #username formControlName="username" type="text" required>
 					<label>Username</label>
+          <p
+      class="text-danger float-start error"
+      *ngIf="!isUsernameValid"
+    >
+      {{ usernameMsg }}
+    </p>
 				</div>
 				<div class="input-group" style="background-color: transparent;">
-					<input class="form-control" #email type="email" required>
+					<input class="form-control" #email formControlName="email" type="email" required>
 					<label>Email</label>
+          <p
+      class="text-danger float-start error"
+      *ngIf="!isEmailValid"
+    >
+      {{ emailMsg }}
+    </p>
 				</div>
 				<div class="input-group">
 					<input  class="form-control" #password type="password" required pattern=".{8,}">
 					<label>Password</label>
+          <p
+      class="text-danger float-start error"
+      *ngIf="!isPasswordValid"
+    >
+      {{ passwordMsg }}
+    </p>
 				</div>
 			<button type="submit" >
 				Join Us

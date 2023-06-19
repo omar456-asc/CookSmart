@@ -43,9 +43,7 @@ export class LogInComponent {
   ) {}
   cart: any;
   Login(email: any, password: any) {
-console.log(email);
     let logInUser = { email, password };
-    console.log(logInUser);
     this.myService.LOGIN(logInUser).subscribe((response: any) => {
 
       if(response.isVerified==false){
