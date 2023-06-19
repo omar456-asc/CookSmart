@@ -46,8 +46,9 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let meals of Meal; let i = index">
-        <tr *ngFor="let meal of meals;">
+      <!-- <ng-container *ngFor="let meals of Meal; let i = index"> -->
+        <tr *ngFor="let meal of meals; ">
+          <td>{{meal.price}}</td>
           <td scope="row" class="border-0">
             <div class="d-flex align-items-center img-res">
               <img
@@ -86,7 +87,10 @@
             <!-- </a> -->
           </td>
         </tr>
-      </ng-container>
+
+
+
+      <!-- </ng-container> -->
     </tbody>
   </table>
 </div>

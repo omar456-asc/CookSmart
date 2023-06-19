@@ -20,7 +20,8 @@ import { CheckoutModule } from './checkout/checkout.module';
     ReactiveFormsModule,
     HttpClientModule,
     HomeModule,
-    CheckoutModule
+    CheckoutModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

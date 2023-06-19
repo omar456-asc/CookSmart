@@ -12,10 +12,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RecommendationComponent } from './components/recommendation/recommendation.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [HomeComponent, HeroComponent, HeaderComponent, WhyUsComponent, TeamMemberComponent, LatestBlogComponent, ContactUsComponent, ContactFormComponent, FooterComponent, AboutUsComponent, ProductsComponent, RecommendationComponent],
-  imports: [CommonModule],
-  exports: [HomeComponent, HeroComponent],
+  imports: [CommonModule,
+    RouterModule],
+  exports: [HomeComponent, HeroComponent,
+FooterComponent,
+HeaderComponent
+  ],
 })
-export class HomeModule {}
+export class HomeModule { }
