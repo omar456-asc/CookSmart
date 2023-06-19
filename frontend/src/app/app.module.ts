@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HomeModule } from './home/home.module';
+import { UserdashboardModule } from './userdashboard/userdashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HomeModule } from './home/home.module';
     ReactiveFormsModule,
     HttpClientModule,
     HomeModule,
+    UserdashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
