@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
 import { AboutUsModule } from './about-us/about-us.module';
 import { SharedModule } from './shared/shared.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     HomeModule,
     SharedModule,
-    AboutUsModule
+    AboutUsModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent],
