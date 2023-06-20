@@ -41,12 +41,12 @@ const Nav = () => (
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a routerLink="/" class="nav-item nav-link active">Home</a>
+        <a href="http://localhost:4200/" class="nav-item nav-link active">Home</a>
         <a href="#" class="nav-item nav-link active">Why Us </a>
         <a href="#" class="nav-item nav-link active">Our Team</a>
         <a href="#" class="nav-item nav-link active">Blog</a>
         <a href="#" class="nav-item nav-link active">Contact Us</a>
-        <a routerLink="/about"  class="nav-item nav-link active">About Us</a>
+        <a href="/about"  class="nav-item nav-link active">About Us</a>
         <a href="#" class="nav-item nav-link active">Products</a>
         <a href="#" class="nav-item nav-link active">Recommendation</a>
       <div class="nav-item dropdown"> 
