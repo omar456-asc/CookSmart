@@ -125,5 +125,6 @@ var GetProductByID = async (req, res) => {
 };
 module.exports = {
     GetAllProducts,
-    GetProductByID
+    GetProductByID,
+    SearchMeal
 }
