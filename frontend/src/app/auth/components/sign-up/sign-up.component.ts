@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SignUpService } from '../../services/sign-up/sign-up.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent {
+  @Output() showLoginComponent = new EventEmitter();
   authUser: any;
   validationMessage: any;
   emailMsg: string = '';
@@ -23,6 +24,7 @@ export class SignUpComponent {
       (data) => {
         this.authUser = data;
         console.log(this.authUser);
+        this.showLoginComponent.emit();
         // this.router.navigateByUrl('/login');
       },
       (err) => {
