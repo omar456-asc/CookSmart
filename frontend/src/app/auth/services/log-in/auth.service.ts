@@ -54,7 +54,7 @@ export class AuthService {
     }
     const decoded: any = jwt_decode(token) as {
       id: string;
-      is_admin: boolean;
+      // is_admin: boolean;
     };
     return decoded;
   }
@@ -65,10 +65,10 @@ export class AuthService {
     if (token) {
       const decoded = jwt_decode(token) as {
         id: string;
-        is_admin: boolean;
+        // is_admin: boolean;
       };
-      const isAdmin = decoded.is_admin;
-      return isAdmin;
+      // const isAdmin = decoded.is_admin;
+      // return isAdmin;
     }
     return false;
   }

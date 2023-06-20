@@ -1,6 +1,8 @@
 let usersmodel = require("../Models/usersModel");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const nodemailer = require('nodemailer');
+const uuid = require('uuid');
 dotenv.config();
 const secret = process.env.SECRET_KEY;
 // usersmodel.collection.createIndex({ username: 1 }, { unique: true });
@@ -55,14 +57,42 @@ const handleErrors = (e) => {
 //#region SignUp
 var AddNewUser = async (req, res) => {
   const { username, email, password } = req.body;
+  const verificationCode = uuid.v4();
+
   try {
     const usersModelCreate = await usersmodel.create({
       username ,
       unique: true ,
       email,
       password,
+      verificationCode
     });
-    const token = createToken(usersModelCreate);
+    // const token = createToken(usersModelCreate);
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.mailtrap.io',
+      port: 2525,
+      auth: {
+        user: process.env.MAILTRAP_USERNAME,
+        pass: process.env.MAILTRAP_PASSWORD
+    }
+    });
+    const resetUrl = process.env.FRONT_URL+`/verify/${verificationCode}`;
+    const mailOptions = {
+      from: 'cooksmart@gmail.com',
+      to: email,
+      subject: 'Verify your email address',
+      html: `<p>Hello ${username},</p><p>Thank you for signing up! Please click the following link to verify your email address:</p><p><a href="${resetUrl}">Verify Email</a></p>`
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to send verification email.' });
+      } else {
+        console.log(`Verification email sent to ${email}: ${info.response}`);
+        res.json({ message: 'Verification email sent.' });
+      }})
+  
     res.json({ status: "success" });
   } catch (e) {
     const errors = handleErrors(e);
@@ -70,11 +100,35 @@ var AddNewUser = async (req, res) => {
   }
 };
 //#endregion
+//#region get verification code
+var getVerificationCode= async (req, res) => {
+  const { code } = req.params;
+ 
+   // Check if the user exists in the database
+   const user = await usersmodel.findOne({verificationCode:code});
+   if (user) {
+
+    await usersmodel.updateOne(
+      { _id: user._id },
+      {
+        isVerified: true,
+      }
+    );
+  
+
+    res.send("done");
+  } else {
+     console.log('error')
+    res.status(404).send("invalid");
+  }
+
+}
+//#endregion
 
 //#region JWT
 const maxDay = 3 * 24 * 60 * 60; // The days i logged in then expires
-const createToken = (id, is_admin) => {
-  return jwt.sign({ id, is_admin }, secret, {
+const createToken = (id) => {
+  return jwt.sign({ id }, secret, {
     expiresIn: maxDay,
   }); //id, secret
 };
@@ -86,12 +140,12 @@ var logIn = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await usersmodel.login(email, password);
-    console.log("role and id", user.id, user.is_admin);
-    const token = createToken(user.id, user.is_admin);
+    console.log("id", user.id);
+    const token = createToken(user.id);
     res.cookie("token", token, { maxAge: maxDay * 1000 });
 
     res.status(200);
-    res.json({ status: "success", token: token,id:user._id });
+    res.json({ status: "success", token: token,id:user._id ,isVerified:user.isVerified});
   } catch (e) {
     var errors = handleErrors(e);
     res.status(400);
@@ -104,6 +158,7 @@ var logIn = async (req, res) => {
 module.exports = {
 
     logIn,
-    AddNewUser
+    AddNewUser,
+    getVerificationCode
   };
   

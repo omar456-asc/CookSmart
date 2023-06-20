@@ -19,6 +19,10 @@ app.use("/", logging);
 app.use("/api/users", UserRoutes);
 //#endregion
 
+//#region user
+const ResetRoutes = require("./Routes/resetPasswordRoutes");
+app.use("/api", ResetRoutes);
+//#endregion
 
 app.listen(PORT, () => {
   console.log("http://localhost:" + PORT);
