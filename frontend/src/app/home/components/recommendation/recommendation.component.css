@@ -1,0 +1,12 @@
+.container-fluid {
+    background-color: #2e394d;
+}
+
+.btnn {
+    background-color: #990000;
+    color: white;
+}
+
+.btnn:hover {
+    background-color: #aa2d2d;
+}

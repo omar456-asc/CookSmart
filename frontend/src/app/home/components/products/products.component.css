@@ -1,0 +1,58 @@
+/*** Product ***/
+.nav-pills .nav-item .btn {
+    color: var(--dark);
+}
+
+.nav-pills .nav-item .btn:hover,
+.nav-pills .nav-item .btn.active {
+    color: #FFFFFF;
+}
+
+.product-item {
+    box-shadow: 0 0 45px rgba(0, 0, 0, .07);
+}
+
+.product-item img {
+    transition: .5s;
+}
+
+.product-item:hover img {
+    transform: scale(1.1);
+}
+
+.product-item small a:hover {
+    color: #2e394d !important;
+}
+
+.btn-outline-primary {
+    border-color: #2e394d;
+
+}
+
+.btn.active {
+    background-color: #2e394d;
+    border-color: #990000;
+    outline-style: none;
+}
+
+.btn-outline-primary:hover {
+    border-color: #990000;
+    background-color: #990000;
+}
+
+.sign {
+    background-color: #990000;
+}
+
+.price {
+    color: #990000;
+}
+
+.productn:hover {
+    color: #990000;
+}
+
+.btnn {
+    background-color: #990000;
+    color: white;
+}
