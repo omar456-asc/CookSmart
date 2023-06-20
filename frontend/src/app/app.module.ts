@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HomeModule } from './home/home.module';
+import { OrderModule } from './order/order.module';
+import { PaymentModule } from './payment/payment.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +20,9 @@ import { HomeModule } from './home/home.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HomeModule,
+    // HomeModule,
+    // OrderModule,
+    PaymentModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
