@@ -4,6 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { HomeModule } from './home/home.module';
 
 import { HomeComponent } from './home/home.component';
+import { HeroComponent } from './home/components/hero/hero.component';
 import { AboutusComponent } from './about-us/about-us.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';

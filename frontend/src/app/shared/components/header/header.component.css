@@ -67,3 +67,8 @@
         color: #990000;
     }
 }
+
+.dropdown-item:active {
+    background-color: #990000;
+    /* replace with the desired color */
+}
