@@ -6,7 +6,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(2, 2, 2, 0.8);
+  /* background: rgba(2, 2, 2, 0.8); */
   z-index: 9;
 
 }
@@ -185,8 +185,8 @@ form .row .col-2{
 }
 .btn{
   width: 100%;
-  background-color: #D4AF37;
-  border-color: #D4AF37;
+  background-color: #990000;
+  border-color: #990000;
   color: white;
   justify-content: center;
   padding: 2vh 0;
