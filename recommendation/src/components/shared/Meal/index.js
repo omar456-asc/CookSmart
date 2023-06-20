@@ -16,13 +16,13 @@ const Meal = (props) => (
         <h4 className="Meal__content__desc--source">{props.source}</h4>
       </div>
       <div className="Meal__content__labels">
-        {props.ingredients.map((ingredient, i) => (
+        {/* {props.ingredients.map((ingredient, i) => (
           <Tag
             icon={props.ingredient}
             name={ingredient}
             key={`Tag__${i}`}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   </a>
