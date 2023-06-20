@@ -1,0 +1,46 @@
+
+<section id="meals">
+  <div class="s004">
+    <form>
+      <fieldset>
+        <div class="inner-form">
+          <div class="input-field">
+            <input #key  class="form-control" id="choices-text-preset-values" type="text" placeholder="Type to search..." />
+            <i class="fa fa-search btn-search"></i>
+          </div>
+        </div>
+        <div class="suggestion-wrap d-flex flex-column flex-md-row text-center text-sm-left">
+          <a (click)="filter($event,'')">All</a>
+          <a (click)="filter($event,'Fivourite')">Favourite</a>
+          <a  (click)="filter($event,'pizza')">Pizza</a>
+          <a  (click)="filter($event,'pasta')">Pasta</a>
+          <a  (click)="filter($event,'Fish')">Fish</a>
+          <a  (click)="filter($event,'Cheese')">Cheese</a>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="container">
+    <div class="row my-4"  >
+      <ng-container *ngIf="filteredCategories;" >
+      <div class="col-md-3 card-container animate__animated animate__backInDown" *ngFor="let meal of filteredCategories;">
+        <div class="card">
+          <a routerLink="/mealdetails/{{meal._id}}">
+          <img src={{meal.image}} class="card-image" alt="...">
+          </a>
+          <div class="card-icons cascading-top"style="color: #000000;" [ngClass]="{'visible': card.active}">
+           <button class="btn"><i class="fa-solid fa-eye" routerLink="/mealdetails/{{meal._id}}" ></i></button>
+           <button class="btn"><i ></i></button>
+          </div>
+          <div class="card-content">
+            <h5 class="card-title">{{ meal.title }}</h5>
+            <p>{{ meal.summary }}</p>
+          </div>
+        </div>
+      </div>
+</ng-container>
+
+    </div>
+  </div>
+</section>
+
