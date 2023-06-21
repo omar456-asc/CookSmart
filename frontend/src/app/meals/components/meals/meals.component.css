@@ -1,16 +1,14 @@
 
 #meals {
 
-height: 100%;
-min-height: 100vh;
-
+margin-top: 10%;
 }
 
 
 .active{
-  color: #FFC107 !important;
+  color: #990000 !important;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 2px rgba(214, 207, 207, 0.3);
+  box-shadow: 0px 0px 10px 2px rgba(132, 128, 128, 0.3);
 }
 
 
@@ -87,7 +85,7 @@ margin-top: 35px;
   display: inline-block;
   padding: 0 15px;
   line-height: 32px;
-  color: #fff;
+  color: darkblue;
   border-radius: 16px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -157,5 +155,7 @@ padding: 0px 15px
 .productn:hover {
   color: #990000;
 }
-
-
+/*  */
+.icon:hover{
+  cursor: pointer;
+}
