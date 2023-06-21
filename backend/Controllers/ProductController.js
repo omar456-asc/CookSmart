@@ -126,8 +126,19 @@ var GetProductByID = async (req, res) => {
     res.status(400).send("failed to get Product");
   }
 };
+var DeleteProductByID = async (req, res) => {
+  try {
+    var ID = req.params.id;
+    await productsModel.findByIdAndDelete(ID);
+    res.send("Deleted Successfully");
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("failed to delete user");
+  }
+};
 module.exports = {
     GetAllProducts,
     GetProductByID,
-    SearchMeal
+    SearchMeal,
+    DeleteProductByID
 }
