@@ -13,7 +13,8 @@ import { RouterModule } from '@angular/router';
     ShoppingCartComponent,
     CustomizeMealComponent,
   ],
-  // imports: [CommonModule, SharedModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
+  // , SharedModule in imports
   exports: [CheckoutComponent, ShoppingCartComponent, CustomizeMealComponent],
 })
 export class CheckoutModule {}
