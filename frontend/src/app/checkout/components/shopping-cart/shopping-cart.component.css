@@ -5,6 +5,9 @@ i{
   cursor: pointer;
   padding-left: 25%;
 }
+#main{
+  min-height: 100hv !important;
+}
 .Checkout::before {
     content: "";
     position: absolute;
@@ -12,7 +15,7 @@ i{
     right: 0;
     top: 0;
     bottom: 0;
-    /* background: rgba(2, 2, 2, 0.8); */
+    background: rgba(132, 122, 122, 0.7);
     z-index: 9;
 
 }
@@ -74,7 +77,7 @@ img {
 }
 
 .checkout-btn {
-    background: #bc3b2c;
+    background: #990000;
     border: 0;
     padding: 10px 24px;
     color: #fff;

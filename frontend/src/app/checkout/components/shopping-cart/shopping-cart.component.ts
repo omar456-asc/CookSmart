@@ -18,10 +18,10 @@ export class ShoppingCartComponent implements OnInit {
   cartid: any = [];
   Meal: any = [];
   meals: any = [
-    { "category": 'AA', "price": 11 },
-    { "category": 'BB', "price": 12 },
-    { "category": 'CC', "price": 13 },
-    { "category": 'DD', "price": 14 },
+    // { "category": 'AA', "price": 11 },
+    // { "category": 'BB', "price": 12 },
+    // { "category": 'CC', "price": 13 },
+    // { "category": 'DD', "price": 14 },
 
   ];
 
