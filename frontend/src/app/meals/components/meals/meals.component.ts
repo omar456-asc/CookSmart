@@ -22,7 +22,7 @@ export class MealsComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
+    //this.getFavorite();
     this.mealService.GetAllMeals().subscribe(
       {
         next:(data:any)=>{
@@ -52,7 +52,47 @@ export class MealsComponent implements OnInit {
     )
   }
 
+  // getFavorite(){
 
+  //   this.getProfile.getProfileInfo(this.LocalStorageId).subscribe({
+  //     next:(value:any)=>{
+  //       this.favorite = value.favorite;
+  //       if(this.category=='Fivourite'){
+  //         this.filteredCategories= this.Meals.filter((meal:any) => this.favorite.includes(meal._id));
+  //       }
+  //       console.log(this.favorite);
+  //     },
+  //     error:(err)=>{
+  //       this.favorite =null;
+  //       console.log(err);
+  //     }
+  //   })
+  // }
+
+  // AddToFav(Id:any){
+  //   const userId=this.LocalStorageId
+  //   const mealId=Id
+  //   console.log(mealId);
+  //   this.getProfile.AddToFavorite(userId,mealId).subscribe({
+  //     next:(value:any)=>{
+  //       console.log(value);
+  //       this.getFavorite()
+  //     },
+  //     error:(err)=>{
+  //       this.getFavorite()
+  //       console.log(err);
+  //     }
+
+  //   })
+
+
+  // }
+  // isFavorite(mealId: number) {
+  //   if(this.favorite){
+  //   const fav=this.favorite.includes(mealId);
+  //   return fav
+  //   }
+  // }
 
   filter(event: MouseEvent,categoryy:string){
     const links = document.querySelectorAll('.suggestion-wrap a');
