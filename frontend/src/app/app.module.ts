@@ -14,6 +14,7 @@ import { HomeModule } from './home/home.module';
 import { AboutUsModule } from './about-us/about-us.module';
 import { SharedModule } from './shared/shared.module';
 import { UserdashboardModule } from './userdashboard/userdashboard.module';
+import { CheckoutModule } from './checkout/checkout.module';
 
 @NgModule({
 
@@ -29,7 +30,8 @@ import { UserdashboardModule } from './userdashboard/userdashboard.module';
     SharedModule,
     AboutUsModule,
     UserdashboardModule,
-    RouterModule
+    RouterModule,
+    CheckoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './auth/components/log-in/reset-password/
 import { EmailVerificationComponent } from './auth/components/sign-up/email-verification/component/email-verification.component';
 import { MealsComponent } from './meals/components/meals/meals.component';
 import { MealDetailsComponent } from './meals/components/meal-details/meal-details.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -22,7 +23,9 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'user', component: UserdashboardComponent },
   { path: 'about', component: AboutusComponent },
+  { path: 'cart', component: CheckoutComponent},
   { path: '**', component: ErrorComponent },
+
 ];
 
 @NgModule({
