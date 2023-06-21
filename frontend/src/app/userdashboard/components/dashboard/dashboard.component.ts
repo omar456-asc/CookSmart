@@ -1,4 +1,4 @@
-// import { Component } from '@angular/core';
+
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData, ChartOptions } from 'chart.js';
