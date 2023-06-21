@@ -8,6 +8,11 @@
         <button class="btn" (click)="filter($event,'login')">LOGIN</button>
 </div>
       </div>
-<app-sign-up *ngIf="signup" ></app-sign-up>
+
+
+<app-sign-up *ngIf="signup && !login" (showLoginComponent)="login=true" ></app-sign-up>
 <app-log-in *ngIf="login"></app-log-in>
+
 		</div>
+
+

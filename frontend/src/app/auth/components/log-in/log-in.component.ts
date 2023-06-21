@@ -51,8 +51,9 @@ export class LogInComponent {
       }else{
         this.authService.setToken(response.token);
       this.authService.setUserID(response.id);
+      this.router.navigateByUrl('');
       }
-      // this.router.navigateByUrl('');
+
       // this.getcart();
       // this.checkRole();
     },
