@@ -3,10 +3,9 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from 'src/app/config.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-
   private readonly Base_URL: string;
 
   constructor(
@@ -18,5 +17,13 @@ export class OrderService {
 
   CreateOrder(newOrder: any) {
     return this.HttpClient.post(this.Base_URL, newOrder);
+  }
+  updateOrderStatus(id: any, status: string) {
+    const body = { status };
+
+    return this.HttpClient.put(`${this.Base_URL}/${id}`, body);
+  }
+  getOrderByID(id: any) {
+    return this.HttpClient.get(this.Base_URL + '/' + id);
   }
 }
