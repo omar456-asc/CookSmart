@@ -5,7 +5,7 @@
       <fieldset>
         <div class="inner-form">
           <div class="input-field">
-            <input #key  class="form-control" id="choices-text-preset-values" type="text" placeholder="Type to search..." />
+            <input #key  (keyup)="SearchMeal(key)" class="form-control" id="choices-text-preset-values" type="text" placeholder="Type to search..." />
             <i class="fa fa-search btn-search"></i>
           </div>
         </div>
@@ -58,8 +58,7 @@
                   <a class="text-body icon"
                     ><i class="fa fa-regular fa-heart me-2" style="color: #990000;" ></i>Add to Favourite</a
                   >
-                  <!-- <i class="fa-sharp fa-regular fa-heart" style="color: #5c1414;"></i> -->
-                  <!-- [ngClass]="isFavorite(meal._id) ? 'fa fa-heart' : 'fa-regular fa-heart'"  -->
+
                 </small>
               </div>
             </div>
@@ -99,8 +98,7 @@
                   <a class="text-body icon"
                     ><i class="fa fa-regular fa-heart me-2" style="color: #990000;" ></i>Add to Favourite</a
                   >
-                  <!-- <i class="fa-sharp fa-regular fa-heart" style="color: #5c1414;"></i> -->
-                  <!-- [ngClass]="isFavorite(meal._id) ? 'fa fa-heart' : 'fa-regular fa-heart'"  -->
+            
                 </small>
               </div>
             </div>

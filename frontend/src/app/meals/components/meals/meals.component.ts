@@ -35,7 +35,22 @@ export class MealsComponent implements OnInit {
     )
   }
 
+  SearchMeal(key:HTMLInputElement){
+    const searchQuery = key.value;
+    console.log(searchQuery);
+    //let searchKey = { key };
+    this.mealService.SearchMeal(searchQuery).subscribe({
+      next:(value:any)=>{
+         this.filteredCategories=value
+      },
+      error:(err)=> {
+        this.filteredCategories=null;
+        console.log(err)
+      },
+    }
 
+    )
+  }
 
 
 

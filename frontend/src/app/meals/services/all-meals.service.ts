@@ -16,8 +16,13 @@ export class AllMealsService {
     this.Base_URL = this.configService.getBaseUrl('products');
   }
 
+  //#region SearchMeal
+  SearchMeal(key:any){
+    return this.myClient.get(this.Base_URL + '/search' + '/' + key )
+  }
+  //#endregion
+  
   //#region rateMeal
-
   RateMeal(id: any,rate: any){
     return this.myClient.post(this.Base_URL + '/' + id,rate)
   }
@@ -28,9 +33,8 @@ export class AllMealsService {
     //method[Get-Delete-Put-Patch]
     return this.myClient.get(this.Base_URL);
   }
-
-
   //#endregion
+
   //#region GetMealByID
   GetMealByID(id: any) {
     return this.myClient.get(this.Base_URL + '/' + id);
@@ -44,6 +48,5 @@ export class AllMealsService {
   getCart() {
     return localStorage.getItem('cart');
   }
-
   //#endregion
 }
