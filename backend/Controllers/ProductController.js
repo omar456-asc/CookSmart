@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-
+//#region SearchMeal
 var SearchMeal = async (req, res) => {
   try {
     let meals = await productsModel.find({
@@ -19,7 +19,9 @@ var SearchMeal = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+//#endregion
 
+//#region GetAllProducts
 var GetAllProducts = async (req, res) => {
   try {
     var AllProducts = await productsModel.aggregate([
@@ -39,7 +41,9 @@ var GetAllProducts = async (req, res) => {
     res.status(400).send("failed to get all Products");
   }
 };
+//#endregion
 
+//#region GetProductByID
 var GetProductByID = async (req, res) => {
   try {
     var ID = req.params.id;
@@ -126,6 +130,9 @@ var GetProductByID = async (req, res) => {
     res.status(400).send("failed to get Product");
   }
 };
+//#endregion
+
+//#region delete product by id
 var DeleteProductByID = async (req, res) => {
   try {
     var ID = req.params.id;
@@ -136,9 +143,40 @@ var DeleteProductByID = async (req, res) => {
     res.status(400).send("failed to delete user");
   }
 };
+//#endregion
+
+//#region get Latest
+var getLatest6products = async (req, res) => {
+  try {
+    var AllProducts = await productsModel.find().sort({ _id: -1 }).limit(6);
+    await res.json(AllProducts);
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("failed to get last 6 products");
+  }
+};
+//#endregion
+
+//#region cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "ingredient-uploads", 
+    allowedFormats: ["jpg", "jpeg", "png"], 
+    transformation: [{ width: 500, height: 500, crop: "limit" }], 
+  },
+});
+//#endregion
+
 module.exports = {
     GetAllProducts,
     GetProductByID,
     SearchMeal,
-    DeleteProductByID
+    DeleteProductByID,
+    getLatest6products
 }
