@@ -173,10 +173,85 @@ const storage = new CloudinaryStorage({
 });
 //#endregion
 
+//#region addNewProduct 
+const upload = multer({ storage: storage }).single("image");
+
+const addNewProduct = async (req, res) => {
+  console.log(req.body)
+  try {
+    upload(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        return res.status(400).json({ error: "Error uploading image" });
+      } else if (err) {
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      const { title, price, summary, ingredients, category } = req.body;
+
+      let image = "";
+      if (req.file) {
+        image = req.file.path;
+      }
+      // Validate the incoming product data against the schema
+
+      const isValid = productSchema({
+        title,
+        price,
+        summary,
+        image,
+        ingredients,
+        category,
+      });
+
+
+      // Create a new product object
+      const newProduct = new productsModel({
+        title,
+        price,
+        summary,
+        image,
+        ingredients,
+        category,
+        image,
+      });
+
+      // Save the new product object to the database
+      await newProduct.save();
+
+      return res.status(201).json({ message: "Product created successfully" });
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error !!!!" });
+  }
+};
+//#endregion
+
+//#region editProduct
+const editProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, summary, ingredients, image, category } = req.body;
+    const product = await productsModel.findByIdAndUpdate(
+      id,
+      { title, summary, ingredients, image, category },
+      { new: true }
+    );
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(product);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+//#endregion
+
 module.exports = {
     GetAllProducts,
     GetProductByID,
     SearchMeal,
     DeleteProductByID,
-    getLatest6products
+    getLatest6products,
+    addNewProduct,
+    editProduct
 }
