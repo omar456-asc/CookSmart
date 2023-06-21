@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentFormService } from '../service/payment-form.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-// import { AdminOrdersServiceService } from 'src/app/admin/admin-orders/services/admin-orders-service.service';
+import { OrderService } from 'src/app/order/service/order.service';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -15,8 +15,8 @@ export class PaymentFormComponent implements OnInit {
   constructor(
     private Router: ActivatedRoute,
     private paymentService: PaymentFormService,
-    // private AdminOrdersServiceService: AdminOrdersServiceService,
-    private router:Router
+    private OrdersService: OrderService,
+    private router: Router
   ) {
     this.id = this.Router.snapshot.paramMap.get('id');
   }
@@ -25,18 +25,18 @@ export class PaymentFormComponent implements OnInit {
   payFailed: any = false;
   FalseMsg = '';
   validationForm = new FormGroup({
-    card: new FormControl(null,[Validators.required]),
-    cvv: new FormControl(null,[Validators.required]),
+    card: new FormControl(null, [Validators.required]),
+    cvv: new FormControl(null, [Validators.required]),
   });
 
   ngOnInit(): void {
-    // this.AdminOrdersServiceService.getOrderByID(this.id).subscribe({
-      // next: (data: any) => {
-        // console.log(data);
-        // this.Price = data.order.totalPrice;
-        // console.log(this.Price);
-      // },
-    // });
+    this.OrdersService.getOrderByID(this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.Price = data.order.totalPrice;
+        console.log(this.Price);
+      },
+    });
   }
   Pay(amount: any, name: any) {
     let payUser = { amount, name };
@@ -45,7 +45,7 @@ export class PaymentFormComponent implements OnInit {
         (response: any) => {
           this.paySuccess = true;
           this.payFailed = false;
-          // this.updateOrderStatus('payed');
+          this.updateOrderStatus('payed');
           this.router.navigate(['/user']);
         },
         (err) => {
@@ -60,12 +60,12 @@ export class PaymentFormComponent implements OnInit {
       this.FalseMsg = 'Please enter the required fields';
     }
   }
-  // updateOrderStatus(status: any) {
-    // this.AdminOrdersServiceService.updateOrderStatus(this.id, status).subscribe(
-      // () => this.ngOnInit(),
-      // (err) => {
-        // console.log(err);
-      // }
-    // );
-  // }
+  updateOrderStatus(status: any) {
+    this.OrdersService.updateOrderStatus(this.id, status).subscribe(
+      () => this.ngOnInit(),
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

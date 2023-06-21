@@ -4,6 +4,9 @@
 <br />
 <br />
 <br />
+<div class="container">
+  <!-- *ngIf="highestRateCategory; else falseBlock" -->
+<ng-container >
 <div class="content mt-9">
   <!-- Sale & Revenue Start -->
   <div class="container-fluid pt-4 px-4">
@@ -15,7 +18,7 @@
           <i class="sign fa fa-chart-line fa-3x"></i>
           <div class="ms-3">
             <p class="mb-2">Total Orders Price</p>
-            <h6 class="mb-0">$1234</h6>
+            <h6 class="mb-0">{{totalOrdersPrice}}</h6>
           </div>
         </div>
       </div>
@@ -27,7 +30,7 @@
           <i class="sign fa fa-chart-area fa-3x"></i>
           <div class="ms-3">
             <p class="mb-2">Top Category</p>
-            <h6 class="mb-0">Pasta Category</h6>
+            <h6 class="mb-0">{{highestRateCategory}}</h6>
           </div>
         </div>
       </div>
@@ -81,45 +84,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngfor="let order of orderDetails">
               <td><input class="form-check-input" type="checkbox" /></td>
-              <td>01 Jan 2045</td>
-              <td>$123</td>
-              <td>Paid</td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
-              <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" /></td>
-              <td>01 Jan 2045</td>
-              <td>$123</td>
-              <td>Paid</td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
-              <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" /></td>
-              <td>01 Jan 2045</td>
-              <td>$123</td>
-              <td>Paid</td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
-              <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" /></td>
-              <td>01 Jan 2045</td>
-              <td>$123</td>
-              <td>Paid</td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
-              <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" /></td>
-              <td>01 Jan 2045</td>
-              <td>$123</td>
-              <td>Paid</td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
-              <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
+              <td>{{order.orderId}}</td>
+              <td>{{order.totalPrice}}</td>
+              <td><span [ngClass]="getStatusClass(order.status)">{{
+                      order.status
+                    }}</span></td>
+              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>  
+              <td *ngIf="order.status == 'pending'; else noAction">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="updateOrderStatus(order.orderId, 'cancelled')"
+                    >
+                      Cancel
+                    </button>
+                  </td>
+                  <ng-template #noAction>
+                    <td *ngIf="order.status == 'confirmed'">
+                      <button
+                        routerLink="/payment/{{ order.orderId }}"
+                        type="button"
+                        class="btn btn-danger"
+                      >
+                        payment
+                      </button>
+                    </td>
+                    <ng-template *ngIf="order.status == 'rejected'">
+                      <label class="text-danger">Rejected</label></ng-template
+                    >
+                  </ng-template>
             </tr>
           </tbody>
         </table>
@@ -129,3 +124,13 @@
   <!-- Recent Sales End -->
 </div>
 <!-- Content End -->
+</ng-container>
+ <!-- <ng-template #falseBlock> -->
+      <!-- <div -->
+      <!-- id="spinner" -->
+      <!-- class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center" -->
+    <!-- > -->
+      <!-- <div class="spinner-border" role="status"></div> -->
+    <!-- </div> -->
+    <!-- </ng-template> -->
+</div>

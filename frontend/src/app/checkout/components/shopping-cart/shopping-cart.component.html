@@ -50,13 +50,13 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <ng-container *ngFor="let meals of Meal; let i = index"> -->
+                <ng-container *ngFor="let meals of Meal; let i = index">
                 <tr *ngFor="let meal of meals">
-                  <td>{{ meal.price }}</td>
+
                   <td scope="row" class="border-0">
                     <div class="d-flex align-items-center img-res">
                       <img
-                        class="imgg mr-3"
+                        class="imgg mx-3"
                         src="{{ meal.image }}"
                         alt=""
                         width="70"
@@ -82,24 +82,24 @@
                   </td>
                   <td class="quantity border-0 align-middle qun-res">
                     <div class="d-flex align-items-center">
-                      <!-- <button *ngIf="meals.quantity > 1" (click)="minus(i)" class="minus-btn" type="button">-</button> -->
-                      <!-- <input [(ngModel)]="meals.quantity" class="quantity-input" type="number" [disabled]="true" /> -->
-                      <!-- <button (click)="plus(i)" class="plus-btn" type="button">+</button> -->
+                      <button *ngIf="meals.quantity > 1" (click)="minus(i)" class="minus-btn" type="button">-</button>
+                      <input [(ngModel)]="meals.quantity" class="quantity-input" type="number" [disabled]="true" />
+                      <button (click)="plus(i)" class="plus-btn" type="button">+</button>
                     </div>
                   </td>
                   <td class="border-0 align-middle cust-res">
-                    <!-- <a [routerLink]="['/customize', meal._id]" [queryParams]="{count: meals.count}" class="text-dark"> -->
-                    <i class="fa-solid fa-wrench" style="color: #000000"></i>
-                    <!-- </a> -->
+                    <a [routerLink]="['/customize', meal._id]" [queryParams]="{count: meals.count}" class="text-dark">
+                    <i class="fa fa-solid fa-wrench" style="color: #000000"></i>
+                    </a>
                   </td>
                   <td class="border-0 align-middle dele-res">
-                    <!-- <a (click)="deleteConfirmation(meal._id)" class="text-dark"> -->
+                    <a (click)="deleteConfirmation(meal._id)" class="text-dark">
                     <i class="fa fa-trash"></i>
-                    <!-- </a> -->
+                    </a>
                   </td>
                 </tr>
 
-                <!-- </ng-container> -->
+                </ng-container>
               </tbody>
             </table>
           </div>
@@ -109,10 +109,11 @@
           </div>
           <form method="POST">
             <button
-              href="/payment"
+
               class="btn btn-lg"
               class="checkout-btn"
               type="submit"
+              (click)="checkout()"
             >
               <span>Checkout</span>
             </button>
