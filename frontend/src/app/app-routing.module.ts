@@ -2,6 +2,8 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { HomeModule } from './home/home.module';
+import { PaymentComponent } from './payment/payment.component';
+import { OrderComponent } from './order/components/order/order.component';
 
 import { HomeComponent } from './home/home.component';
 import { HeroComponent } from './home/components/hero/hero.component';
@@ -24,8 +26,14 @@ const routes: Routes = [
   { path: 'user', component: UserdashboardComponent },
   { path: 'about', component: AboutusComponent },
   { path: 'cart', component: CheckoutComponent},
+  
+  {
+    path: 'payment/:id',
+    component: PaymentComponent,
+  },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'order', component: OrderComponent },
   { path: '**', component: ErrorComponent },
-
 ];
 
 @NgModule({
