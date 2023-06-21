@@ -1,53 +1,151 @@
-
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData, ChartOptions } from 'chart.js';
+import { OrderService } from 'src/app/order/service/order.service';
+import { UserdashboardServiceService } from '../../services/userdashboard-service.service';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnInit {
   @ViewChild('worldwideSalesCanvas') worldwideSalesCanvas!: ElementRef;
   @ViewChild('salesRevenueCanvas') salesRevenueCanvas!: ElementRef;
+  ID: any = localStorage.getItem('id');
+  orders: any;
+  category: any;
+  totalPrice: any;
+  totalPriceValues: any;
+  totalOrdersPrice: any;
+  totalCategory: any;
+  rate: any;
+  allRates: any;
+  highestRate: any;
+  highestRateCategory: any;
+  data: any;
+  orderDetails: any;
+  options: any;
+  data1: any;
+  data2: any;
+  type2: any;
+  type1: any;
 
+  //
+  ingredients: any;
+  summary: any;
+
+  constructor(
+    myRoute: ActivatedRoute,
+    public UserdashboardServiceService: UserdashboardServiceService,
+    private orderService: OrderService
+  ) {}
+  ngOnInit(): void {
+    console.log(this.ID);
+    this.UserdashboardServiceService.getOrdersByUserId(this.ID).subscribe({
+      next: (data: any) => {
+        this.data = data;
+        console.log(this.data);
+
+        for (let i = 0; i < data.orders.length; i++) {
+          for (let j = 0; j < data.orders[i].meals.length; j++) {
+            let meal = data.orders[i].meals[j];
+
+            this.rate = parseFloat(meal.rate);
+            this.category = meal.category;
+            //
+            this.ingredients = meal.ingredients;
+            this.summary = meal.summary;
+            if (this.rate > this.highestRate) {
+              this.highestRate = this.rate;
+              this.highestRateCategory = this.category;
+            }
+          }
+          console.log(this.orders);
+          this.orders.push(`Order ${i + 1}`);
+          this.totalPriceValues.push(this.totalPrice);
+          this.totalCategory.push(this.category);
+          this.orderDetails.push({
+            orderId: data.orders[i].order._id,
+            status: data.orders[i].order.status,
+            totalPrice: data.orders[i].order.totalPrice,
+          });
+          this.totalPrice += parseFloat(this.orderDetails[i].totalPrice);
+          this.allRates.push(this.rate);
+        }
+
+        this.totalOrdersPrice += this.totalPrice;
+        //Bar Chart
+        this.type2 = 'line';
+        this.type1 = 'bar';
+        this.data1 = {
+          labels: this.orders,
+          datasets: [
+            {
+              label: 'total price per order',
+              data: this.totalPriceValues,
+              backgroundColor: ['black'],
+            },
+          ],
+        };
+        this.data2 = {
+          labels: this.totalCategory,
+          datasets: [
+            {
+              label: 'category per rate',
+              data: this.allRates,
+              backgroundColor: ['#d4af37'],
+            },
+          ],
+        };
+        this.options = {
+          maintainAspectRatio: true,
+          responsive: true,
+          // maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        };
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
   ngAfterViewInit() {
     const worldwideSalesCanvas = this.worldwideSalesCanvas.nativeElement;
     const salesRevenueCanvas = this.salesRevenueCanvas.nativeElement;
 
     const worldwideSalesData = {
-      labels: [
-        'order1',
-        'order2',
-        'order3',
-        'order4',
-        'order5',
-        'order6',
-        'order7',
-      ],
+      labels: this.orders,
       datasets: [
         {
-          label: 'Total Price Per Orader',
-          data: [200, 150, 600, 755, 400, 399, 1000],
-          backgroundColor: '#2e394d',
+          label: 'total price per order',
+          data: this.totalPriceValues,
+          backgroundColor: ['#2e394d'],
         },
       ],
     };
 
     const salesRevenueData = {
-      labels: [
-        'Pizza-category',
-        'Pasta-category',
-        'Fish-category',
-        'Pizza-category',
-        'Pizza-category',
-        'Pizza-category',
-        'Pizza-category',
-      ],
+      labels: this.totalCategory,
       datasets: [
         {
           label: 'Category Per Rate',
-          data: [3.0, 2.5, 4, 2, 3.5, 4, 4],
+          data: this.allRates,
           backgroundColor: '#990000',
           fill: true,
         },
@@ -69,5 +167,35 @@ export class DashboardComponent implements AfterViewInit {
         responsive: true,
       },
     });
+  }
+
+  getStatusClass(status: string): string {
+    if (status === 'pending') {
+      return 'badge badge-warning';
+    } else if (status === 'confirmed') {
+      return 'badge badge-success';
+    } else if (status === 'rejected') {
+      return 'badge badge-danger';
+    } else if (status === 'cancelled') {
+      return 'badge badge-secondary';
+    } else if (status === 'payed') {
+      return 'badge badge-primary';
+    }
+    return 'badge ';
+  }
+
+  updateOrderStatus(id: any, status: any) {
+    this.orderService.updateOrderStatus(id, status).subscribe(
+      () => {
+        this.ngOnInit();
+        if (status === 'cancelled') {
+          location.reload();
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    console.log(id, status);
   }
 }
