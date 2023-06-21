@@ -22,13 +22,76 @@ var SearchMeal = async (req, res) => {
 
 var GetAllProducts = async (req, res) => {
   try {
+    
+
     var AllProducts = await productsModel.aggregate([
+      
       {
         $lookup: {
           from: "ingredients",
           localField: "ingredients",
-          foreignField: "id",
+          foreignField: "_id",
           as: "ingredients_details",
+        },
+      },
+      {
+        $unwind: {
+          path: "$ingredients_details",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: "ratings",
+          let: { productID: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ["$productID", "$$productID"] },
+                    { $ne: ["$value", null] },
+                  ],
+                },
+              },
+            },
+            {
+              $group: {
+                _id: null,
+                rating: { $avg: "$value" },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                rating: { $round: ["$rating", 1] },
+              },
+            },
+          ],
+          as: "rating",
+        },
+      },
+
+      {
+        $group: {
+          _id: "$_id",
+          title: { $first: "$title" },
+          image: { $first: "$image" },
+          summary: { $first: "$summary" },
+          ingredients: { $addToSet: "$ingredients_details._id" },
+          category: { $first: "$category" },
+          price: { $sum: "$ingredients_details.price" },
+          rate: { $first: "$rating.rating" },
+          ingredients_details: {
+            $push: {
+              _id: "$ingredients_details._id",
+              name: "$ingredients_details.name",
+              consistency: "$ingredients_details.consistency",
+              image: "$ingredients_details.image",
+              amount: "$ingredients_details.amount",
+              price: "$ingredients_details.price",
+            },
+          },
         },
       },
     ]);
@@ -118,7 +181,7 @@ var GetProductByID = async (req, res) => {
         },
       },
     ]);
-    console.log(product);
+    // console.log(product);
     product.ingredientLength = product[0].ingredients.length;
     res.json(product);
   } catch (e) {
