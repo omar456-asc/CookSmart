@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const Nav = () => (
 <div class="container-fluid fixed px-0 wow fadeIn" data-wow-delay="0.1s">
-  <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+  {/* <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
     <div class="col-lg-6 px-5 text-start">
       <small
         ><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York,
@@ -22,7 +22,7 @@ const Nav = () => (
       <a class="text-body ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
       <a class="text-body ms-3" href=""><i class="fab fa-instagram"></i></a>
     </div>
-  </div>
+  </div> */}
 
   <nav
     class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn"
@@ -49,7 +49,7 @@ const Nav = () => (
         <a href="/about"  class="nav-item nav-link active">About Us</a>
         <a href="#" class="nav-item nav-link active">Products</a>
         <a href="#" class="nav-item nav-link active">Recommendation</a>
-      <div class="nav-item dropdown"> 
+      {/* <div class="nav-item dropdown"> 
       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
             >Pages</a
           > 
@@ -59,12 +59,12 @@ const Nav = () => (
             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
             <a href="404.html" class="dropdown-item">404 Page</a>
           </div> 
-      </div> 
+      </div>  */}
       </div>
       <div class="d-none d-lg-flex ms-2">
-      <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+      {/* <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
           <small class="fa fa-search text-body"></small>
-        </a> 
+        </a>  */}
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
           <small class="fa fa-user text-body"></small>
         </a>
