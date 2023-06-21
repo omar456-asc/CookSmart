@@ -3,6 +3,7 @@ import { LogInService } from '../../services/log-in/log-in.service';
 import { AuthService } from '../../services/log-in/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResetPasswordService } from './reset-password/service/reset-password.service';
 // import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { SharedService } from 'src/app/shared/services/shared.service';
 
@@ -15,6 +16,7 @@ export class LogInComponent {
   isRegistred: boolean = false;
   emailMsg: string = '';
   passwordMsg: string = '';
+  resetpw:string='';
   validationForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [Validators.required]),
@@ -35,18 +37,23 @@ export class LogInComponent {
     private myService: LogInService,
     private authService: AuthService,
     private router: Router,
+    private reset: ResetPasswordService
     // private usercart: AllMealsService,
     // private shared: SharedService
   ) {}
   cart: any;
   Login(email: any, password: any) {
-console.log(email);
     let logInUser = { email, password };
-    console.log(logInUser);
     this.myService.LOGIN(logInUser).subscribe((response: any) => {
-      this.authService.setToken(response.token);
+
+      if(response.isVerified==false){
+        this.passwordMsg = 'Please verify your email first, check your email';
+      }else{
+        this.authService.setToken(response.token);
       this.authService.setUserID(response.id);
-      // this.router.navigateByUrl('');
+      this.router.navigateByUrl('');
+      }
+
       // this.getcart();
       // this.checkRole();
     },
@@ -67,6 +74,25 @@ console.log(email);
       }
     }
     );
+  }
+  sendEmail(email:any){
+    if(email){
+      this.resetpw="check your email, password reset link sent"
+      console.log(this.resetpw)
+    let resetemail = { email };
+    this.reset.sendresetemail(resetemail).subscribe((response: any) => {
+     console.log(response);
+    },
+    (err) => {
+      console.log(err)
+     if(err.error.message =='User not found'){
+      this.emailMsg='this email isn\'t registered'
+     }
+    }
+    );}
+    else{
+      this.emailMsg = 'please enter your email';
+    }
   }
 
 //   getcart() {

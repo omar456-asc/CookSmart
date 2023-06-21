@@ -1,0 +1,161 @@
+
+#meals {
+
+margin-top: 10%;
+}
+
+
+.active{
+  color: #990000 !important;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba(132, 128, 128, 0.3);
+}
+
+
+img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+}
+
+
+
+
+.choices__input {
+  border: 0;
+}
+
+.choices__input:focus {
+  outline: 0;
+}
+
+
+.s004 {
+margin-top: 35px;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+
+}
+.s004 form {
+  width: 100%;
+  max-width: 50%;
+}
+
+
+.s004 form .inner-form {
+  width: 100%;
+  margin-bottom: 17px;
+}
+
+.s004 form .inner-form .input-field {
+  width: 100%;
+  position: relative;
+}
+
+.s004 form .inner-form .input-field .btn-search {
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+}
+
+.s004 form .inner-form .input-field .btn-search  {
+  fill: #333;
+  width: 40px;
+  height: 40px;
+
+}
+
+.s004 form .suggestion-wrap a {
+  font-size: 14px;
+  font-family: 'Helvetica', sans-serif;
+  display: inline-block;
+  padding: 0 15px;
+  line-height: 32px;
+  color: darkblue;
+  border-radius: 16px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.pad{
+padding: 0px 15px
+}
+
+@media (max-width: 1024px) {
+  .container .card{
+    width: 100%;
+  }
+}
+
+
+/*** Product ***/
+.nav-pills .nav-item .btn {
+  color: var(--dark);
+}
+
+.nav-pills .nav-item .btn:hover,
+.nav-pills .nav-item .btn.active {
+  color: #FFFFFF;
+}
+
+.product-item {
+  box-shadow: 0 0 45px rgba(0, 0, 0, .07);
+}
+
+.product-item img {
+  transition: .5s;
+}
+
+.product-item:hover img {
+  transform: scale(1.1);
+}
+
+.product-item small a:hover {
+  color: #2e394d !important;
+}
+
+.btn-outline-primary {
+  border-color: #2e394d;
+
+}
+
+.btn.active {
+  background-color: #2e394d;
+  border-color: #990000;
+  outline-style: none;
+}
+
+.btn-outline-primary:hover {
+  border-color: #990000;
+  background-color: #990000;
+}
+
+.sign {
+  background-color: #990000;
+}
+
+.price {
+  color: #990000;
+}
+
+.productn:hover {
+  color: #990000;
+}
+/*  */
+.icon:hover{
+  cursor: pointer;
+}

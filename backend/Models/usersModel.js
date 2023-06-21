@@ -32,6 +32,8 @@ var userSchema = new mongoose.Schema({
     minlength: [6, "Minimum password length is 6 characters"],
     required: [true, "Please enter a password"],
   },
+  verificationCode: { type: String },
+  isVerified: { type: Boolean, default: false }
   // is_admin: { type: Boolean, default: false },
   // avatar: {
   //   type: String,

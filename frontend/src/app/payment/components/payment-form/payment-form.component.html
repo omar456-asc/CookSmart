@@ -1,0 +1,72 @@
+<main id="main">
+  <div
+    class="Checkout"
+    style="
+      background-image: url(https://images.unsplash.com/photo-1600025112931-e41e9a4c1a60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80);
+    "
+  >
+    <div class="container">
+      <div class="row">
+        <div class="card mt-50 mb-50">
+          <div
+            class="col-md-10 offset-1 alert alert-success"
+            *ngIf="paySuccess"
+          >
+            Payment Succeeded
+          </div>
+          <div class="col-md-10 offset-1 alert alert-danger" *ngIf="payFailed">
+            {{ FalseMsg }}
+          </div>
+          <div class="nav">
+            <ul class="mx-auto">
+              <li class="active"><a>Payment</a></li>
+            </ul>
+          </div>
+          <form
+            (ngSubmit)="Pay(Price, name.value)"
+            [formGroup]="validationForm"
+          >
+            <div class="row-1">
+              <div class="row row-2">
+                <span id="card-inner">Card holder name</span>
+              </div>
+              <div class="row row-2">
+                <input type="text" #name placeholder="Bojan Viner" />
+              </div>
+            </div>
+            <div class="row three">
+              <div class="col-7">
+                <div class="row-1">
+                  <div class="row row-2">
+                    <span id="card-inner">Card number</span>
+                  </div>
+                  <div class="row row-2">
+                    <input
+                      #card
+                      type="text"
+                      placeholder="5134-5264-4526-4545"
+                      class="form-control"
+                      formControlName="card"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <input
+                  #cvv
+                  type="text"
+                  placeholder="CVV"
+                  class="form-control"
+                  formControlName="cvv"
+                />
+              </div>
+            </div>
+            <button class="btn d-flex mx-auto" routerLink="/cart">
+              <b>Add card</b>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
