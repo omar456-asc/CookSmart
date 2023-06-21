@@ -18,13 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   localcart: any;
   cartid: any = [];
   Meal: any = [];
-  meals: any = [
-    // { "category": 'AA', "price": 11 },
-    // { "category": 'BB', "price": 12 },
-    // { "category": 'CC', "price": 13 },
-    // { "category": 'DD', "price": 14 },
-
-  ];
+  meals: any = [];
 
   trueAlert: boolean = false;
   showConfirmationPrompt: boolean = false;
@@ -49,23 +43,24 @@ export class ShoppingCartComponent implements OnInit {
  this.AlertMsg="No Items Available"
  }
 this.cartid = JSON.parse(this.localcart);
-console.log(this.cartid);
+ if(this.cartid){
   for (let i = 0; i < this.cartid.length; i++) {
 
-this.mymeals.GetMealByID(this.cartid[i].id).subscribe({
-   next: (data: any) => {
-   data.quantity=this.cartid[i].quantity
-  data.count=this.cartid[i].count
-   data.price=this.cartid[i].price
-  data.customized=this.cartid[i].customized
-  console.log(data);
-  this.Meal.push(data);
-        },
-     error: (err) => {
-   console.log(err);
-      },
-     });
-      }
+    this.mymeals.GetMealByID(this.cartid[i].id).subscribe({
+       next: (data: any) => {
+       data.quantity=this.cartid[i].quantity
+      data.count=this.cartid[i].count
+       data.price=this.cartid[i].price
+      data.customized=this.cartid[i].customized
+      console.log(data);
+      this.Meal.push(data);
+            },
+         error: (err) => {
+       console.log(err);
+          },
+         });
+          }
+ }
       this.trueAlert=false;
      }
      checkout() {
@@ -74,7 +69,8 @@ this.mymeals.GetMealByID(this.cartid[i].id).subscribe({
       this.cartid = JSON.parse(cart)
      this.myService.AddToUserCart(this.cartid, this.ID).subscribe(
        (data: any) => {
-       this.router.navigateByUrl('/order');
+       localStorage.removeItem('cart')
+      //  this.router.navigateByUrl('/order');
 
      },
    (err) => {
