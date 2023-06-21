@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/log-in/auth.service';
-// import { ShoppingCartService } from 'src/app/checkout/service/shopping-cart.service';
-// import { AllMealsService } from 'src/app/meals/services/all-meals.service';
+import { ShoppingCartService } from 'src/app/checkout/service/shopping-cart.service';
+import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { ProfileService } from 'src/app/profile/services/profile.service';
 import { OrderService } from 'src/app/order/service/order.service';
 
@@ -12,8 +12,8 @@ import { OrderService } from 'src/app/order/service/order.service';
 })
 export class OrderComponent implements OnInit {
   constructor(
-    // public mymeals: AllMealsService,
-    // public cartService: ShoppingCartService,
+    public mymeals: AllMealsService,
+    public cartService: ShoppingCartService,
     // private UserService: ProfileService,
     private authService: AuthService,
     private orderService: OrderService
@@ -21,44 +21,37 @@ export class OrderComponent implements OnInit {
   ID: any = localStorage.getItem('id');
   localcart: any;
   Meal: any = [];
-  // cartid: any = this.mymeals.getCart(); neeeeeeeed
+  cartid: any = this.mymeals.getCart();
   userID: any;
   user: any;
   totalPrice = 0;
   now = new Date();
-  // ordernum=(this.ID+this.cartid[0]).slice(5 ,15); neeeeeeeeed
+  ordernum = (this.ID + this.cartid[0]).slice(5, 15);
   ngOnInit(): void {
     this.user = { fname: 'Omar', lname: 'Walid', email: 'omar@gmail.com' };
-    this.Meal = [
-      [
-        { title: 'Meal 1', price: 100, quantity: 2 },
-        { title: 'Meal 2', price: 150, quantity: 1 },
-        { title: 'Meal 3', price: 120, quantity: 3 },
-      ],
-    ];
+
     this.totalPrice = 370;
 
     //geting user cart from local storage
-    // this.getUserCart() neeed
+    this.getUserCart();
     //get user information using id
-    // this.getUser() neeeeeed
+    // this.getUser()
   }
 
   //delete cart from local storage and database when confirm the order
-  // order(){ neeed
-  // this.createOrder()
-  // this.cartid = [{}]
-  // this.cartService.AddToUserCart(this.cartid, this.ID).subscribe(
-  // (data: any) => {
-  // localStorage.removeItem('cart');
-  // location.reload();
-  // },
-  // (err) => {
-  //  console.log("error")
-  // }
-  // );
-
-  // }
+  order() {
+    this.createOrder();
+    this.cartid = [{}];
+    this.cartService.AddToUserCart(this.cartid, this.ID).subscribe(
+      (data: any) => {
+        localStorage.removeItem('cart');
+        location.reload();
+      },
+      (err) => {
+        console.log('error');
+      }
+    );
+  }
   // getUser(){  need to be unccommented
   // this.UserService.getProfileInfo(this.ID).subscribe(
   // (data: any) => {
@@ -69,47 +62,50 @@ export class OrderComponent implements OnInit {
 
   // }
   //getting cart
-  // getUserCart(){
-  // this.localcart=this.mymeals.getCart();
-  // this.cartid = JSON.parse(this.localcart);
-  // //use regex to get price as number to compute total price
-  // const myRegex = /\d+/;
-  // if(this.cartid.length>0){
-  // for (let i = 0; i < this.cartid.length; i++) {
-  // this.mymeals.GetMealByID(this.cartid[i].id).subscribe({
-  // next: (data: any) => {
-  // data.quantity=this.cartid[i].quantity
-  // data.price=this.cartid[i].price
-  // this.Meal.push(data)
-  // this.totalPrice += this.cartid[i].quantity * this.cartid[i].price;
-  //  console.log(this.totalPrice)
-  // },
-  // error: (err) => {
-  // console.log(err);
-  // },
-  // });
-  // }}
-
-  // }
-  // createOrder(){
-  // [{MealID:"",ingredients:[{}],amount:Number}]
-  // var newOrder:any={}
-  // newOrder.userID=this.ID
-  // newOrder.totalPrice=this.totalPrice
-  // newOrder.status="pending"
-  // newOrder.meals=this.cartid.map((meal: { id: any; ingredients: any; quantity: any; }) => {
-  // return {
-  // mealID: meal.id,
-  // ingredients: meal.ingredients,
-  // quantity: meal.quantity
-  // };
-  // })
-  // this.orderService.CreateOrder(newOrder).subscribe((response: any) => {
-  // console.log("Order created")
-  // },
-  // (err) => {
-  // console.log("Error creating order")
-  // }
-  // );
-  // }
+  getUserCart() {
+    this.localcart = this.mymeals.getCart();
+    this.cartid = JSON.parse(this.localcart);
+    //use regex to get price as number to compute total price
+    const myRegex = /\d+/;
+    if (this.cartid.length > 0) {
+      for (let i = 0; i < this.cartid.length; i++) {
+        this.mymeals.GetMealByID(this.cartid[i].id).subscribe({
+          next: (data: any) => {
+            data.quantity = this.cartid[i].quantity;
+            data.price = this.cartid[i].price;
+            this.Meal.push(data);
+            this.totalPrice += this.cartid[i].quantity * this.cartid[i].price;
+            console.log(this.totalPrice);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    }
+  }
+  createOrder() {
+    [{ MealID: '', ingredients: [{}], amount: Number }];
+    var newOrder: any = {};
+    newOrder.userID = this.ID;
+    newOrder.totalPrice = this.totalPrice;
+    newOrder.status = 'pending';
+    newOrder.meals = this.cartid.map(
+      (meal: { id: any; ingredients: any; quantity: any }) => {
+        return {
+          mealID: meal.id,
+          ingredients: meal.ingredients,
+          quantity: meal.quantity,
+        };
+      }
+    );
+    this.orderService.CreateOrder(newOrder).subscribe(
+      (response: any) => {
+        console.log('Order created');
+      },
+      (err) => {
+        console.log('Error creating order');
+      }
+    );
+  }
 }

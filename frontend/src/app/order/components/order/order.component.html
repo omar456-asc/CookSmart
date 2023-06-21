@@ -7,7 +7,7 @@
   >
     <div class="container">
       <!-- *ngIf="Meal && user; else falseBlock" -->
-      <div class="row d-flex justify-content-center align-items-center">
+      <div class="row d-flex justify-content-center align-items-center" *ngIf="Meal; else falseBlock">
         <div class="col-lg-8 col-xl-6">
           <div
             class="card border-top border-bottom border-3"
@@ -79,12 +79,11 @@
 
               <p class="mt-4 pt-2">
                 Want any help?
-                <a href="#!" style="color: #990000">Please contact us</a>
+                <a routerLink="" fragment="contact-us" style="color: #990000">Please contact us</a>
               </p>
 
               <a routerLink="/meals">
-                <!-- add click method  (click)="order()" -->
-                <button class="order-btn">Confirm Order</button>
+                <button (click)="order()" class="order-btn">Confirm Order</button>
               </a>
               <a routerLink="/cart">
                 <button class="order-btn" type="submit">Cancel</button>
@@ -94,12 +93,12 @@
         </div>
       </div>
       <ng-template #falseBlock class="mt-5">
-        <h1
-          class="alert alert-danger"
-          style="background-color: #debd54; border-color: #debd54"
+        <div
+          id="spinner"
+          class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
         >
-          Loading...
-        </h1>
+          <div class="spinner-border" role="status"></div>
+        </div>
       </ng-template>
     </div>
   </div>
