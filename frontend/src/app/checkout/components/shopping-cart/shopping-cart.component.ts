@@ -69,8 +69,8 @@ this.cartid = JSON.parse(this.localcart);
       this.cartid = JSON.parse(cart)
      this.myService.AddToUserCart(this.cartid, this.ID).subscribe(
        (data: any) => {
-       localStorage.removeItem('cart')
-      //  this.router.navigateByUrl('/order');
+
+       this.router.navigateByUrl('/order');
 
      },
    (err) => {
