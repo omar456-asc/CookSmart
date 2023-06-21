@@ -53,8 +53,8 @@
             data-bs-toggle="dropdown"
           ></a>
           <div class="dropdown-menu m-0">
-            <a href="#" class="dropdown-item">log out</a>
-            <a routerLink="/auth" class="dropdown-item">log-in</a>
+            <a class="dropdown-item" (click)="logout()" *ngIf="userID">log out</a>
+            <a routerLink="/auth" class="dropdown-item" *ngIf="!userID">log-in</a>
             <a routerLink="/user" class="dropdown-item">Dashboard</a>
             <a routerLink="/profile" class="dropdown-item">
               <small class="fa fa-user text-body"></small>  Profile
