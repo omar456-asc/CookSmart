@@ -22,8 +22,13 @@
           </div>
             <span  class="d-block mb-2">Average rating: {{Meal[0].rate}}</span>
           </div>
-          <p class="font-weight-bold mt-2">price: {{Meal[0].price}}$</p>
+          <p class="font-weight-bold text-uppercase" style="font-weight: bold;">price: {{Meal[0].price}}$</p>
           <p >{{Meal[0].summary}}</p>
+          <hr>
+          <p class="h2">Ingredients</p>
+          <ul *ngFor="let ing of Meal[0].ingredients_details;" >
+            <li>{{ing.name}}</li>
+          </ul>
 
           <button class="btn btn-lg "  (click)="AddToCart()" >
             <span>Add To Cart</span>
@@ -31,15 +36,15 @@
 
         </div>
       </div >
-      <div class="col-md-10 offset-1 mt-5 py-4 border-top" style="margin-left: 0px !important;" >
-        <p class="h1">ingredients</p>
-        <ul *ngFor="let ing of Meal[0].ingredients_details;" >
-          <li>{{ing.name}}</li>
-        </ul>
-      </div>
+
     </div>
     <ng-template #falseBlock>
-      <h1 class="alert alert-danger" style="background-color: #debd54; border-color: #debd54; ">Loading...</h1>
+      <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div class="spinner-border" role="status"></div>
+    </div>
     </ng-template>
 
   </div>

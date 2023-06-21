@@ -23,6 +23,7 @@
   <div class="container ">
     <div class="tab-content ">
       <div id="tab-1" class="tab-pane fade show p-0 active">
+        <ng-container  *ngIf="filteredCategories || Meals; else falsemeals">
         <div class="row g-4 px-4">
           <ng-container *ngIf="filteredCategories; else falseBlock" >
           <div *ngFor="let meal of filteredCategories;"
@@ -49,8 +50,8 @@
               </div>
               <div class="d-flex border-top">
                 <small class="w-50 text-center border-end py-2">
-                  <a class="text-body icon"
-                    ><i class="fa fa-eye price me-2" routerLink="/mealdetails/{{meal._id}}" ></i>View detail</a
+                  <a class="text-body icon" routerLink="/mealdetails/{{meal._id}}"
+                    ><i class="fa fa-eye price me-2" ></i>View detail</a
                   >
                 </small>
                 <small class="w-50 text-center py-2">
@@ -90,8 +91,8 @@
               </div>
               <div class="d-flex border-top">
                 <small class="w-50 text-center border-end py-2">
-                  <a class="text-body icon"
-                    ><i class="fa fa-eye price me-2" routerLink="/mealdetails/{{meal._id}}" ></i>View detail</a
+                  <a class="text-body icon" routerLink="/mealdetails/{{meal._id}}"
+                    ><i class="fa fa-eye price me-2"  ></i>View detail</a
                   >
                 </small>
                 <small class="w-50 text-center py-2">
@@ -107,6 +108,15 @@
         </ng-template>
 
         </div>
+      </ng-container>
+        <ng-template #falsemeals>
+          <div
+          id="spinner"
+          class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+        >
+          <div class="spinner-border" role="status"></div>
+        </div>
+        </ng-template>
       </div>
 
     </div>
