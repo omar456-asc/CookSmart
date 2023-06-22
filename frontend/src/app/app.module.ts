@@ -22,6 +22,7 @@ import { TokenInterceptor } from './auth/services/log-in/Token Interceptor/Token
 import { ConfigService } from './config.service';
 import { ProfileModule } from './profile/profile.module';
 
+
 @NgModule({
 
   declarations: [AppComponent,MealsComponent,MealDetailsComponent],
@@ -39,6 +40,7 @@ import { ProfileModule } from './profile/profile.module';
     RouterModule,
     CheckoutModule,
     PaymentModule,
+
   ],
   providers: [
     AuthService,

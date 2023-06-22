@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-
+//#region SearchMeal
 var SearchMeal = async (req, res) => {
   try {
     let meals = await productsModel.find({
@@ -19,7 +19,9 @@ var SearchMeal = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+//#endregion
 
+//#region GetAllProducts
 var GetAllProducts = async (req, res) => {
   try {
     
@@ -102,7 +104,9 @@ var GetAllProducts = async (req, res) => {
     res.status(400).send("failed to get all Products");
   }
 };
+//#endregion
 
+//#region GetProductByID
 var GetProductByID = async (req, res) => {
   try {
     var ID = req.params.id;
@@ -189,8 +193,128 @@ var GetProductByID = async (req, res) => {
     res.status(400).send("failed to get Product");
   }
 };
+//#endregion
+
+//#region delete product by id
+var DeleteProductByID = async (req, res) => {
+  try {
+    var ID = req.params.id;
+    await productsModel.findByIdAndDelete(ID);
+    res.send("Deleted Successfully");
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("failed to delete user");
+  }
+};
+//#endregion
+
+//#region get Latest
+var getLatest6products = async (req, res) => {
+  try {
+    var AllProducts = await productsModel.find().sort({ _id: -1 }).limit(6);
+    await res.json(AllProducts);
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("failed to get last 6 products");
+  }
+};
+//#endregion
+
+//#region cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "ingredient-uploads", 
+    allowedFormats: ["jpg", "jpeg", "png"], 
+    transformation: [{ width: 500, height: 500, crop: "limit" }], 
+  },
+});
+//#endregion
+
+//#region addNewProduct 
+const upload = multer({ storage: storage }).single("image");
+
+const addNewProduct = async (req, res) => {
+  console.log(req.body)
+  try {
+    upload(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        return res.status(400).json({ error: "Error uploading image" });
+      } else if (err) {
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      const { title, price, summary, ingredients, category } = req.body;
+
+      let image = "";
+      if (req.file) {
+        image = req.file.path;
+      }
+      // Validate the incoming product data against the schema
+
+      const isValid = productSchema({
+        title,
+        price,
+        summary,
+        image,
+        ingredients,
+        category,
+      });
+
+
+      // Create a new product object
+      const newProduct = new productsModel({
+        title,
+        price,
+        summary,
+        image,
+        ingredients,
+        category,
+        image,
+      });
+
+      // Save the new product object to the database
+      await newProduct.save();
+
+      return res.status(201).json({ message: "Product created successfully" });
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error !!!!" });
+  }
+};
+//#endregion
+
+//#region editProduct
+const editProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, summary, ingredients, image, category } = req.body;
+    const product = await productsModel.findByIdAndUpdate(
+      id,
+      { title, summary, ingredients, image, category },
+      { new: true }
+    );
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(product);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+//#endregion
+
 module.exports = {
     GetAllProducts,
     GetProductByID,
-    SearchMeal
+    SearchMeal,
+    DeleteProductByID,
+    getLatest6products,
+    addNewProduct,
+    editProduct
 }

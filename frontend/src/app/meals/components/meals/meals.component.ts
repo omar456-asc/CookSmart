@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllMealsService } from '../../services/all-meals.service';
 import { RouterLink } from '@angular/router';
+// import { ProfileService } from 'src/app/profile/services/profile.service';
 
 
 @Component({
@@ -18,11 +19,13 @@ export class MealsComponent implements OnInit {
   card={
     active:true
   };
-  constructor(public mealService:AllMealsService){
+  constructor(public mealService:AllMealsService,
+    // public getProfile:ProfileService
+    ){
 
   }
   ngOnInit(): void {
-
+    // this.getFavorite();
     this.mealService.GetAllMeals().subscribe(
       {
         next:(data:any)=>{
@@ -38,6 +41,77 @@ export class MealsComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  SearchMeal(key:HTMLInputElement){
+    const searchQuery = key.value;
+    console.log(searchQuery);
+    //let searchKey = { key };
+    this.mealService.SearchMeal(searchQuery).subscribe({
+      next:(value:any)=>{
+         this.filteredCategories=value
+      },
+      error:(err)=> {
+        this.filteredCategories=null;
+        console.log(err)
+      },
+    }
+
+    )
+  }
+
+  // getFavorite(){
+
+  //   this.getProfile.getProfileInfo(this.LocalStorageId).subscribe({
+  //     next:(value:any)=>{
+  //       this.favorite = value.favorite;
+  //       if(this.category=='Fivourite'){
+  //         this.filteredCategories= this.Meals.filter((meal:any) => this.favorite.includes(meal._id));
+  //       }
+  //       console.log(this.favorite);
+  //     },
+  //     error:(err)=>{
+  //       this.favorite =null;
+  //       console.log(err);
+  //     }
+  //   })
+  // }
+
+  // AddToFav(Id:any){
+  //   const userId=this.LocalStorageId
+  //   const mealId=Id
+  //   console.log(mealId);
+  //   this.getProfile.AddToFavorite(userId,mealId).subscribe({
+  //     next:(value:any)=>{
+  //       console.log(value);
+  //       this.getFavorite()
+  //     },
+  //     error:(err)=>{
+  //       this.getFavorite()
+  //       console.log(err);
+  //     }
+
+  //   })
+
+
+  // }
+  // isFavorite(mealId: number) {
+  //   if(this.favorite){
+  //   const fav=this.favorite.includes(mealId);
+  //   return fav
+  //   }
+  // }
 
   filter(event: MouseEvent,categoryy:string){
     const links = document.querySelectorAll('.suggestion-wrap a');
