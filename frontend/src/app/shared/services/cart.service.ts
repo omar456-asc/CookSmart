@@ -5,14 +5,17 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
+  private cart = localStorage.getItem('cart');
+  private oldCartLength = this.cart ? JSON.parse(this.cart).length : 0;
 
-  private cartCountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private cartCountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.oldCartLength);
   public cartCount$ = this.cartCountSubject.asObservable();
 
   private cartItems: any[] = [];
 
-  constructor() { }
+  constructor() {
 
+  }
   addToCart(item: any) {
     this.cartItems.push(item);
     this.updateCartCount();
