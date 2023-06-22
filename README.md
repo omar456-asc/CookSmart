@@ -27,10 +27,10 @@ The MealPlanner Managment System has two Roles Like `Chief`, and `user`.</br>
 To install and run User Cook Smart locally, follow these steps:
 
 1. Clone the repository:
-<pre>
--git clone https://github.com/omar456-asc/CookSmart
-- cd CookSmart
-</pre>
+  <pre>
+    -git clone https://github.com/omar456-asc/CookSmart
+    - cd CookSmart
+  </pre>
 - **BACK-END INSTALLATION**
   <pre>
     - cd backend
