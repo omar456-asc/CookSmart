@@ -7,6 +7,7 @@ import { ResetPasswordService } from './reset-password/service/reset-password.se
 import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { SharedService } from 'src/app/shared/services/shared.service';
+import {CartService} from 'src/app/shared/services/cart.service'
 
 @Component({
   selector: 'app-log-in',
@@ -41,6 +42,8 @@ export class LogInComponent {
     private reset: ResetPasswordService,
     private usercart: AllMealsService,
     // private shared: SharedService
+    private cartService :CartService
+
   ) {}
   cart: any;
   Login(email: any, password: any) {
@@ -56,6 +59,7 @@ export class LogInComponent {
       }
 
       this.getcart();
+      // this.cartService.updateCartCount()
       // this.checkRole();
     },
     (err) => {

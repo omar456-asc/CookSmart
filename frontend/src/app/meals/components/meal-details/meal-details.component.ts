@@ -56,13 +56,7 @@ export class MealDetailsComponent implements OnInit {
     });
   }
   AddToCart() {
-    // Increment cart
-    this.cartService.addToCart(this.cart[0]);
 
-    // Subscribe to the cartCount$ observable in the ShoppingCartService to update the count dynamically
-    this.cartService.cartCount$.subscribe(count => {
-      this.count = count;
-    });
 
     if (this.userID) {
       if (this.cart[0].quantity === 0) {
@@ -77,6 +71,15 @@ export class MealDetailsComponent implements OnInit {
           ),
           customized: false,
         };
+        // Increment cart
+        this.cartService.addToCart(this.cart[0]);
+
+        // Subscribe to the cartCount$ observable in the ShoppingCartService to update the count dynamically
+        this.cartService.cartCount$.subscribe(count => {
+          this.count = count;
+
+        });
+
       } else {
         let index = this.cart.findIndex((item) => item.id == this.ID && item.count == this.Meal[0].ingredients_details.length)
         if (index == -1 || this.Meal[0].ingredients.length != this.cart[index].ingredients.length) {
@@ -90,6 +93,15 @@ export class MealDetailsComponent implements OnInit {
             ),
             customized: false,
           });
+          this.cartService.addToCart(this.cart[0]);
+
+          // Subscribe to the cartCount$ observable in the ShoppingCartService to update the count dynamically
+          this.cartService.cartCount$.subscribe(count => {
+            this.count = count;
+            console.log(this.count);
+
+          });
+
         } else {
 
           this.cart[index].quantity = Number(this.cart[index].quantity) + 1;
