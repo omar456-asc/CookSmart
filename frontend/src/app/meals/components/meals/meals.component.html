@@ -34,16 +34,16 @@
         <ng-container *ngIf="filteredCategories || Meals; else falsemeals">
           <div
             class="row g-4 px-4"
-            style="background-color: rgb(244, 244, 244)"
           >
             <ng-container *ngIf="filteredCategories; else falseBlock">
               <div
+
                 *ngFor="let meal of filteredCategories"
                 class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
                 data-wow-delay="0.1s"
               >
-                <div class="product-item">
-                  <div class="position-relative bg-light overflow-hidden">
+                <div class="product-item"  >
+                  <div class="position-relative bg-light overflow-hidden" >
                     <img
                       class="img-fluid w-100"
                       src="{{ meal.image }}"
@@ -55,7 +55,7 @@
                       New
                     </div>
                   </div>
-                  <div class="text-center p-4">
+                  <div class="text-center p-4" >
                     <a class="productn d-block h5 mb-2">{{ meal.title }}</a>
                     <span class="price me-1">{{ meal.price }}</span>
                   </div>
@@ -86,11 +86,12 @@
 
             <ng-template #falseBlock>
               <div
+              style="background-color: rgb(255, 255, 255); "
                 *ngFor="let meal of Meals"
-                class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                class=" col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
                 data-wow-delay="0.1s"
               >
-                <div class="product-item">
+                <div class="product-item" style="width: 300px; height: 500px; position: relative;">
                   <div class="position-relative bg-light overflow-hidden">
                     <img
                       class="img-fluid w-100"
@@ -107,8 +108,8 @@
                     <a class="productn d-block h5 mb-2">{{ meal.title }}</a>
                     <span class="price me-1">{{ meal.price }}</span>
                   </div>
-                  <div class="d-flex border-top">
-                    <small class="w-50 text-center border-end py-2">
+                  <div class=" d-flex border-top w-100" style="position: absolute; bottom: 0;">
+                    <small class="w-50 text-center border-end py-2" >
                       <a
                         class="text-body icon"
                         routerLink="/mealdetails/{{ meal._id }}"

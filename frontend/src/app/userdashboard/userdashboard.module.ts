@@ -5,10 +5,12 @@ import { UserdashboardComponent } from './userdashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [UserdashboardComponent, DashboardComponent],
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SharedModule, RouterLink],
   exports: [UserdashboardComponent, DashboardComponent],
 })
 export class UserdashboardModule {}
+

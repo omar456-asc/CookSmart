@@ -1,10 +1,6 @@
 <!-- Content Start -->
-<br />
-<br />
-<br />
-<br />
-<br />
-<div class="container">
+
+<div  class="container container-fluid bg-icon my-5 py-6">
   <!-- *ngIf="highestRateCategory; else falseBlock" -->
 <ng-container >
 <div class="content mt-9">
@@ -91,7 +87,7 @@
               <td><span [ngClass]="getStatusClass(order.status)">{{
                       order.status
                     }}</span></td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>  
+              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
               <td *ngIf="order.status == 'pending'; else noAction">
                     <button
                       type="button"
