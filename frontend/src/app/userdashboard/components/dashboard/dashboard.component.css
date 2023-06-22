@@ -13,10 +13,13 @@
 }
 .add-btn {
   background-color: #990000;
-    border-radius: 10% !important;
-    margin-left: 48%;
-    margin-top: 2%;
-    color: white;
-    height: 35px;
-    width: 115px;
+  border-radius: 10% !important;
+  margin-left: 48%;
+  margin-top: 2%;
+  color: white;
+  height: 30px !important;
+  width: 80px;
+  display: block;
+  text-align: center;
+  padding-top: 3px;
 }

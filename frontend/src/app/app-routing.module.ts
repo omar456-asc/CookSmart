@@ -15,6 +15,7 @@ import { EmailVerificationComponent } from './auth/components/sign-up/email-veri
 import { MealsComponent } from './meals/components/meals/meals.component';
 import { MealDetailsComponent } from './meals/components/meal-details/meal-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AddMealComponent } from './meals/components/add-meal/add-meal.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
   { path: 'user', component: UserdashboardComponent },
   { path: 'about', component: AboutusComponent },
   { path: 'cart', component: CheckoutComponent},
-  
+  {path:'add-meal',component:AddMealComponent},
   {
     path: 'payment/:id',
     component: PaymentComponent,

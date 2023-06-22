@@ -24,6 +24,12 @@ const ResetRoutes = require("./Routes/resetPasswordRoutes");
 app.use("/api", ResetRoutes);
 //#endregion
 
+//#region ingredients
+const IngredientRoutes = require("./Routes/ingredientsRoutes");
+app.use("/api/ingredients", IngredientRoutes);
+//#endregion
+
+
 //#region product
 const ProductRoutes = require("./Routes/productsRoutes");
 app.use("/api/products", ProductRoutes);

@@ -17,10 +17,11 @@ import { UserdashboardModule } from './userdashboard/userdashboard.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
+import { AddMealComponent } from './meals/components/add-meal/add-meal.component';
 
 @NgModule({
 
-  declarations: [AppComponent,MealsComponent,MealDetailsComponent],
+  declarations: [AppComponent,MealsComponent,MealDetailsComponent, AddMealComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
