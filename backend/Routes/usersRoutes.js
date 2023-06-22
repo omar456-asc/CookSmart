@@ -6,6 +6,8 @@ const express = require("express");
 const router = new express.Router();
 const bcrypt = require("bcrypt");
 
+router.post('/:userId/favorite/:mealId', UserController.addMealToFavorites);
+
 //#region Authentication
 router.post("/login", AuthController.logIn);
 router.post("/signup", AuthController.AddNewUser);
