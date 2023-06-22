@@ -5,6 +5,8 @@ const UserController = require("../Controllers/UserController");
 const express = require("express");
 const router = new express.Router();
 const bcrypt = require("bcrypt");
+//fav
+router.post('/:userId/favorite/:mealId', UserController.addMealToFavorites);
 
 //#region Authentication
 router.post("/login", AuthController.logIn);

@@ -56,11 +56,45 @@ var DeleteUserByID = async (req, res) => {
     res.status(400).send("failed to delete user");
   }
 };
+async function addMealToFavorites(req, res) {
+  var userId = req.params.userId;
+  const mealId = req.params.mealId;
+  //console.log("mmmm");
+  //console.log(userId);
+  //console.log(mealId);
+  try {
+    const user = await usersmodel.findById(userId);
+    const favorite = user.favorite;
+    console.log(favorite);
+    const CheckFavorite = favorite.findIndex((item) => item == mealId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if the meal is already in the user's favorites
+    if (CheckFavorite != -1) {
+      favorite.splice(CheckFavorite, 1);
+      await usersmodel.updateOne({ _id: userId }, { favorite: favorite });
+      console.log(favorite);
+      return res.status(400).json({ message: "Meal already in favorites" });
+    }
+    favorite.push(mealId);
+    await usersmodel.updateOne({ _id: userId }, { favorite: favorite });
+    //await user.save();
+
+    return res.json({ message: "Meal added to favorites" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
+  }
+}
+
 
 
 module.exports = {
   GetAllUsers,
   UpdateUserByID,
   GetUserByID,
-  DeleteUserByID
+  DeleteUserByID,
+  addMealToFavorites
 };

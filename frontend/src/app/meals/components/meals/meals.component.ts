@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllMealsService } from '../../services/all-meals.service';
 import { RouterLink } from '@angular/router';
+// import { ProfileService } from 'src/app/profile/services/profile.service';
 
 
 @Component({
@@ -18,11 +19,13 @@ export class MealsComponent implements OnInit {
   card={
     active:true
   };
-  constructor(public mealService:AllMealsService){
+  constructor(public mealService:AllMealsService,
+    // public getProfile:ProfileService
+    ){
 
   }
   ngOnInit(): void {
-    //this.getFavorite();
+    // this.getFavorite();
     this.mealService.GetAllMeals().subscribe(
       {
         next:(data:any)=>{
@@ -34,6 +37,22 @@ export class MealsComponent implements OnInit {
       }
     )
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   SearchMeal(key:HTMLInputElement){
     const searchQuery = key.value;

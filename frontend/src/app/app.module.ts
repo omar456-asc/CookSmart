@@ -18,6 +18,7 @@ import { CheckoutModule } from './checkout/checkout.module';
 import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
 
+
 @NgModule({
 
   declarations: [AppComponent,MealsComponent,MealDetailsComponent],
@@ -35,6 +36,7 @@ import { PaymentModule } from './payment/payment.module';
     RouterModule,
     CheckoutModule,
     PaymentModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

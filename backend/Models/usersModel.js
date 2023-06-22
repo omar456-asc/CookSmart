@@ -18,8 +18,8 @@ var userSchema = new mongoose.Schema({
     minlength: 4,
     maxlength: 16,
     match: [/^[a-zA-Z0-9]+$/ ,"please enter a valid username"]}, 
-  // cart: { type: Array },
-  // favorite: { type: Array , ref:'meals' },
+  cart: { type: Array },
+  favorite: { type: Array , ref:'meals' },
   email: {
     type: String,
     required: [true, "Please enter an email"],
