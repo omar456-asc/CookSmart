@@ -7,7 +7,7 @@
 				<h2>Sign Up</h2>
 
 			</header>
-			<form (ngSubmit)="AddNewUser(username.value,email.value,password.value)"
+			<form (ngSubmit)="AddNewUser(username.value,email.value,password.value,is_chef.value)"
       [formGroup]="validationForm"   class="form"
       >
 				<div class="input-group">
@@ -40,9 +40,22 @@
       {{ passwordMsg }}
     </p>
 				</div>
+        <div style="display: flex; padding-left: 15px; padding-top: 20px;">
+          <div style="display: flex; flex-direction: row;">
+            <input #is_chef type="checkbox" id="option2" name="options"  (click)="updateCheckboxValue()" style="width: 15px; height: 15px;">
+            <label for="option2">Chef</label>
+          </div>
+        </div>
+
 			<button type="submit" >
 				Join Us
 			</button>
+      <div class="social-links" >
+        <a  class="facebook onhover" style="color: #778395;"><i class="fab fa-brands fa-facebook-f"></i></a>
+        <a  class="google onhover" style="color: #778395;"><i class="fab fa-brands fa-google"></i></a>
+        <a  class="twitter onhover" style="color: #778395;"><i class="fab fa-brands fa-twitter"></i></a>
+        <a  class="github onhover" style="color: #778395;"><i class="fab fa-brands fa-github"></i></a>
+      </div>
       <i class="fa-sharp fa-solid fa-house"></i>
       <i class="fa-light fa-house-person-leave"></i>
 			</form>

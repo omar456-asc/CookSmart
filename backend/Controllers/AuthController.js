@@ -56,7 +56,7 @@ const handleErrors = (e) => {
 
 //#region SignUp
 var AddNewUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password ,is_chef} = req.body;
   const verificationCode = uuid.v4();
 
   try {
@@ -65,7 +65,8 @@ var AddNewUser = async (req, res) => {
       unique: true ,
       email,
       password,
-      verificationCode
+      verificationCode,
+      is_chef
     });
     // const token = createToken(usersModelCreate);
     const transporter = nodemailer.createTransport({
@@ -127,8 +128,8 @@ var getVerificationCode= async (req, res) => {
 
 //#region JWT
 const maxDay = 3 * 24 * 60 * 60; // The days i logged in then expires
-const createToken = (id) => {
-  return jwt.sign({ id }, secret, {
+const createToken = (id, is_chef) => {
+  return jwt.sign({ id, is_chef }, secret, {
     expiresIn: maxDay,
   }); //id, secret
 };
@@ -140,8 +141,8 @@ var logIn = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await usersmodel.login(email, password);
-    console.log("id", user.id);
-    const token = createToken(user.id);
+    console.log("role and id", user.id, user.is_chef);
+    const token = createToken(user.id, user.is_chef);
     res.cookie("token", token, { maxAge: maxDay * 1000 });
 
     res.status(200);

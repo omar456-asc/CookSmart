@@ -15,17 +15,19 @@ export class SignUpComponent {
   emailMsg: string = '';
   usernameMsg: string = '';
   passwordMsg: string = '';
+  chefvalue=false
 
   constructor(private myUser: SignUpService, private router: Router) {}
   //# region registerComponent
-  AddNewUser(username: any, email: any, password: any) {
-    let signupUser = { username, email, password };
+  AddNewUser(username: any, email: any, password: any, is_chef:any) {
+    is_chef=this.chefvalue
+    let signupUser = { username, email, password, is_chef };
+
     this.myUser.AddNewUser(signupUser).subscribe(
       (data) => {
         this.authUser = data;
         console.log(this.authUser);
         this.showLoginComponent.emit();
-        // this.router.navigateByUrl('/login');
       },
       (err) => {
         if (email == '') {
@@ -52,6 +54,12 @@ export class SignUpComponent {
       }
     );
   }
+  updateCheckboxValue() {
+    this.chefvalue=true
+
+    console.log(`Checkbox value updated to: ${this.chefvalue}`);
+  }
+
   //#endregion
   //#region validation
   validationForm = new FormGroup({
@@ -64,6 +72,7 @@ export class SignUpComponent {
       Validators.minLength(6),
       Validators.required,
     ]),
+    is_chef: new FormControl(null, [Validators.required]),
   });
 
   get Validation() {

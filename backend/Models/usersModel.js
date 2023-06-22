@@ -33,11 +33,11 @@ var userSchema = new mongoose.Schema({
     required: [true, "Please enter a password"],
   },
   verificationCode: { type: String },
-  isVerified: { type: Boolean, default: false }
-  // is_admin: { type: Boolean, default: false },
-  // avatar: {
-  //   type: String,
-  // },
+  isVerified: { type: Boolean, default: false },
+  is_chef: { type: Boolean, default: false },
+  avatar: {
+    type: String,
+  },
   // mobile: { type: String},
   // address: { type: String}, 
   // gender: { type: String},
