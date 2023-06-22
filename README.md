@@ -28,7 +28,7 @@ To install and run User Cook Smart locally, follow these steps:
 
 1. Clone the repository:
   <pre>
-    -git clone https://github.com/omar456-asc/CookSmart
+    - git clone https://github.com/omar456-asc/CookSmart
     - cd CookSmart
   </pre>
 - **BACK-END INSTALLATION**
