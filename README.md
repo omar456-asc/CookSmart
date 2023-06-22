@@ -42,7 +42,7 @@ To install and run User Cook Smart locally, follow these steps:
     - npm install
     - ng serve -o
   </pre>
-  ## Technologies Used
+## Technologies Used
 
 The following technologies were used in the development of User Meal Planner:
 
