@@ -10,16 +10,17 @@ if (mongoose.connect(DB_URL, { useNewUrlParser: true })) {
 }
 
 var userSchema = new mongoose.Schema({
-  username:{
-    type: String, 
+  username: {
+    type: String,
     required: [true, "Please enter a username"],
-    unique: [true, ],
+    unique: [true],
     lowercase: true,
     minlength: 4,
     maxlength: 16,
-    match: [/^[a-zA-Z0-9]+$/ ,"please enter a valid username"]}, 
+    match: [/^[a-zA-Z0-9]+$/, "please enter a valid username"],
+  },
   cart: { type: Array },
-  favorite: { type: Array , ref:'meals' },
+  favorite: { type: Array, ref: "meals" },
   email: {
     type: String,
     required: [true, "Please enter an email"],
@@ -33,17 +34,17 @@ var userSchema = new mongoose.Schema({
     required: [true, "Please enter a password"],
   },
   verificationCode: { type: String },
-  isVerified: { type: Boolean, default: false }
+  isVerified: { type: Boolean, default: false },
   // is_admin: { type: Boolean, default: false },
   avatar: {
     type: String,
   },
-  fname: { type: String},
-  lname: { type: String},
-  mobile: { type: String},
-  address: { type: String}, 
-  gender: { type: String},
-  age: { type: Number},
+  fname: { type: String },
+  lname: { type: String },
+  mobile: { type: String },
+  address: { type: String },
+  gender: { type: String },
+  age: { type: Number },
 });
 
 //#region FireAFunctionBeforeSaveToDataBaseToHash
