@@ -3,7 +3,14 @@
 
 margin-top: 10%;
 }
-
+.fav{
+  height: 60px !important;
+  margin-left: 24%;
+  margin-bottom: 5%;
+}
+.fav>p{
+  margin-left: 20%;
+}
 
 .active{
   color: #990000 !important;
