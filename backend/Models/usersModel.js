@@ -35,13 +35,15 @@ var userSchema = new mongoose.Schema({
   verificationCode: { type: String },
   isVerified: { type: Boolean, default: false }
   // is_admin: { type: Boolean, default: false },
-  // avatar: {
-  //   type: String,
-  // },
-  // mobile: { type: String},
-  // address: { type: String}, 
-  // gender: { type: String},
-  // age: { type: Number},
+  avatar: {
+    type: String,
+  },
+  fname: { type: String},
+  lname: { type: String},
+  mobile: { type: String},
+  address: { type: String}, 
+  gender: { type: String},
+  age: { type: Number},
 });
 
 //#region FireAFunctionBeforeSaveToDataBaseToHash

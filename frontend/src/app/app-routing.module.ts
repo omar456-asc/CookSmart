@@ -8,6 +8,7 @@ import { OrderComponent } from './order/components/order/order.component';
 import { HomeComponent } from './home/home.component';
 import { HeroComponent } from './home/components/hero/hero.component';
 import { AboutusComponent } from './about-us/about-us.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { ResetPasswordComponent } from './auth/components/log-in/reset-password/component/reset-password.component';
@@ -34,7 +35,12 @@ const routes: Routes = [
   },
   { path: 'payment', component: PaymentComponent },
   { path: 'order', component: OrderComponent },
-  { path: '**', component: ErrorComponent },
+  { path: 'profile', component: ProfileComponent},
+  // { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
+
+
+  { path: '**', component: ErrorComponent }
+
 ];
 
 @NgModule({
