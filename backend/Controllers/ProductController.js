@@ -1,4 +1,5 @@
 let productsModel = require("../Models/ProductsModel");
+const ChefMeals = require('../Models/cheifMealModel');
 const productSchema = require("../Utils/ProductSchema");
 const { ObjectId } = require("mongodb");
 const cloudinary = require("cloudinary").v2;
@@ -241,7 +242,7 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage }).single("image");
 
 const addNewProduct = async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     upload(req, res, async (err) => {
       if (err instanceof multer.MulterError) {
@@ -249,7 +250,7 @@ const addNewProduct = async (req, res) => {
       } else if (err) {
         return res.status(500).json({ error: "Internal server error" });
       }
-      const { title, price, summary, ingredients, category } = req.body;
+      const { title, price, summary, ingredients, category} = req.body;
 
       let image = "";
       if (req.file) {
@@ -279,7 +280,21 @@ const addNewProduct = async (req, res) => {
       });
 
       // Save the new product object to the database
-      await newProduct.save();
+      const product=await newProduct.save();
+    let chefId=req.params.chefid;
+      mealIds=product._id;
+         
+      try {
+        console.log(chefId)
+        await  ChefMeals.create({
+          chefId,
+          mealIds
+              });
+              console.log("created");
+              
+            } catch (e) {
+              res.status(400).json({ status: "failed" });
+            }
 
       return res.status(201).json({ message: "Product created successfully" });
     });

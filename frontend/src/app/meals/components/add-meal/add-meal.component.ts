@@ -9,7 +9,9 @@ import { AdminMealsServiceService } from './services/admin-meals-service.service
   styleUrls: ['./add-meal.component.css']
 })
 export class AddMealComponent {
+  chefId:any
   meal: any = {
+    chefId:'',
     ingredients: [], // Initialize ingredients as an empty array
     price: 0 // Initialize price as 0
   };
@@ -75,6 +77,8 @@ export class AddMealComponent {
     formData.append('price', this.meal.price);
     formData.append('summary', this.meal.summary);
     formData.append('category', this.meal.category);
+    this.chefId= localStorage.getItem('id')
+
 
     // Append the image file to the form data
     if (inputEl.files.length > 0) {
@@ -87,7 +91,7 @@ export class AddMealComponent {
     });
 
     console.log(formData.get('title'));
-    this.mealService.addNewMeal(formData).subscribe(
+    this.mealService.addNewMeal(formData,this.chefId).subscribe(
       (response: any) => {
         console.log('Meal added successfully!', response);
         this.isMealAdded = true;

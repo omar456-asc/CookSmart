@@ -22,8 +22,8 @@ export class AdminMealsServiceService {
   GetMealByID(id: any) {
     return this.HttpClient.get(this.Base_URL + '/' + id);
   }
-  addNewMeal(newMeal: FormData) {
-    return this.HttpClient.post(this.Base_URL, newMeal,
+  addNewMeal(newMeal: FormData,chefid: any) {
+    return this.HttpClient.post(this.Base_URL+'/'+chefid, newMeal,
       // { reportProgress: true, observe: 'events' }
       );
   }
