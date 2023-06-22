@@ -21,8 +21,12 @@
     </form>
   </div>
   <div class="container ">
+    <div *ngIf="this.favMsg!=''" class="alert alert-success fav w-50 ">
+      <p class="alert-success">{{this.favMsg}}</p>
+    </div>
     <div class="tab-content ">
       <div id="tab-1" class="tab-pane fade show p-0 active">
+
         <ng-container  *ngIf="filteredCategories || Meals; else falsemeals">
         <div class="row g-4 px-4" style="background-color: white;">
           <ng-container *ngIf="filteredCategories; else falseBlock" >
@@ -54,8 +58,7 @@
                     ><i class="fa fa-eye price me-2" ></i>View detail</a
                   >
                 </small>
-                <!-- (click)="AddToFav(meal._id)" -->
-                <small class="w-50 text-center py-2"  >
+                <small class="w-50 text-center py-2"  (click)="AddToFav(meal._id)">
                   <a class="text-body icon">
                     <i class="fa fa-regular fa-heart me-2"  style="color: #990000;" ></i>Add to Favourite</a
                   >
@@ -96,8 +99,7 @@
                     ><i class="fa fa-eye price me-2"  ></i>View detail</a
                   >
                 </small>
-                <!-- (click)="AddToFav(meal._id)" -->
-                <small class="w-50 text-center py-2" >
+                <small class="w-50 text-center py-2" (click)="AddToFav(meal._id)">
                   <a class="text-body icon"
                     ><i class="fa fa-regular fa-heart me-2" style="color: #990000;" ></i>Add to Favourite</a
                   >

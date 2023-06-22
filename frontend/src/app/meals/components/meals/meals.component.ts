@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllMealsService } from '../../services/all-meals.service';
 import { RouterLink } from '@angular/router';
-// import { ProfileService } from 'src/app/profile/services/profile.service';
+import { ProfileService } from 'src/app/profile/services/profile.service';
 
 
 @Component({
@@ -15,17 +15,17 @@ export class MealsComponent implements OnInit {
   LocalStorageId:any = localStorage.getItem('id');
   filteredCategories:any;
   favorite:any;
+  favMsg:string=''
   errorMessage: string | undefined;
   card={
     active:true
   };
   constructor(public mealService:AllMealsService,
-    // public getProfile:ProfileService
-    ){
+    public getProfile:ProfileService){
 
   }
   ngOnInit(): void {
-    // this.getFavorite();
+    this.getFavorite();
     this.mealService.GetAllMeals().subscribe(
       {
         next:(data:any)=>{
@@ -71,47 +71,55 @@ export class MealsComponent implements OnInit {
     )
   }
 
-  // getFavorite(){
+  getFavorite(){
 
-  //   this.getProfile.getProfileInfo(this.LocalStorageId).subscribe({
-  //     next:(value:any)=>{
-  //       this.favorite = value.favorite;
-  //       if(this.category=='Fivourite'){
-  //         this.filteredCategories= this.Meals.filter((meal:any) => this.favorite.includes(meal._id));
-  //       }
-  //       console.log(this.favorite);
-  //     },
-  //     error:(err)=>{
-  //       this.favorite =null;
-  //       console.log(err);
-  //     }
-  //   })
-  // }
+    this.getProfile.getProfileInfo(this.LocalStorageId).subscribe({
+      next:(value:any)=>{
+        this.favorite = value.favorite;
+        if(this.category=='Fivourite'){
+          this.filteredCategories= this.Meals.filter((meal:any) => this.favorite.includes(meal._id));
+        }
+        console.log(this.favorite);
+      },
+      error:(err)=>{
+        this.favorite =null;
+        console.log(err);
+      }
+    })
+  }
 
-  // AddToFav(Id:any){
-  //   const userId=this.LocalStorageId
-  //   const mealId=Id
-  //   console.log(mealId);
-  //   this.getProfile.AddToFavorite(userId,mealId).subscribe({
-  //     next:(value:any)=>{
-  //       console.log(value);
-  //       this.getFavorite()
-  //     },
-  //     error:(err)=>{
-  //       this.getFavorite()
-  //       console.log(err);
-  //     }
+  AddToFav(Id:any){
+    const userId=this.LocalStorageId
+    const mealId=Id
+    console.log(mealId);
+    this.getProfile.AddToFavorite(userId,mealId).subscribe({
+      next:(value:any)=>{
+        console.log(value);
+        this.favMsg='Meal added to your favorites successfully'
+        setTimeout(() => {
+          this.favMsg=''
+        }, 2000);
+        this.getFavorite()
+      },
+      error:(err)=>{
+        this.getFavorite()
+        this.favMsg='Meal removed from your favorites successfully'
+        setTimeout(() => {
+          this.favMsg=''
+        }, 2000);
+        console.log(err);
+      }
 
-  //   })
+    })
 
 
-  // }
-  // isFavorite(mealId: number) {
-  //   if(this.favorite){
-  //   const fav=this.favorite.includes(mealId);
-  //   return fav
-  //   }
-  // }
+  }
+  isFavorite(mealId: number) {
+    if(this.favorite){
+    const fav=this.favorite.includes(mealId);
+    return fav
+    }
+  }
 
   filter(event: MouseEvent,categoryy:string){
     const links = document.querySelectorAll('.suggestion-wrap a');
