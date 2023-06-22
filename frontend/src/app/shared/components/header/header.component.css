@@ -2,10 +2,14 @@
 .fixed-top {
     transition: .5s;
 }
+.dropdown-item{
+  cursor:pointer
+}
 
 .top-bar {
     height: 45px;
     border-bottom: 1px solid rgba(0, 0, 0, .07);
+
 }
 
 .navbar .dropdown-toggle::after {
@@ -70,5 +74,6 @@
 
 .dropdown-item:active {
     background-color: #990000;
+
     /* replace with the desired color */
 }

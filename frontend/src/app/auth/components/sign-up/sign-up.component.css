@@ -1,5 +1,31 @@
+/* home icon */
+.gohome{
+  margin-top:8%;
+  margin-left:35%;
+  color:#1a2639;
+}
+.person{
+  margin-right: -27%;
 
-
+    color: firebrick;
+    font-size: 40px;
+    z-index: 1;
+    position: relative;
+}
+.home{
+  font-size: 80px;
+}
+.p-home{
+  color: #1a2639;
+    margin-left: -5%;
+  font-size: 16px;
+  font-weight: bold;
+}
+.gohome:hover{
+  opacity: 0.9;
+  scale: 1.1;
+  cursor: pointer;
+}
 /* Remove default margin */
 body,
 h1,

@@ -18,6 +18,7 @@
     "nodemailer": "^6.9.3",
     "salt": "^0.5.5",
     "uuid": "^9.0.0",
-    "validator": "^13.9.0"
+    "validator": "^13.9.0",
+    "stripe": "^12.5.0"
   }
 }

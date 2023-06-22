@@ -1,11 +1,47 @@
 let usersmodel = require("../Models/usersModel");
 const bcrybt = require("bcrypt");
-// const multer = require("multer");
+const multer = require("multer");
 var path = require("path");
-// const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
 const dotenv = require("dotenv");
 
 dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
+const uploadsCloud = (file, folder) => {
+  return new Promise((resolve) => {
+    cloudinary.uploader.upload(
+      file,
+      (result) => {
+        resolve({
+          url: result.url,
+          id: result.public_id,
+        });
+      },
+      {
+        resource_type: "auto",
+        folder: folder,
+      }
+    );
+  });
+};
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix =
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname);
+    cb(null, uniqueSuffix);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 var GetAllUsers = async (req, res) => {
   try {
@@ -77,6 +113,29 @@ async function addMealToFavorites(req, res) {
     return res.status(500).json({ message: "Server error" });
   }
 }
+var UpdateUserProfileData = async (req, res) => {
+  try {
+    console.log("-------UpdateUserProfileData--------");
+    var updatedUser = req.body;
+
+    await usersmodel.updateOne(
+      { _id: updatedUser.id },
+      {
+        fname: updatedUser.fname,
+        lname: updatedUser.lname,
+        email: updatedUser.email,
+        mobile: updatedUser.mobile,
+        address: updatedUser.address,
+        gender: updatedUser.gender,
+        age: updatedUser.age,
+      }
+    );
+    await res.send(updatedUser);
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("*******failed to update new user**********");
+  }
+};
 
 
 var DeleteUserByID = async (req, res) => {
@@ -89,11 +148,73 @@ var DeleteUserByID = async (req, res) => {
     res.status(400).send("failed to delete user");
   }
 };
+async function addMealToFavorites(req, res) {
+  var userId = req.params.userId;
+  const mealId = req.params.mealId;
+  //console.log("mmmm");
+  //console.log(userId);
+  //console.log(mealId);
+  try {
+    const user = await usersmodel.findById(userId);
+    const favorite = user.favorite;
+    console.log(favorite);
+    const CheckFavorite = favorite.findIndex((item) => item == mealId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if the meal is already in the user's favorites
+    if (CheckFavorite != -1) {
+      favorite.splice(CheckFavorite, 1);
+      await usersmodel.updateOne({ _id: userId }, { favorite: favorite });
+      console.log(favorite);
+      return res.status(400).json({ message: "Meal already in favorites" });
+    }
+    favorite.push(mealId);
+    await usersmodel.updateOne({ _id: userId }, { favorite: favorite });
+    //await user.save();
+
+    return res.json({ message: "Meal added to favorites" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
+  }
+}
+
+
+
+var UploadProfilePic = async (req, res) => {
+  try {
+    const uploader = async (path) => await uploadsCloud(path, "Images");
+    const { path } = req.file;
+    const newPath = await uploader(path);
+    const avatarUrl = newPath.url;
+    await usersmodel.updateOne(
+      { _id: req.body.userId },
+      {
+        avatar: avatarUrl,
+      }
+    );
+
+    res.status(200).send({
+      messege: "Hello from upload profile pic",
+      url: avatarUrl,
+      status: "ok",
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).send("Error in upload profile pic");
+  }
+};
+
 
 module.exports = {
   GetAllUsers,
   UpdateUserByID,
   GetUserByID,
+  UpdateUserProfileData,
+  UploadProfilePic,
+  upload,
   DeleteUserByID,
   addMealToFavorites
 };

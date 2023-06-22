@@ -4,6 +4,7 @@ import { AuthService } from '../../services/log-in/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResetPasswordService } from './reset-password/service/reset-password.service';
+import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { SharedService } from 'src/app/shared/services/shared.service';
 
@@ -37,8 +38,8 @@ export class LogInComponent {
     private myService: LogInService,
     private authService: AuthService,
     private router: Router,
-    private reset: ResetPasswordService
-    // private usercart: AllMealsService,
+    private reset: ResetPasswordService,
+    private usercart: AllMealsService,
     // private shared: SharedService
   ) {}
   cart: any;
@@ -56,6 +57,8 @@ export class LogInComponent {
 
       // this.getcart();
       this.checkRole();
+      this.getcart();
+      // this.checkRole();
     },
     (err) => {
       if (email == '') {
@@ -95,22 +98,22 @@ export class LogInComponent {
     }
   }
 
-//   getcart() {
-//     var id = this.authService.getUserID();
+  getcart() {
+    var id = this.authService.getUserID();
 
-//     this.myService.GetUserCart(id).subscribe({
-//       next: (data: any) => {
-//         this.cart = data.cart;
-//         if (this.cart[0].id) {
-//           this.usercart.setCart(JSON.stringify(this.cart));
-// location.reload();
-//         }
-//       },
-//       error: (err) => {
-//         console.log(err);
-//       },
-//     });
-//   }
+    this.myService.GetUserCart(id).subscribe({
+      next: (data: any) => {
+        this.cart = data.cart;
+        if (this.cart[0].id) {
+          this.usercart.setCart(JSON.stringify(this.cart));
+location.reload();
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   checkRole() {
     let is_chef= this.authService.getRole();

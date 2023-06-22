@@ -21,6 +21,8 @@ import { AddMealComponent } from './meals/components/add-meal/add-meal.component
 import { AuthService } from './auth/services/log-in/auth.service';
 import { TokenInterceptor } from './auth/services/log-in/Token Interceptor/TokenInterceptor';
 import { ConfigService } from './config.service';
+import { ProfileModule } from './profile/profile.module';
+
 
 @NgModule({
 
@@ -39,12 +41,15 @@ import { ConfigService } from './config.service';
     RouterModule,
     CheckoutModule,
     PaymentModule,
+
   ],
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     ConfigService,
+    ProfileModule
   ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,3 +1,7 @@
+/**
+ * Utils [Separtion]
+ * MVC[Model - View - Controller]
+ */
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -10,12 +14,14 @@ const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 require("dotenv").config();
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+//Global MiddleWare
+const logging = require("./MiddleWares/logging");
+app.use("/", logging);
 
 //#region user
 const UserRoutes = require("./Routes/usersRoutes");
-const logging = require("./MiddleWares/logging");
-app.use("/", logging);
 app.use("/api/users", UserRoutes);
 //#endregion
 
@@ -34,6 +40,29 @@ app.use("/api/ingredients", IngredientRoutes);
 const ProductRoutes = require("./Routes/productsRoutes");
 app.use("/api/products", ProductRoutes);
 //#endregion
+
+// //#region ingredients
+// const IngredientRoutes = require("./Routes/ingredientsRoutes");
+// app.use("/api/ingredients", IngredientRoutes);
+// //#endregion
+
+// //#region orders
+const OrderRoutes = require("./Routes/ordersRoutes");
+app.use("/api/orders", OrderRoutes);
+// //#region cart
+const CartRoutes = require("./Routes/cartRoutes");
+app.use("/api/cart", CartRoutes);
+//#endregion
+ 
+//#region cart
+const stripeRoutes = require("./Routes/stripeRoutes");
+app.use("/api/payment", stripeRoutes);
+//#endregion
+
+// //#region order by user id
+const userOrderRoutes = require("./Routes/userOrderRoutes");
+app.use("/api/order", userOrderRoutes);
+// //#endregion
 
 app.listen(PORT, () => {
   console.log("http://localhost:" + PORT);

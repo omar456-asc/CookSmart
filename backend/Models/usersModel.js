@@ -10,8 +10,8 @@ if (mongoose.connect(DB_URL, { useNewUrlParser: true })) {
 }
 
 var userSchema = new mongoose.Schema({
-  username:{
-    type: String, 
+  username: {
+    type: String,
     required: [true, "Please enter a username"],
     unique: [true ],
     lowercase: true,
