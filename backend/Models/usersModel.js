@@ -39,8 +39,7 @@ var userSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
-  fname: { type: String },
-  lname: { type: String },
+  username: { type: String },
   mobile: { type: String },
   address: { type: String },
   gender: { type: String },
