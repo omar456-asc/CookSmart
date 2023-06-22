@@ -5,9 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResetPasswordService } from './reset-password/service/reset-password.service';
 import { AllMealsService } from 'src/app/meals/services/all-meals.service';
-// import { AllMealsService } from 'src/app/meals/services/all-meals.service';
-// import { SharedService } from 'src/app/shared/services/shared.service';
-
+import { CartService } from 'src/app/shared/services/cart.service';
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -40,7 +38,7 @@ export class LogInComponent {
     private router: Router,
     private reset: ResetPasswordService,
     private usercart: AllMealsService,
-    // private shared: SharedService
+    private cartService: CartService
   ) {}
   cart: any;
   Login(email: any, password: any) {
@@ -97,13 +95,26 @@ export class LogInComponent {
   }
 
   getcart() {
+    console.log('getcart');
     var id = this.authService.getUserID();
+    console.log(id);
 
     this.myService.GetUserCart(id).subscribe({
       next: (data: any) => {
         this.cart = data.cart;
-        if (this.cart[0].id) {
+        console.log(this.cart)
+        console.log(this.cart.length);
+        if (this.cart) {
+          // this.cartService.cartCount$.subscribe((count) => {
+            // this.cart.length = count;
+          // });
           this.usercart.setCart(JSON.stringify(this.cart));
+        }
+        else{
+          // var length =0;
+          // this.cartService.cartCount$.subscribe((count) => {
+            // length = count;
+          // });
         }
       },
       error: (err) => {
