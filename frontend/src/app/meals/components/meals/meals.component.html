@@ -1,126 +1,147 @@
-
- <section id="meals" class="container-fluid bg-light bg-icon my-5 py-6">
+<section id="meals" class="container-fluid bg-icon my-5 py-6">
   <div class="s004 mb-4">
     <form>
       <fieldset>
         <div class="inner-form">
           <div class="input-field">
-            <input #key  (keyup)="SearchMeal(key)" class="form-control" id="choices-text-preset-values" type="text" placeholder="Type to search..." />
+            <input
+              #key
+              (keyup)="SearchMeal(key)"
+              class="form-control"
+              id="choices-text-preset-values"
+              type="text"
+              placeholder="Type to search..."
+            />
             <i class="fa fa-search btn-search"></i>
           </div>
         </div>
-        <div class="suggestion-wrap d-flex flex-column flex-md-row text-center text-sm-left">
-          <a (click)="filter($event,'')">All</a>
-          <a (click)="filter($event,'Fivourite')">Favourite</a>
-          <a  (click)="filter($event,'pizza')">Pizza</a>
-          <a  (click)="filter($event,'pasta')">Pasta</a>
-          <a  (click)="filter($event,'Fish')">Fish</a>
-          <a  (click)="filter($event,'Cheese')">Cheese</a>
+        <div
+          class="suggestion-wrap d-flex flex-column flex-md-row text-center text-sm-left"
+        >
+          <a (click)="filter($event, '')">All</a>
+          <a (click)="filter($event, 'Fivourite')">Favourite</a>
+          <a (click)="filter($event, 'pizza')">Pizza</a>
+          <a (click)="filter($event, 'pasta')">Pasta</a>
+          <a (click)="filter($event, 'Fish')">Fish</a>
+          <a (click)="filter($event, 'Cheese')">Cheese</a>
         </div>
       </fieldset>
     </form>
   </div>
-  <div class="container ">
-    <div class="tab-content ">
+  <div class="container">
+    <div class="tab-content">
       <div id="tab-1" class="tab-pane fade show p-0 active">
-        <ng-container  *ngIf="filteredCategories || Meals; else falsemeals">
-        <div class="row g-4 px-4" style="background-color: white;">
-          <ng-container *ngIf="filteredCategories; else falseBlock" >
-          <div *ngFor="let meal of filteredCategories;"
-            class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-            data-wow-delay="0.1s"
+        <ng-container *ngIf="filteredCategories || Meals; else falsemeals">
+          <div
+            class="row g-4 px-4"
+            style="background-color: rgb(244, 244, 244)"
           >
-            <div class="product-item">
-              <div class="position-relative bg-light overflow-hidden">
-                <img
-                  class="img-fluid w-100"
-                  src={{meal.image}}
-                  alt=""
-                />
-                <div
-                  class="sign rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
-                >
-                  New
+            <ng-container *ngIf="filteredCategories; else falseBlock">
+              <div
+                *ngFor="let meal of filteredCategories"
+                class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                data-wow-delay="0.1s"
+              >
+                <div class="product-item">
+                  <div class="position-relative bg-light overflow-hidden">
+                    <img
+                      class="img-fluid w-100"
+                      src="{{ meal.image }}"
+                      alt=""
+                    />
+                    <div
+                      class="sign rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                    >
+                      New
+                    </div>
+                  </div>
+                  <div class="text-center p-4">
+                    <a class="productn d-block h5 mb-2">{{ meal.title }}</a>
+                    <span class="price me-1">{{ meal.price }}</span>
+                  </div>
+                  <div class="d-flex border-top">
+                    <small class="w-50 text-center border-end py-2">
+                      <a
+                        class="text-body icon"
+                        routerLink="/mealdetails/{{ meal._id }}"
+                        ><i class="fa fa-eye price me-2"></i>View detail</a
+                      >
+                    </small>
+                    <!-- (click)="AddToFav(meal._id)" -->
+                    <small class="w-50 text-center py-2">
+                      <a class="text-body icon">
+                        <i
+                          class="fa fa-regular fa-heart me-2"
+                          style="color: #990000"
+                        ></i
+                        >Add to Favourite</a
+                      >
+                      <!-- <i class="fa-sharp fa-regular fa-heart" style="color: #5c1414;"></i> -->
+                      <!-- [ngClass]="isFavorite(meal._id) ? 'fa fa-heart' : 'fa-regular fa-heart'"  -->
+                    </small>
+                  </div>
                 </div>
               </div>
-              <div class="text-center p-4">
-                <a class="productn d-block h5 mb-2">{{meal.title}}</a>
-                <span class="price me-1">{{meal.price}}</span>
+            </ng-container>
 
+            <ng-template #falseBlock>
+              <div
+                *ngFor="let meal of Meals"
+                class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                data-wow-delay="0.1s"
+              >
+                <div class="product-item">
+                  <div class="position-relative bg-light overflow-hidden">
+                    <img
+                      class="img-fluid w-100"
+                      src="{{ meal.image }}"
+                      alt=""
+                    />
+                    <div
+                      class="sign rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
+                    >
+                      New
+                    </div>
+                  </div>
+                  <div class="text-center p-4">
+                    <a class="productn d-block h5 mb-2">{{ meal.title }}</a>
+                    <span class="price me-1">{{ meal.price }}</span>
+                  </div>
+                  <div class="d-flex border-top">
+                    <small class="w-50 text-center border-end py-2">
+                      <a
+                        class="text-body icon"
+                        routerLink="/mealdetails/{{ meal._id }}"
+                        ><i class="fa fa-eye price me-2"></i>View detail</a
+                      >
+                    </small>
+                    <!-- (click)="AddToFav(meal._id)" -->
+                    <small class="w-50 text-center py-2">
+                      <a class="text-body icon"
+                        ><i
+                          class="fa fa-regular fa-heart me-2"
+                          style="color: #990000"
+                        ></i
+                        >Add to Favourite</a
+                      >
+                      <!-- <i class="fa-sharp fa-regular fa-heart" style="color: #5c1414;"></i> -->
+                      <!-- [ngClass]="isFavorite(meal._id) ? 'fa fa-heart' : 'fa-regular fa-heart'"  -->
+                    </small>
+                  </div>
+                </div>
               </div>
-              <div class="d-flex border-top">
-                <small class="w-50 text-center border-end py-2">
-                  <a class="text-body icon" routerLink="/mealdetails/{{meal._id}}"
-                    ><i class="fa fa-eye price me-2" ></i>View detail</a
-                  >
-                </small>
-                <!-- (click)="AddToFav(meal._id)" -->
-                <small class="w-50 text-center py-2"  >
-                  <a class="text-body icon">
-                    <i class="fa fa-regular fa-heart me-2"  style="color: #990000;" ></i>Add to Favourite</a
-                  >
-                  <!-- <i class="fa-sharp fa-regular fa-heart" style="color: #5c1414;"></i> -->
-                  <!-- [ngClass]="isFavorite(meal._id) ? 'fa fa-heart' : 'fa-regular fa-heart'"  -->
-                </small>
-              </div>
-            </div>
+            </ng-template>
           </div>
         </ng-container>
-
-        <ng-template  #falseBlock >
-          <div *ngFor="let meal of Meals;"
-            class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-            data-wow-delay="0.1s"
-          >
-            <div class="product-item">
-              <div class="position-relative bg-light overflow-hidden">
-                <img
-                  class="img-fluid w-100"
-                  src={{meal.image}}
-                  alt=""
-                />
-                <div
-                  class="sign rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"
-                >
-                  New
-                </div>
-              </div>
-              <div class="text-center p-4">
-                <a class="productn d-block h5 mb-2">{{meal.title}}</a>
-                <span class="price me-1">{{meal.price}}</span>
-
-              </div>
-              <div class="d-flex border-top">
-                <small class="w-50 text-center border-end py-2">
-                  <a class="text-body icon" routerLink="/mealdetails/{{meal._id}}"
-                    ><i class="fa fa-eye price me-2"  ></i>View detail</a
-                  >
-                </small>
-                <!-- (click)="AddToFav(meal._id)" -->
-                <small class="w-50 text-center py-2" >
-                  <a class="text-body icon"
-                    ><i class="fa fa-regular fa-heart me-2" style="color: #990000;" ></i>Add to Favourite</a
-                  >
-                  <!-- <i class="fa-sharp fa-regular fa-heart" style="color: #5c1414;"></i> -->
-                  <!-- [ngClass]="isFavorite(meal._id) ? 'fa fa-heart' : 'fa-regular fa-heart'"  -->
-                </small>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-
-        </div>
-      </ng-container>
         <ng-template #falsemeals>
           <div
-          id="spinner"
-          class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
-        >
-          <div class="spinner-border" role="status"></div>
-        </div>
+            id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+          >
+            <div class="spinner-border" role="status"></div>
+          </div>
         </ng-template>
       </div>
-
     </div>
   </div>
- </section>
+</section>
