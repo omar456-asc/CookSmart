@@ -106,6 +106,7 @@ export class LogInComponent {
     this.myService.GetUserCart(id).subscribe({
       next: (data: any) => {
         this.cart = data.cart;
+        console.log(this.cart);
         if (this.cart[0].id) {
           this.usercart.setCart(JSON.stringify(this.cart));
         }
@@ -114,6 +115,8 @@ export class LogInComponent {
         console.log(err);
       },
     });
+    console.log(this.cart);
+    console.log(this.usercart)
   }
   // checkRole() {
   //   let isAdmin = this.authService.getRole();
