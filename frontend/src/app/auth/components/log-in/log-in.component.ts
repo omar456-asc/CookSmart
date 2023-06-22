@@ -115,7 +115,7 @@ export class LogInComponent {
   checkRole() {
     let is_chef= this.authService.getRole();
     if (is_chef === true) {
-      this.router.navigate(['/chef']);
+      this.router.navigate(['/user']);
     } else if (is_chef === false) {
       this.router.navigate(['/']);
     } else {

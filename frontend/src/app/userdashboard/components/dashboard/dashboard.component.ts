@@ -11,13 +11,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements AfterViewInit {
-
+is_chef:boolean=false;
   constructor(
     private myService: LogInService,
     private authService: AuthService,
     private router: Router,
-  ) {}
-  
+  ) {
+  this.is_chef=this.authService.getRole()
+
+  }
+
 
   @ViewChild('worldwideSalesCanvas') worldwideSalesCanvas!: ElementRef;
   @ViewChild('salesRevenueCanvas') salesRevenueCanvas!: ElementRef;
