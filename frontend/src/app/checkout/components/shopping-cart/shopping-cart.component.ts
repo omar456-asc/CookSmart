@@ -91,7 +91,6 @@ this.cartid.splice(index, 1);
       if(this.cartid.length==0){
         localStorage.removeItem('cart');
       }
-      location.reload();
     }
   deleteConfirmation(ID: number): void {
     this.mealIdToDelete = ID;
