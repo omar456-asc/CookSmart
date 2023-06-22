@@ -55,7 +55,7 @@ export class LogInComponent {
       }
 
       // this.getcart();
-      // this.checkRole();
+      this.checkRole();
     },
     (err) => {
       if (email == '') {
@@ -111,14 +111,15 @@ export class LogInComponent {
 //       },
 //     });
 //   }
-//   checkRole() {
-//     let isAdmin = this.authService.getRole();
-//     if (isAdmin === true) {
-//       this.router.navigate(['/admin']);
-//     } else if (isAdmin === false) {
-//       this.router.navigate(['/']);
-//     } else {
-//       this.router.navigate(['/login']);
-//     }
-//   }
+
+  checkRole() {
+    let is_chef= this.authService.getRole();
+    if (is_chef === true) {
+      this.router.navigate(['/chef']);
+    } else if (is_chef === false) {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 }

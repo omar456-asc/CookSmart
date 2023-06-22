@@ -2,12 +2,23 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData, ChartOptions } from 'chart.js';
+import { AuthService } from './../../../auth/services/log-in/auth.service';
+import { LogInService } from './../../../auth/services/log-in/log-in.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements AfterViewInit {
+
+  constructor(
+    private myService: LogInService,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
+  
+
   @ViewChild('worldwideSalesCanvas') worldwideSalesCanvas!: ElementRef;
   @ViewChild('salesRevenueCanvas') salesRevenueCanvas!: ElementRef;
 
@@ -71,3 +82,12 @@ export class DashboardComponent implements AfterViewInit {
     });
   }
 }
+
+
+
+
+
+
+
+
+
