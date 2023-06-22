@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MealsComponent } from './meals/components/meals/meals.component';
 import { MealDetailsComponent } from './meals/components/meal-details/meal-details.component';
@@ -18,6 +18,9 @@ import { CheckoutModule } from './checkout/checkout.module';
 import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
 import { AddMealComponent } from './meals/components/add-meal/add-meal.component';
+import { AuthService } from './auth/services/log-in/auth.service';
+import { TokenInterceptor } from './auth/services/log-in/Token Interceptor/TokenInterceptor';
+import { ConfigService } from './config.service';
 
 @NgModule({
 
@@ -37,7 +40,11 @@ import { AddMealComponent } from './meals/components/add-meal/add-meal.component
     CheckoutModule,
     PaymentModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    ConfigService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
