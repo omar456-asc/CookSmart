@@ -45,14 +45,27 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   ingredients: any;
   summary: any;
 is_chef: boolean=false;
+
   constructor(
     myRoute: ActivatedRoute,
     public UserdashboardServiceService: UserdashboardServiceService,
     private orderService: OrderService,
     private authService: AuthService,
     private router: Router,
+
   ) {
-  this.is_chef=this.authService.getRole()}
+  this.is_chef=this.authService.getRole()
+  this.totalPrice = 0.0;
+  this.orders = [];
+  this.totalPriceValues = [];
+  this.totalCategory = [];
+  this.totalOrdersPrice = 0.0;
+  this.allRates = [];
+  this.highestRate = 0;
+  this.highestRateCategory = '';
+  this.orderDetails = [];
+
+}
   ngOnInit(): void {
     console.log(this.ID);
     this.UserdashboardServiceService.getOrdersByUserId(this.ID).subscribe({
