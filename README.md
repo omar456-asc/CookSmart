@@ -1,4 +1,9 @@
 # CookSmart
+
+<p align="center" style="margin-top:6%;margin-bottom:6%;">
+  <img  src="https://media.giphy.com/media/jCOuICpkZRPyg/giphy.gif" />
+</p>
+
 CookSmart is an Angular-based application that helps users plan, track, and order meals based on their preferences. It uses Node.js and MongoDB for secure and efficient database access, and offers payment processing and delivery management. Overall, it provides a convenient and user-friendly way to manage meals and groceries.
 
 ## INTRODUCTION
