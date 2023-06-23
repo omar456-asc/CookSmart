@@ -89,8 +89,7 @@ var UpdateUserProfileData = async (req, res) => {
     await usersmodel.updateOne(
       { _id: updatedUser.id },
       {
-        fname: updatedUser.fname,
-        lname: updatedUser.lname,
+        username: updatedUser.username,
         email: updatedUser.email,
         mobile: updatedUser.mobile,
         address: updatedUser.address,

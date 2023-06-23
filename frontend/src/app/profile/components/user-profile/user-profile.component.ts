@@ -11,7 +11,7 @@ export class UserProfileComponent implements OnInit {
   avatarUrl =
     'http://res.cloudinary.com/dquveo9pl/image/upload/v1684333006/Images/mafkm3yefhk4ccpqeogu.jpg';
   user: any;
-  name: string = '';
+  username: string = '';
   email: string = '';
   isPicPicked: boolean = false;
   mobile: string = '';
@@ -39,7 +39,7 @@ export class UserProfileComponent implements OnInit {
         console.log(data);
         this.dbUser = data;
         this.avatarUrl = data.avatar;
-        this.name = data.fname + ' ' + data.lname;
+        this.username = data.username;
         this.email = data.email;
         this.gender = data.gender;
         this.mobile = data.mobile;
@@ -73,8 +73,7 @@ export class UserProfileComponent implements OnInit {
   updateUser() {
     let body = {
       'id': this.user.id,
-      'fname': this.dbUser.fname,
-      'lname': this.dbUser.lname,
+      'username': this.dbUser.username,
       'email': this.dbUser.email,
       'mobile': this.dbUser.mobile,
       'address': this.dbUser.address,
@@ -86,7 +85,7 @@ export class UserProfileComponent implements OnInit {
     this.profileService.UpdateUserProfileData(body).subscribe(
       (data: any) => {
         console.log('User profile data updated successfully!', data);
-        this.name = this.dbUser.fname + ' ' + this.dbUser.lname;
+        this.username = this.dbUser.username;
         this.email = this.dbUser.email;
         this.mobile = this.dbUser.mobile;
         this.address = this.dbUser.address;
