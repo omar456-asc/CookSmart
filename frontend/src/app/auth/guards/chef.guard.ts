@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth/services/log-in/auth.service';
 export class ChefGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(): boolean {
-    if (this.authService.isUserLoggedIn() && !this.authService.getRole()) {
+    if (this.authService.isUserLoggedIn() && this.authService.getRole()) {
       return true;
     } else {
       this.router.navigate(['/']);
