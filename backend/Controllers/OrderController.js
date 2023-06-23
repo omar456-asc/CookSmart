@@ -27,8 +27,7 @@ const getAllOrders = async (req, res) => {
           status: 1,
           date: 1,
           user: {
-            fname: 1,
-            lname: 1,
+            username: 1,
             email: 1,
           },
           mealCount: { $size: "$meals" },

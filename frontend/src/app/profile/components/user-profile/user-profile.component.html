@@ -27,7 +27,7 @@
               (change)="onFilePicked($event.target)"
             />
             <i
-              class="fas fa-mobile-alt fs-5 pl-2"
+              class="fas fa-cloud-upload-alt"
               *ngIf="isPicPicked"
               (click)="upload()"
             ></i>
@@ -35,19 +35,19 @@
           <div class="card-body p-1-9 p-xl-5">
             <div>
               <i
-                class="fas fa-mobile-alt fs-5 d-flex justify-content-end"
+                class="fas fa-pencil-alt fs-5 d-flex justify-content-end"
                 *ngIf="!editable"
                 (click)="changeEditable()"
               ></i>
               <i
-                class="fas fa-mobile-alt fs-5 d-flex justify-content-end"
+                class="far fa-save fs-5 d-flex justify-content-end"
                 *ngIf="editable"
                 (click)="updateUser()"
                 (click)="changeEditable()"
               ></i>
             </div>
             <div *ngIf="!editable">
-              <h3 class="h4 mb-4">{{ name }}</h3>
+              <h3 class="h4 mb-4">{{ username }}</h3>
               <ul class="list-unstyled mb-4">
                 <li class="mb-3">
                   <a
@@ -77,7 +77,7 @@
                 <li class="mb-3">
                   <a
                     ><i
-                      class="bi bi-person-bounding-box display-25 me-3 text-secondary"
+                      class="far fa-user display-25 me-3 text-secondary"
                     ></i
                     >{{ gender }}</a
                   >
@@ -85,7 +85,7 @@
                 <li class="mb-3">
                   <a
                     ><i
-                      class="bi bi-calendar-heart-fill display-25 me-3 text-secondary"
+                      class="far fa-calendar-check display-25 me-3 text-secondary"
                     ></i
                     >{{ age }}</a
                   >
@@ -95,28 +95,17 @@
             <form>
               <div class="form-col" *ngIf="editable">
                 <div class="form-group">
-                  <label for="inputEmail4">First Name</label>
+                  <label for="inputEmail4">Username</label>
                   <input
                     type="name"
                     class="form-control"
                     id="inputEmail4"
                     name="fname"
                     type="text"
-                    [(ngModel)]="dbUser.fname"
+                    [(ngModel)]="dbUser.username"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="inputEmail4">Last Name</label>
-                  <input
-                    type="name"
-                    class="form-control"
-                    id="inputEmail4"
-                    name="lname"
-                    type="text"
-                    [(ngModel)]="dbUser.lname"
-                  />
-                </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="inputEmail4">Email</label>
                   <input
                     type="email"
@@ -126,7 +115,7 @@
                     type="text"
                     [(ngModel)]="dbUser.email"
                   />
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label for="inputAddress">Address</label>
                   <input

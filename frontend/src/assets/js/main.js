@@ -19,13 +19,17 @@
     if ($(window).width() < 992) {
       if ($(this).scrollTop() > 45) {
         $(".fixed-top").addClass("bg-white shadow");
+        $(".navbar-expand-lg").addClass("bg-white");
       } else {
         $(".fixed-top").removeClass("bg-white shadow");
+        $(".navbar-expand-lg").removeClass("bg-white");
       }
     } else {
       if ($(this).scrollTop() > 45) {
         $(".fixed-top").addClass("bg-white shadow").css("top", -45);
+        $(".navbar-expand-lg").addClass("bg-white");
       } else {
+        $(".navbar-expand-lg").removeClass("bg-white");
         $(".fixed-top").removeClass("bg-white shadow").css("top", 0);
       }
     }
