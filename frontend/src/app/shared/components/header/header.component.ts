@@ -12,16 +12,21 @@ import { ShoppingCartService } from 'src/app/checkout/service/shopping-cart.serv
 })
 export class HeaderComponent  {
   cartid:any;
-  userID:any
-  ID=this.auth.getUserID()
+  userID:any;
+  isLoggedIn: any;
+  getRole: any;
+  ID=this.authService.getUserID()
   constructor(private route: ActivatedRoute,
-    private auth:AuthService,
+    private authService:AuthService,
     private router: Router,
     private mealService: AllMealsService,
     private cart:ShoppingCartService,
     ) {
-      this.userID=this.auth.getUserID()
+      this.userID=this.authService.getUserID()
       console.log(this.userID)
+      console.log(this.authService.isUserLoggedIn());
+      this.isLoggedIn = this.authService.isUserLoggedIn();
+      this.getRole = this.authService.getRole();
     }
 
 

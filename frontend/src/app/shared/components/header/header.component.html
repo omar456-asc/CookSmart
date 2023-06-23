@@ -55,8 +55,8 @@
           <div class="dropdown-menu m-0">
             <a class="dropdown-item" (click)="logout()" *ngIf="userID">log out</a>
             <a routerLink="/auth" class="dropdown-item" *ngIf="!userID">log-in</a>
-            <a routerLink="/user" class="dropdown-item">Dashboard</a>
-            <a routerLink="/profile" class="dropdown-item">
+            <a  *ngIf="isLoggedIn " routerLink="/user" class="dropdown-item">Dashboard</a>
+            <a *ngIf="isLoggedIn " routerLink="/profile" class="dropdown-item">
               <small class="fa fa-user text-body"></small>  Profile
             </a>
           </div>
