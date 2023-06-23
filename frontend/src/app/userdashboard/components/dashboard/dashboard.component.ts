@@ -151,7 +151,6 @@ flag:any;
   }
 }
   ngAfterViewChecked() {
-    console.log(this.worldwideSalesCanvas , this.salesRevenueCanvas)
     if(this.flag){
     if(this.worldwideSalesCanvas && this.salesRevenueCanvas){
       console.log('insiiide')
@@ -198,7 +197,6 @@ flag:any;
     console.log('return')
     this.flag=false;
   }}
-  console.log('no   return')
 
   }
 
