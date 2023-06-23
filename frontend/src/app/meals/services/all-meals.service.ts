@@ -21,7 +21,7 @@ export class AllMealsService {
     return this.myClient.get(this.Base_URL + '/search' + '/' + key )
   }
   //#endregion
-  
+
   //#region rateMeal
   RateMeal(id: any,rate: any){
     return this.myClient.post(this.Base_URL + '/' + id,rate)
@@ -35,6 +35,11 @@ export class AllMealsService {
   }
   //#endregion
 
+  //#region get latest
+  latest8products(){
+    return  this.myClient.get(this.Base_URL + '/latest8products')
+  }
+  //#endregion
   //#region GetMealByID
   GetMealByID(id: any) {
     return this.myClient.get(this.Base_URL + '/' + id);

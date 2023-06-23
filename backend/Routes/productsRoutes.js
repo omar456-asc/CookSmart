@@ -4,7 +4,7 @@ const express = require("express");
 let router = express.Router();
 
 //#region Product
-router.get("/latest6products", ProductController.getLatest6products);
+router.get("/latest8products", ProductController.getLatest8products);
 router.get("/", ProductController.GetAllProducts);
 router.get("/:id", ProductController.GetProductByID);
 router.get("/search/:key", ProductController.SearchMeal);
