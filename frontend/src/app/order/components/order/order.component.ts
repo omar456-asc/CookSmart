@@ -59,6 +59,7 @@ export class OrderComponent implements OnInit {
   this.UserService.getProfileInfo(this.ID).subscribe(
   (data: any) => {
   this.user=data;
+  console.log(data);
   },
   (error) => console.log('Error', error)
   );

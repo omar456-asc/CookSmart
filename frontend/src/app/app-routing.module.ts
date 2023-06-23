@@ -38,7 +38,6 @@ const routes: Routes = [
     path: 'payment/:id',
     component: PaymentComponent, canActivate: [AuthGuard]
   },
-  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
 
   {path:'order/:id',component:ShowOrderComponent},
   { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
