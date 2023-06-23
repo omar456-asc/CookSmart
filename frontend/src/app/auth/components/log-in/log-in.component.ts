@@ -38,6 +38,7 @@ export class LogInComponent {
     private router: Router,
     private reset: ResetPasswordService,
     private usercart: AllMealsService,
+    private cartService: CartService
     // private shared: SharedService
   ) {}
   cart: any;
@@ -103,19 +104,20 @@ export class LogInComponent {
     this.myService.GetUserCart(id).subscribe({
       next: (data: any) => {
         this.cart = data.cart;
-        console.log(this.cart)
-        console.log(this.cart.length);
         if (this.cart) {
-          // this.cartService.cartCount$.subscribe((count) => {
-            // this.cart.length = count;
-          // });
+          this.cartService.updateCartCount(this.cart.length);
+          this.cartService.cartCount$.subscribe((count) => {
+            this.cart.length = count;
+          });
+          if(this.cart[0]){
           this.usercart.setCart(JSON.stringify(this.cart));
-        }
+        }}
         else{
-          // var length =0;
-          // this.cartService.cartCount$.subscribe((count) => {
-            // length = count;
-          // });
+          var length =0;
+          this.cartService.updateCartCount(this.cart.length);
+          this.cartService.cartCount$.subscribe((count) => {
+            length = count;
+          });
         }
       },
       error: (err) => {
