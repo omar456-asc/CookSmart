@@ -4,27 +4,34 @@ import { AuthService } from 'src/app/auth/services/log-in/auth.service';
 import { Router } from '@angular/router';
 import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 import { ShoppingCartService } from 'src/app/checkout/service/shopping-cart.service';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent  {
-  cartid:any;
-  userID:any
-  ID=this.auth.getUserID()
+export class HeaderComponent {
+  cartid: any;
+  userID: any
+  cartCount: any;
+  ID = this.auth.getUserID()
   constructor(private route: ActivatedRoute,
-    private auth:AuthService,
+    private auth: AuthService,
     private router: Router,
     private mealService: AllMealsService,
-    private cart:ShoppingCartService,
-    ) {
-      this.userID=this.auth.getUserID()
-      console.log(this.userID)
-    }
+    private cart: ShoppingCartService,
+    private cartService: CartService
+  ) {
+    this.userID = this.auth.getUserID()
+    console.log(this.userID)
+  }
 
-
+  ngOnInit() {
+    this.cartService.cartCount$.subscribe(count => {
+      this.cartCount = count;
+    });
+  }
 
   ngAfterViewInit() {
     this.route.fragment.subscribe((fragment) => {
@@ -39,11 +46,11 @@ export class HeaderComponent  {
   logout() {
     var cart: any = this.mealService.getCart();
 
-    if(cart){
+    if (cart) {
       this.cartid = JSON.parse(cart);
     }
-    else{
-      this.cartid=[]
+    else {
+      this.cartid = []
     }
     this.cart.AddToUserCart(this.cartid, this.ID).subscribe(
       (data: any) => {

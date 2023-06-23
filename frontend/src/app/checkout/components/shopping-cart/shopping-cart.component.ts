@@ -3,6 +3,7 @@ import { ShoppingCartService } from '../../service/shopping-cart.service';
 // import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AllMealsService } from 'src/app/meals/services/all-meals.service';
+import { CartService } from 'src/app/shared/services/cart.service';
 // import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
@@ -23,12 +24,14 @@ export class ShoppingCartComponent implements OnInit {
   trueAlert: boolean = false;
   showConfirmationPrompt: boolean = false;
   mealIdToDelete: number | undefined;
+  count: any;
   constructor(
     public myService: ShoppingCartService,
     public mymeals: AllMealsService,
     myRoute: ActivatedRoute,
     //  private shared: SharedService,
     private router: Router,
+    private cartService:CartService,
 
   ) {
 
@@ -90,8 +93,17 @@ this.cartid.splice(index, 1);
  this.Meal.splice(index, 1);
       if(this.cartid.length==0){
         localStorage.removeItem('cart');
+        location.reload();
       }
-      location.reload();
+      this.count = this.cartid.length;
+      this.cartService.updateCartCount(this.count)
+
+
+  this.cartService.cartCount$.subscribe(count => {
+    this.count = count;
+
+  });
+
     }
   deleteConfirmation(ID: number): void {
     this.mealIdToDelete = ID;

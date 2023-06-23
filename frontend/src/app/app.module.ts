@@ -22,10 +22,10 @@ import { TokenInterceptor } from './auth/services/log-in/Token Interceptor/Token
 import { ConfigService } from './config.service';
 import { ProfileModule } from './profile/profile.module';
 
+import { CartService } from './shared/services/cart.service';
 
 @NgModule({
-
-  declarations: [AppComponent,MealsComponent,MealDetailsComponent],
+  declarations: [AppComponent, MealsComponent, MealDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,13 +40,13 @@ import { ProfileModule } from './profile/profile.module';
     RouterModule,
     CheckoutModule,
     PaymentModule,
-
+    ProfileModule,
   ],
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     ConfigService,
-    ProfileModule
+    CartService,
   ],
   bootstrap: [AppComponent],
 })
