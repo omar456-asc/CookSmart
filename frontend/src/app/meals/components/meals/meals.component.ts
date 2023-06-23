@@ -72,7 +72,8 @@ export class MealsComponent implements OnInit {
   }
 
   getFavorite(){
-
+    console.log(this.LocalStorageId);
+    if(this.LocalStorageId!=null){
     this.getProfile.getProfileInfo(this.LocalStorageId).subscribe({
       next:(value:any)=>{
         this.favorite = value.favorite;
@@ -85,7 +86,7 @@ export class MealsComponent implements OnInit {
         this.favorite =null;
         console.log(err);
       }
-    })
+    })}
   }
 
   AddToFav(Id:any){
