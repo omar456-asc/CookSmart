@@ -39,12 +39,17 @@ export class AddMealComponent {
 
   }
   computePrice(): number {
-    const ingredientPrices = this.meal.ingredients.map((ingredient: any) => {
-      const selectedIngredient = this.ingredients.find((i: any) => i._id === ingredient);
-      return selectedIngredient ? selectedIngredient.price : 0;
-    });
+    if(this.meal.ingredients){
+      const ingredientPrices = this.meal.ingredients.map((ingredient: any) => {
+        const selectedIngredient = this.ingredients.find(
+          (i: any) => i._id === ingredient
+        );
+        return selectedIngredient ? selectedIngredient.price : 0;
+      });
+      return ingredientPrices.reduce((a: number, b: number) => a + b, 0);
+    }
+    return 0;
 
-    return ingredientPrices.reduce((a: number, b: number) => a + b, 0);
   }
   onIngredientChange() {
     this.meal.price = this.computePrice();
@@ -69,8 +74,6 @@ export class AddMealComponent {
 
   submitForm() {
     let inputEl: any = this.el.nativeElement.querySelector('#image');
-    console.log(this.meal);
-    console.log(this.meal.image);
 
     let formData = new FormData();
     formData.append('title', this.meal.title);

@@ -72,6 +72,7 @@ flag:any;
   ngOnInit(): void {
     if(this.is_chef){
       this.getAllOrder()
+      this.highestRateCategory=1;
     }else{
     this.UserdashboardServiceService.getOrdersByUserId(this.ID).subscribe({
       next: (data: any) => {
