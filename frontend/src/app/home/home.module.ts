@@ -9,6 +9,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 // import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ProductsComponent } from './components/products/products.component';
+import { RouterModule } from '@angular/router';
 import { RecommendationComponent } from './components/recommendation/recommendation.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -24,7 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     ProductsComponent,
     RecommendationComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule,RouterModule],
   exports: [HomeComponent, HeroComponent],
 })
 export class HomeModule { }

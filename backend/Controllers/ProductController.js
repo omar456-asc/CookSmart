@@ -209,9 +209,9 @@ var DeleteProductByID = async (req, res) => {
 //#endregion
 
 //#region get Latest
-var getLatest6products = async (req, res) => {
+var getLatest8products = async (req, res) => {
   try {
-    var AllProducts = await productsModel.find().sort({ _id: -1 }).limit(6);
+    var AllProducts = await productsModel.find().sort({ _id: -1 }).limit(8);
     await res.json(AllProducts);
   } catch (e) {
     console.log(e);
@@ -314,7 +314,7 @@ module.exports = {
     GetProductByID,
     SearchMeal,
     DeleteProductByID,
-    getLatest6products,
+    getLatest8products,
     addNewProduct,
     editProduct
 }

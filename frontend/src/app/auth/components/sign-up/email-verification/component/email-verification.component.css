@@ -1,52 +1,32 @@
-.congratulation-wrapper {
-  max-width: 550px;
-  margin-inline: auto;
-  -webkit-box-shadow: 0  0 50px #f3f3f3;
-  box-shadow: 0  0 20px #f3f3f3;
-  padding: 30px 20px;
-  background-color: #fff;
-  border-radius: 10px;
+section {
+  text-align: center;
+  padding: 40px 0;
+  margin-top: 5%;
 }
-
-.congratulation-contents.center-text .congratulation-contents-icon {
-  margin-inline: auto;
+  h1 {
+    color: #88B04B;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #404F5E;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size:20px;
+    margin: 0;
+  }
+i {
+  color: #9ABC66;
+  font-size: 100px;
+  line-height: 200px;
+  margin-left:-15px;
 }
-.congratulation-contents-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  height: 100px;
-  width: 100px;
-  background-color: #65c18c;
-  color: #fff;
-  font-size: 50px;
-  border-radius: 50%;
-  margin-bottom: 30px;
-}
-.congratulation-contents-title {
-  font-size: 32px;
-  line-height: 36px;
-  margin: -6px 0 0;
-}
-.congratulation-contents-para {
-  font-size: 16px;
-  line-height: 24px;
-  margin-top: 15px;
-}
-.btn-wrapper {
-  display: block;
-}
-.cmn-btn.btn-bg-1 {
-  background: #6176f6;
-  color: #fff;
-  border: 2px solid transparent;
-  border-radius:3px;
-  text-decoration: none;
-  padding:5px;
+.card {
+  background: white;
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px #C8D0D8;
+  display: inline-block;
+  margin: 0 auto;
 }
