@@ -3,6 +3,7 @@ const secret = process.env.SECRET_KEY;
 
 function authuserMiddleware(req, res, next) {
   // Get the token from the request header
+  //   const token = req.headers["token"];
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
