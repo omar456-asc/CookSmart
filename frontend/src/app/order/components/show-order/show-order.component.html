@@ -74,45 +74,22 @@
 
         <h2>Ordered Meals</h2>
           <!-- Iterate through the meals data and display each meal -->
-          <div *ngFor="let meal of meals" class="col-md-6 offset-3">
-            <div class="card">
-              <img
-                src="{{ meal.image }}"
-                class="card-img-top img-responsive img-fluid h-50"
-                alt="{{ meal.title }}"
-              />
-              <div class="card-body">
-                <h2 class="card-title">{{ meal.title }}</h2>
-                <p class="card-text">{{ meal.summary }}</p>
-                <!-- <h2>ingredients Info</h2>
-                <div class="container">
-                  <div class="row"> -->
-                    <!-- Iterate through the meals data and display each meal -->
-                    <!-- <div
-                      *ngFor="let ingredient of meal.ingredients"
-                      class="col-md-6"
-                    >
-                      <div class="card">
-                        <img
-                          src="{{ ingredient.image }}"
-                          class="card-img-top"
-                          alt="Pizza Image"
-                        />
-                        <div class="card-body">
-                          <h3 class="card-title">{{ ingredient.name }}</h3>
-                          <p class="card-text">
-                            {{ ingredient.consistency }}
-                          </p>
-                          <p class="card-text">
-                            {{ ingredient.price }}
-                          </p>
-                          <p class="card-text">Price: {{ ingredient.price }}</p>
-                          <p class="card-text">Rate: {{ ingredient.rate }}</p>
-                        </div>
-                      </div>
-                    </div> -->
-                  <!-- </div>
-                </div> -->
+          <div class="container">
+            <div class="row">
+              <div *ngFor="let meal of meals" class="col-md-5 offset-1 mb-2 p-5 card">
+
+                  <img
+                    src="{{ meal.image }}"
+                    class="card-img-top img-responsive  img-fluid   w-50"
+                    style="margin-left: 25%;"
+                    alt="{{ meal.title }}"
+                  />
+                  <div class="card-body">
+                    <h2 class="card-title">{{ meal.title }}</h2>
+                    <p class="card-text">{{ meal.summary }}</p>
+
+                  </div>
+
               </div>
             </div>
           </div>
