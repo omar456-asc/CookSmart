@@ -12,13 +12,16 @@ import { ProfileService } from 'src/app/profile/services/profile.service';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
+  is_chef: boolean = false
   constructor(
     public mymeals: AllMealsService,
     public cartService: ShoppingCartService,
     private UserService: ProfileService,
     private authService: AuthService,
     private orderService: OrderService
-  ) {}
+  ) {
+    this.is_chef=this.authService.getRole()
+  }
   ID: any = localStorage.getItem('id');
   localcart: any;
   Meal: any = [];
@@ -90,7 +93,7 @@ export class OrderComponent implements OnInit {
     var newOrder: any = {};
     newOrder.userID = this.ID;
     newOrder.totalPrice = this.totalPrice;
-    newOrder.status = 'pending';
+    newOrder.status = this.is_chef?'accepted':'pending';
     newOrder.meals = this.cartid.map(
       (meal: { id: any; ingredients: any; quantity: any }) => {
         return {
