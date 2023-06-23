@@ -1,9 +1,7 @@
 <main id="main">
   <div
-    class="Checkout"
-    style="
-      background-image: url(https://images.unsplash.com/photo-1600025112931-e41e9a4c1a60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80);
-    "
+    class="Checkout  bg-light bg-icon my-0 py-6 "
+
   >
     <div class="container mt-1">
       <div class="row justify-content-center" *ngIf="meal; else falseBlock">
@@ -58,7 +56,10 @@
             </tbody>
           </table>
           <a routerLink="/cart">
-            <button class="checkout-btn">Done</button>
+            <div class="text-center">
+
+              <button class="checkout-btn">Done</button>
+            </div>
           </a>
         </div>
       </div>
