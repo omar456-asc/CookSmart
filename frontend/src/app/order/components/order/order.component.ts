@@ -34,7 +34,6 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.totalPrice = 370;
 
     //geting user cart from local storage
     this.getUserCart();

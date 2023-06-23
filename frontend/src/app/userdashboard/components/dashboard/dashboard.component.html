@@ -135,11 +135,12 @@
   <div *ngIf="is_chef" class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
       <div class="d-flex align-items-center justify-content-between mb-4">
-        <!-- <div class="suggestion-wrap d-flex flex-column flex-md-row text-center text-sm-left">
-          <a (click)="status=='pending'">Pending</a>
-          <a (click)="status=='accepted'">Accepted</a>
-          <a  (click)="status=='rejected'">Rejected</a>
-        </div> -->
+        <div class="suggestion-wrap d-flex flex-column flex-md-row justify-content-center text-sm-left" style="margin-left: 40%;">
+          <a (click)="status=''" class="text-dark mx-2 curs">All</a>/
+          <a (click)="status='pending'" class="text-warning mx-2 curs">Pending</a>/
+          <a (click)="status='accepted'" class="text-success mx-2 curs">Accepted</a>/
+          <a  (click)="status='rejected'" class="text-danger mx-2 curs">Rejected</a>
+        </div>
       </div>
       <div class="table-responsive">
         <table
@@ -152,8 +153,8 @@
               <th scope="col">Total Price</th>
               <th scope="col">Status</th>
               <th scope="col">Details</th>
-              <th scope="col" >Accept</th>
-              <th scope="col">Reject</th>
+              <th scope="col" >Action</th>
+
             </tr>
           </thead>
           <tbody>
@@ -164,35 +165,35 @@
 
             </tr>
             <tr *ngFor="let order of usersOrders">
+              <ng-container *ngIf="status==''; else filter">
 
               <td>{{order.user.email}}</td>
               <td>{{order.totalPrice}}</td>
               <td><span [ngClass]="getStatusClass(order.status)">{{
                       order.status
                     }}</span></td>
-              <td><a class="btn1 btn btn-sm" href="/order/{{order._id}}">Detail</a></td>
+              <td><a class="btn1 btn btn-sm cente" href="/order/{{order._id}}">Detail</a></td>
               <td>
 
                     <button *ngIf="order.status=='pending'"
                       type="button"
-                      class="btn btn-success"
+                      class="btn btn-success mx-2"
                       (click)="updateOrderStatus(order._id, 'accepted')"
                     >
                       Accept
                     </button>
-                    <p  *ngIf="order.status!='pending'" style="text-decoration: line-through; color: green;">Accept</p>
-                  </td>
-                  <td>
+
 
                     <button *ngIf="order.status=='pending'"
                       type="button"
                       class="btn btn-danger"
-                      (click)="updateOrderStatus(order._id, 'cancelled')"
+                      (click)="updateOrderStatus(order._id, 'rejected')"
                     >
                       Cancel
                     </button>
-                    <p  *ngIf="order.status!='pending'" style="text-decoration: line-through; color: red;">Cancel</p>
+
                   </td>
+
                   <ng-template #noAction>
                     <td *ngIf="order.status == 'confirmed'">
                       <button
@@ -207,7 +208,52 @@
                       <label class="text-danger">Rejected</label></ng-template
                     >
                   </ng-template>
-            </tr>
+              </ng-container>
+            <ng-template #filter>
+<ng-container *ngIf="order.status==status">
+              <td>{{order.user.email}}</td>
+              <td>{{order.totalPrice}}</td>
+              <td><span [ngClass]="getStatusClass(order.status)">{{
+                      order.status
+                    }}</span></td>
+              <td><a class="btn1 btn btn-sm cente" href="/order/{{order._id}}">Detail</a></td>
+              <td>
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-success mx-2"
+                      (click)="updateOrderStatus(order._id, 'accepted')"
+                    >
+                      Accept
+                    </button>
+
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="updateOrderStatus(order._id, 'rejected')"
+                    >
+                      Reject
+                    </button>
+
+                  </td>
+
+                  <ng-template #noAction>
+                    <td *ngIf="order.status == 'confirmed'">
+                      <button
+                        routerLink="/payment/{{ order.orderId }}"
+                        type="button"
+                        class="btn btn-danger"
+                      >
+                        payment
+                      </button>
+                    </td>
+                    <ng-template *ngIf="order.status == 'rejected'">
+                      <label class="text-danger">Rejected</label></ng-template
+                    >
+                  </ng-template>
+                </ng-container>
+            </ng-template></tr>
           </tbody>
         </table>
       </div>
