@@ -26,3 +26,6 @@
 .curs{
   cursor: pointer;
 }
+.spinner-border {
+  color: #990000;
+}

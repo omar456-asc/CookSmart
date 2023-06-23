@@ -19,9 +19,9 @@ export class SignUpComponent {
 
   constructor(private myUser: SignUpService, private router: Router) {}
   //# region registerComponent
-  AddNewUser(username: any, email: any, password: any, is_chef:any) {
-    is_chef=this.chefvalue
-    let signupUser = { username, email, password, is_chef };
+  AddNewUser(username: any, email: any, password: any) {
+
+    let signupUser = { username, email, password };
 
     this.myUser.AddNewUser(signupUser).subscribe(
       (data) => {

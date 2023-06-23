@@ -4,6 +4,7 @@ import {
   ElementRef,
   ViewChild,
   OnInit,
+  AfterViewChecked,
 } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData, ChartOptions } from 'chart.js';
@@ -19,7 +20,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements AfterViewInit, OnInit {
+export class DashboardComponent implements AfterViewChecked, OnInit {
   @ViewChild('worldwideSalesCanvas') worldwideSalesCanvas!: ElementRef;
   @ViewChild('salesRevenueCanvas') salesRevenueCanvas!: ElementRef;
   ID: any = localStorage.getItem('id');
@@ -46,6 +47,7 @@ status=''
   ingredients: any;
   summary: any;
 is_chef: boolean=false;
+flag:any;
 
   constructor(
     myRoute: ActivatedRoute,
@@ -65,7 +67,7 @@ is_chef: boolean=false;
   this.highestRate = 0;
   this.highestRateCategory = '';
   this.orderDetails = [];
-
+  this.flag = true;
 }
   ngOnInit(): void {
     if(this.is_chef){
@@ -146,8 +148,13 @@ is_chef: boolean=false;
         console.log(err);
       },
     });
-  }}
-  ngAfterViewInit() {
+  }
+}
+  ngAfterViewChecked() {
+    console.log(this.worldwideSalesCanvas , this.salesRevenueCanvas)
+    if(this.flag){
+    if(this.worldwideSalesCanvas && this.salesRevenueCanvas){
+      console.log('insiiide')
     const worldwideSalesCanvas = this.worldwideSalesCanvas.nativeElement;
     const salesRevenueCanvas = this.salesRevenueCanvas.nativeElement;
 
@@ -181,7 +188,6 @@ is_chef: boolean=false;
         responsive: true,
       },
     });
-
     const salesRevenueChart = new Chart(salesRevenueCanvas, {
       type: 'line',
       data: salesRevenueData,
@@ -189,6 +195,11 @@ is_chef: boolean=false;
         responsive: true,
       },
     });
+    console.log('return')
+    this.flag=false;
+  }}
+  console.log('no   return')
+
   }
 
   getStatusClass(status: string): string {
