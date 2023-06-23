@@ -20,26 +20,27 @@ import { AddMealComponent } from './meals/components/add-meal/add-meal.component
 import { CustomizeMealComponent } from './checkout/components/customize-meal/customize-meal.component';
 import { ShowOrderComponent } from './order/components/show-order/show-order.component';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { ChefGuard } from './auth/guards/chef.guard';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path:'reset-password/:email', component: ResetPasswordComponent},
   { path:'verify/:code', component: EmailVerificationComponent},
   { path: 'meals', component: MealsComponent },
-  { path: 'mealdetails/:id', component: MealDetailsComponent },
+  { path: 'mealdetails/:id', component: MealDetailsComponent ,canActivate: [ChefGuard]},
   { path: '', component: HomeComponent },
   { path: 'user', component: UserdashboardComponent },
   { path: 'about', component: AboutusComponent },
-  { path: 'cart', component: CheckoutComponent, canActivate: [AuthGuard]},
+  { path: 'cart', component: CheckoutComponent, canActivate: [AuthGuard,ChefGuard]},
   { path:'add-meal',component:AddMealComponent, canActivate: [AuthGuard]},
   { path: 'customize/:id', component: CustomizeMealComponent, canActivate: [AuthGuard]},
   {
     path: 'payment/:id',
     component: PaymentComponent, canActivate: [AuthGuard]
   },
-  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
-  { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
-  {path:'order/:id',component:ShowOrderComponent, canActivate: [AuthGuard]},
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard,ChefGuard] },
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard,ChefGuard] },
+  {path:'order/:id',component:ShowOrderComponent, canActivate: [AuthGuard,ChefGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   // { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
 
