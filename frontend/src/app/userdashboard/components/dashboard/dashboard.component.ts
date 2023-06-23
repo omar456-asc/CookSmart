@@ -4,9 +4,13 @@ import {
   ElementRef,
   ViewChild,
   OnInit,
+  AfterViewChecked,
 } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData, ChartOptions } from 'chart.js';
+import { AuthService } from './../../../auth/services/log-in/auth.service';
+import { LogInService } from './../../../auth/services/log-in/log-in.service';
+import { Router } from '@angular/router';
 import { OrderService } from 'src/app/order/service/order.service';
 import { UserdashboardServiceService } from '../../services/userdashboard-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +20,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements AfterViewInit, OnInit {
+export class DashboardComponent implements AfterViewChecked, OnInit {
   @ViewChild('worldwideSalesCanvas') worldwideSalesCanvas!: ElementRef;
   @ViewChild('salesRevenueCanvas') salesRevenueCanvas!: ElementRef;
   ID: any = localStorage.getItem('id');
@@ -37,18 +41,39 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   data2: any;
   type2: any;
   type1: any;
-
+usersOrders: any;
+status=''
   //
   ingredients: any;
   summary: any;
+is_chef: boolean=false;
+flag:any;
 
   constructor(
     myRoute: ActivatedRoute,
     public UserdashboardServiceService: UserdashboardServiceService,
-    private orderService: OrderService
-  ) {}
+    private orderService: OrderService,
+    private authService: AuthService,
+    private router: Router,
+
+  ) {
+  this.is_chef=this.authService.getRole()
+  this.totalPrice = 0.0;
+  this.orders = [];
+  this.totalPriceValues = [];
+  this.totalCategory = [];
+  this.totalOrdersPrice = 0.0;
+  this.allRates = [];
+  this.highestRate = 0;
+  this.highestRateCategory = '';
+  this.orderDetails = [];
+  this.flag = true;
+}
   ngOnInit(): void {
-    console.log(this.ID);
+    if(this.is_chef){
+      this.getAllOrder()
+      this.highestRateCategory=1;
+    }else{
     this.UserdashboardServiceService.getOrdersByUserId(this.ID).subscribe({
       next: (data: any) => {
         this.data = data;
@@ -125,7 +150,11 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       },
     });
   }
-  ngAfterViewInit() {
+}
+  ngAfterViewChecked() {
+    if(this.flag){
+    if(this.worldwideSalesCanvas && this.salesRevenueCanvas){
+      console.log('insiiide')
     const worldwideSalesCanvas = this.worldwideSalesCanvas.nativeElement;
     const salesRevenueCanvas = this.salesRevenueCanvas.nativeElement;
 
@@ -159,7 +188,6 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         responsive: true,
       },
     });
-
     const salesRevenueChart = new Chart(salesRevenueCanvas, {
       type: 'line',
       data: salesRevenueData,
@@ -167,22 +195,30 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         responsive: true,
       },
     });
+    console.log('return')
+    this.flag=false;
+  }}
+
   }
 
   getStatusClass(status: string): string {
     if (status === 'pending') {
-      return 'badge badge-warning';
+      return 'alert text-warning';
     } else if (status === 'confirmed') {
-      return 'badge badge-success';
+      return 'alert text-success';
     } else if (status === 'rejected') {
-      return 'badge badge-danger';
-    } else if (status === 'cancelled') {
-      return 'badge badge-secondary';
+      return 'alert text-danger';
+    }else if (status === 'cancelled') {
+      return 'alert text-danger';
     } else if (status === 'payed') {
-      return 'badge badge-primary';
+      return 'alert text-info';
+    }
+    else if(status === 'accepted') {
+      return 'alert text-primary';
     }
     return 'badge ';
   }
+
 
   updateOrderStatus(id: any, status: any) {
     this.orderService.updateOrderStatus(id, status).subscribe(
@@ -198,4 +234,27 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     );
     console.log(id, status);
   }
+  getAllOrder(){
+    this.orderService.getAllOrders().subscribe(
+      (data:any) => {
+        this.usersOrders=data
+        console.log(this.usersOrders);
+        }
+      ,
+      (err) => {
+        console.log(err);
+      }
+    );
 }
+
+}
+
+
+
+
+
+
+
+
+
+

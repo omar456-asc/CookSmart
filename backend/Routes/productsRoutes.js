@@ -6,6 +6,7 @@ let router = express.Router();
 //#region Product
 router.get("/latest8products", ProductController.getLatest8products);
 router.get("/", ProductController.GetAllProducts);
+router.post("/:chefid", ProductController.addNewProduct);
 router.get("/:id", ProductController.GetProductByID);
 router.get("/search/:key", ProductController.SearchMeal);
 router.post("/:id",RatingController.addNewRate);

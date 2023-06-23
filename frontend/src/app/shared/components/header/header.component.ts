@@ -13,22 +13,28 @@ import { CartService } from 'src/app/shared/services/cart.service';
 })
 export class HeaderComponent {
   cartid: any;
-  userID: any
+  userID: any;
   cartCount: any;
-  ID = this.auth.getUserID()
-  constructor(private route: ActivatedRoute,
-    private auth: AuthService,
+  isLoggedIn: any;
+  getRole: any;
+  ID = this.authService.getUserID();
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService,
     private router: Router,
     private mealService: AllMealsService,
     private cart: ShoppingCartService,
     private cartService: CartService
   ) {
-    this.userID = this.auth.getUserID()
-    console.log(this.userID)
+    this.userID = this.authService.getUserID();
+    console.log(this.userID);
+    console.log(this.authService.isUserLoggedIn());
+    this.isLoggedIn = this.authService.isUserLoggedIn();
+    this.getRole = this.authService.getRole();
   }
 
   ngOnInit() {
-    this.cartService.cartCount$.subscribe(count => {
+    this.cartService.cartCount$.subscribe((count) => {
       this.cartCount = count;
     });
   }
@@ -48,9 +54,8 @@ export class HeaderComponent {
 
     if (cart) {
       this.cartid = JSON.parse(cart);
-    }
-    else {
-      this.cartid = []
+    } else {
+      this.cartid = [];
     }
     this.cart.AddToUserCart(this.cartid, this.ID).subscribe(
       (data: any) => {
@@ -64,6 +69,6 @@ export class HeaderComponent {
     localStorage.removeItem('Token');
 
     localStorage.removeItem('cart');
-    this.router.navigateByUrl('/auth')
+    this.router.navigateByUrl('/auth');
   }
 }

@@ -17,15 +17,18 @@ import { UserdashboardModule } from './userdashboard/userdashboard.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
+import { AddMealComponent } from './meals/components/add-meal/add-meal.component';
 import { AuthService } from './auth/services/log-in/auth.service';
 import { TokenInterceptor } from './auth/services/log-in/Token Interceptor/TokenInterceptor';
 import { ConfigService } from './config.service';
 import { ProfileModule } from './profile/profile.module';
+import { ShowOrderComponent } from './order/components/show-order/show-order.component';
 
 import { CartService } from './shared/services/cart.service';
 
 @NgModule({
-  declarations: [AppComponent, MealsComponent, MealDetailsComponent],
+
+  declarations: [AppComponent,MealsComponent,MealDetailsComponent, AddMealComponent,ShowOrderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,6 +51,7 @@ import { CartService } from './shared/services/cart.service';
     ConfigService,
     CartService,
   ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

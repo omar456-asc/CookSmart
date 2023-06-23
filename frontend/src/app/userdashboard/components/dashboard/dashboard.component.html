@@ -4,12 +4,11 @@
 <br />
 <br />
 <br />
-<div class="container">
-  <!-- *ngIf="highestRateCategory; else falseBlock" -->
-<ng-container >
-<div class="content mt-9">
+<ng-container *ngIf="orderDetails && highestRateCategory   ;else no">
+<div  class="content mt-9" >
+  <a *ngIf="is_chef" class="add-btn" routerLink="/add-meal" >Add Meal</a>
   <!-- Sale & Revenue Start -->
-  <div class="container-fluid pt-4 px-4">
+  <div *ngIf="!is_chef" class="container-fluid pt-4 px-4">
     <div class="row g-4">
       <div class="col-sm-6 col-xl-3">
         <div
@@ -39,7 +38,7 @@
   <!-- Sale & Revenue End -->
 
   <!-- Sales Chart Start -->
-  <div class="container-fluid pt-4 px-4">
+  <div *ngIf="!is_chef" class="container-fluid pt-4 px-4" >
     <div class="row g-4">
       <div class="col-sm-12 col-xl-6">
         <div class="bg-light text-center rounded p-4">
@@ -62,9 +61,17 @@
   <!-- Sales Chart End -->
 
   <!-- Recent Sales Start -->
-  <div class="container-fluid pt-4 px-4">
+  <div *ngIf="!is_chef" class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
       <div class="d-flex align-items-center justify-content-between mb-4">
+        <!-- <div class="suggestion-wrap d-flex flex-column flex-md-row justify-content-center text-sm-left" style="margin-left: 30%;">
+          <a (click)="status=''" class="text-dark mx-2 curs">All</a>/
+          <a (click)="status='pending'" class="text-warning mx-2 curs">Pending</a>/
+          <a (click)="status='accepted'" class="text-success mx-2 curs">Accepted</a>/
+          <a  (click)="status='rejected'" class="text-danger mx-2 curs">Rejected</a>/
+          <a  (click)="status='cancelled'" class="text-warning mx-2 curs">cancelled</a>/
+          <a  (click)="status='payed'" class="text-success mx-2 curs">Payed</a>
+        </div> -->
         <h6 class="mb-0">Latest Orders</h6>
       </div>
       <div class="table-responsive">
@@ -84,14 +91,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngfor="let order of orderDetails">
+            <tr *ngIf="!orderDetails[0]">
+              <td colspan="6">
+                <p class="h2  text-warning alert text-center ">No orders</p>
+              </td>
+
+            </tr>
+            <tr *ngFor="let order of orderDetails">
               <td><input class="form-check-input" type="checkbox" /></td>
               <td>{{order.orderId}}</td>
-              <td>{{order.totalPrice}}</td>
+              <td>{{order.totalPrice}}$</td>
               <td><span [ngClass]="getStatusClass(order.status)">{{
                       order.status
                     }}</span></td>
-              <td><a class="btn1 btn btn-sm" href="">Detail</a></td>  
+              <td><a class="btn1 btn btn-sm" routerLink="/order/{{order.orderId}}" >Detail</a></td>
               <td *ngIf="order.status == 'pending'; else noAction">
                     <button
                       type="button"
@@ -101,6 +114,97 @@
                       Cancel
                     </button>
                   </td>
+                  <ng-template #noAction>
+                    <td >
+                      <button *ngIf="order.status == 'accepted'"
+                        routerLink="/payment/{{ order.orderId }}"
+                        type="button"
+                        class="btn btn-success"
+                      >
+                        payment
+                      </button>
+                      <!-- <p *ngIf="order.status != 'pending'" style="text-decoration: line-through;color: green;">{{order.status}}</p> -->
+
+                    </td>
+                    <ng-template *ngIf="order.status == 'rejected'">
+                      <label class="text-danger">Rejected</label></ng-template
+                    >
+                  </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Recent Sales End -->
+
+
+    <!-- Recent meal Start -->
+    <!-- Recent Sales Start -->
+  <div *ngIf="is_chef" class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="suggestion-wrap d-flex flex-column flex-md-row justify-content-center text-sm-left" style="margin-left: 30%;">
+          <a (click)="status=''" class="text-dark mx-2 curs">All</a>/
+          <a (click)="status='pending'" class="text-warning mx-2 curs">Pending</a>/
+          <a (click)="status='accepted'" class="text-success mx-2 curs">Accepted</a>/
+          <a  (click)="status='rejected'" class="text-danger mx-2 curs">Rejected</a>/
+          <a  (click)="status='cancelled'" class="text-warning mx-2 curs">cancelled</a>/
+          <a  (click)="status='payed'" class="text-success mx-2 curs">Payed</a>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table
+          class="table text-start align-middle table-bordered table-hover mb-0"
+        >
+          <thead>
+            <tr class="text-dark">
+
+              <th scope="col">User</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Status</th>
+              <th scope="col">Details</th>
+              <th scope="col" >Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="!usersOrders">
+              <td colspan="6">
+                <p class="h2  text-warning alert text-center ">No orders</p>
+              </td>
+
+            </tr>
+            <tr *ngFor="let order of usersOrders">
+              <ng-container *ngIf="status==''; else filter">
+
+              <td>{{order.user.email}}</td>
+              <td>{{order.totalPrice}}</td>
+              <td><span [ngClass]="getStatusClass(order.status)">{{
+                      order.status
+                    }}</span></td>
+              <td><a class="btn1 btn btn-sm cente" href="/order/{{order._id}}">Detail</a></td>
+              <td>
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-success mx-2"
+                      (click)="updateOrderStatus(order._id, 'accepted')"
+                    >
+                      Accept
+                    </button>
+
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="updateOrderStatus(order._id, 'rejected')"
+                    >
+                      Cancel
+                    </button>
+
+                  </td>
+
                   <ng-template #noAction>
                     <td *ngIf="order.status == 'confirmed'">
                       <button
@@ -115,16 +219,143 @@
                       <label class="text-danger">Rejected</label></ng-template
                     >
                   </ng-template>
-            </tr>
+              </ng-container>
+            <ng-template #filter>
+          <ng-container *ngIf="order.status==status">
+
+
+              <td>{{order.user.email}}</td>
+              <td>{{order.totalPrice}}</td>
+              <td><span [ngClass]="getStatusClass(order.status)">{{
+                      order.status
+                    }}</span></td>
+              <td><a class="btn1 btn btn-sm cente" href="/order/{{order._id}}">Detail</a></td>
+              <td>
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-success mx-2"
+                      (click)="updateOrderStatus(order._id, 'accepted')"
+                    >
+                      Accept
+                    </button>
+
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="updateOrderStatus(order._id, 'rejected')"
+                    >
+                      Reject
+                    </button>
+
+                  </td>
+
+                  <ng-template #noAction>
+                    <td *ngIf="order.status == 'confirmed'">
+                      <button
+                        routerLink="/payment/{{ order.orderId }}"
+                        type="button"
+                        class="btn btn-danger"
+                      >
+                        payment
+                      </button>
+                    </td>
+                    <ng-template *ngIf="order.status == 'rejected'">
+                      <label class="text-danger">Rejected</label></ng-template
+                    >
+                  </ng-template>
+                </ng-container>
+                <ng-template>
+
+                </ng-template>
+            </ng-template></tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
   <!-- Recent Sales End -->
+    <!-- <div *ngIf="is_chef" class="container-fluid pt-4 px-4">
+      <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h6 class="mb-0">Latest Meals</h6>
+        </div>
+        <div class="table-responsive">
+          <table
+            class="table text-start align-middle table-bordered table-hover mb-0"
+          >
+            <thead>
+              <tr class="text-dark">
+                <th scope="col">
+                  <input class="form-check-input" type="checkbox" />
+                </th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Details</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" /></td>
+                <td>01 Jan 2045</td>
+                <td>$123</td>
+                <td>Paid</td>
+                <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
+                <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" /></td>
+                <td>01 Jan 2045</td>
+                <td>$123</td>
+                <td>Paid</td>
+                <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
+                <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" /></td>
+                <td>01 Jan 2045</td>
+                <td>$123</td>
+                <td>Paid</td>
+                <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
+                <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" /></td>
+                <td>01 Jan 2045</td>
+                <td>$123</td>
+                <td>Paid</td>
+                <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
+                <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" /></td>
+                <td>01 Jan 2045</td>
+                <td>$123</td>
+                <td>Paid</td>
+                <td><a class="btn1 btn btn-sm" href="">Detail</a></td>
+                <td><a class="btn2 btn btn-sm" href="">Cancle</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> -->
+    <!-- Recent meals End -->
 </div>
-<!-- Content End -->
 </ng-container>
+<ng-template #no>
+  <div
+  id="spinner"
+  class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+>
+  <div class="spinner-border" role="status"></div>
+</div>
+</ng-template>
+<!-- Content End -->
+
  <!-- <ng-template #falseBlock> -->
       <!-- <div -->
       <!-- id="spinner" -->
@@ -133,4 +364,4 @@
       <!-- <div class="spinner-border" role="status"></div> -->
     <!-- </div> -->
     <!-- </ng-template> -->
-</div>
+

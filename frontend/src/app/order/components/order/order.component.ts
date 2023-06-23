@@ -4,6 +4,7 @@ import { ShoppingCartService } from 'src/app/checkout/service/shopping-cart.serv
 import { AllMealsService } from 'src/app/meals/services/all-meals.service';
 // import { ProfileService } from 'src/app/profile/services/profile.service';
 import { OrderService } from 'src/app/order/service/order.service';
+import { ProfileService } from 'src/app/profile/services/profile.service';
 
 @Component({
   selector: 'app-order',
@@ -11,13 +12,16 @@ import { OrderService } from 'src/app/order/service/order.service';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
+  is_chef: boolean = false
   constructor(
     public mymeals: AllMealsService,
     public cartService: ShoppingCartService,
-    // private UserService: ProfileService,
+    private UserService: ProfileService,
     private authService: AuthService,
     private orderService: OrderService
-  ) {}
+  ) {
+    this.is_chef=this.authService.getRole()
+  }
   ID: any = localStorage.getItem('id');
   localcart: any;
   Meal: any = [];
@@ -28,14 +32,13 @@ export class OrderComponent implements OnInit {
   now = new Date();
   ordernum = (this.ID + this.cartid[0]).slice(5, 15);
   ngOnInit(): void {
-    this.user = { fname: 'Omar', lname: 'Walid', email: 'omar@gmail.com' };
 
-    this.totalPrice = 370;
+
 
     //geting user cart from local storage
     this.getUserCart();
     //get user information using id
-    // this.getUser()
+    this.getUser()
   }
 
   //delete cart from local storage and database when confirm the order
@@ -52,15 +55,15 @@ export class OrderComponent implements OnInit {
       }
     );
   }
-  // getUser(){  need to be unccommented
-  // this.UserService.getProfileInfo(this.ID).subscribe(
-  // (data: any) => {
-  // this.user=data;
-  // },
-  // (error) => console.log('Error', error)
-  // );
+  getUser(){
+  this.UserService.getProfileInfo(this.ID).subscribe(
+  (data: any) => {
+  this.user=data;
+  },
+  (error) => console.log('Error', error)
+  );
 
-  // }
+  }
   //getting cart
   getUserCart() {
     this.localcart = this.mymeals.getCart();
@@ -89,7 +92,7 @@ export class OrderComponent implements OnInit {
     var newOrder: any = {};
     newOrder.userID = this.ID;
     newOrder.totalPrice = this.totalPrice;
-    newOrder.status = 'pending';
+    newOrder.status = this.is_chef?'accepted':'pending';
     newOrder.meals = this.cartid.map(
       (meal: { id: any; ingredients: any; quantity: any }) => {
         return {
