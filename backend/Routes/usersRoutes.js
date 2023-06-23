@@ -1,6 +1,7 @@
 //Registration
 const AuthController = require("../Controllers/AuthController");
 const UserController = require("../Controllers/UserController");
+const authuserMiddleware = require("../MiddleWares/authuserMiddleware");
 
 const express = require("express");
 const router = new express.Router();
@@ -25,14 +26,14 @@ router.post(
   UserController.UploadProfilePic
 );
 
-router.post("/update-data", UserController.UpdateUserProfileData);
+router.post("/update-data", authuserMiddleware, UserController.UpdateUserProfileData);
 
 //#region User
 // router.get("/latest8users", authuserMiddleware, UserController.getLatest8users);
-router.get("/", UserController.GetAllUsers);
-router.get("/:id", UserController.GetUserByID);
-router.post("/:id", UserController.UpdateUserByID);
-router.delete("/:id", UserController.DeleteUserByID);
+router.get("/", authuserMiddleware, UserController.GetAllUsers);
+router.get("/:id", authuserMiddleware, UserController.GetUserByID);
+router.post("/:id", authuserMiddleware, UserController.UpdateUserByID);
+router.delete("/:id", authuserMiddleware, UserController.DeleteUserByID);
 //#endregion
 
 module.exports = router;
