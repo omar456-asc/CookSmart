@@ -19,27 +19,28 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddMealComponent } from './meals/components/add-meal/add-meal.component';
 import { CustomizeMealComponent } from './checkout/components/customize-meal/customize-meal.component';
 import { ShowOrderComponent } from './order/components/show-order/show-order.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
-  {path:'reset-password/:email', component: ResetPasswordComponent},
-  {path:'verify/:code', component: EmailVerificationComponent},
+  { path:'reset-password/:email', component: ResetPasswordComponent},
+  { path:'verify/:code', component: EmailVerificationComponent},
   { path: 'meals', component: MealsComponent },
   { path: 'mealdetails/:id', component: MealDetailsComponent },
   { path: '', component: HomeComponent },
   { path: 'user', component: UserdashboardComponent },
   { path: 'about', component: AboutusComponent },
-  { path: 'cart', component: CheckoutComponent},
-  {path:'add-meal',component:AddMealComponent},
-  { path: 'customize/:id', component: CustomizeMealComponent},
+  { path: 'cart', component: CheckoutComponent, canActivate: [AuthGuard]},
+  { path:'add-meal',component:AddMealComponent, canActivate: [AuthGuard]},
+  { path: 'customize/:id', component: CustomizeMealComponent, canActivate: [AuthGuard]},
   {
     path: 'payment/:id',
-    component: PaymentComponent,
+    component: PaymentComponent, canActivate: [AuthGuard]
   },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'order', component: OrderComponent },
-  {path:'order/:id',component:ShowOrderComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
+  {path:'order/:id',component:ShowOrderComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   // { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
 
 
