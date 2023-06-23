@@ -5,27 +5,26 @@ import { ConfigService } from 'src/app/config.service';
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService {
+export class AdminMealsServiceService {
   private readonly Base_URL: string;
 
   constructor(
     private readonly HttpClient: HttpClient,
     private readonly configService: ConfigService
   ) {
-    this.Base_URL = this.configService.getBaseUrl('orders');
+    this.Base_URL = this.configService.getBaseUrl('products');
   }
-  getAllOrders() {
+  //Methods [All Requests]
+  GetAllMeals() {
+    //method[Get-Delete-Put-Patch]
     return this.HttpClient.get(this.Base_URL);
   }
-  CreateOrder(newOrder: any) {
-    return this.HttpClient.post(this.Base_URL, newOrder);
-  }
-  updateOrderStatus(id: any, status: string) {
-    const body = { status };
-
-    return this.HttpClient.put(`${this.Base_URL}/${id}`, body);
-  }
-  getOrderByID(id: any) {
+  GetMealByID(id: any) {
     return this.HttpClient.get(this.Base_URL + '/' + id);
+  }
+  addNewMeal(newMeal: FormData,chefid: any) {
+    return this.HttpClient.post(this.Base_URL+'/'+chefid, newMeal,
+      // { reportProgress: true, observe: 'events' }
+      );
   }
 }

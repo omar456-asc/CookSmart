@@ -11,3 +11,21 @@
     background-color: #990000;
     color: white;
 }
+.add-btn {
+  background-color: #990000;
+  border-radius: 10% !important;
+  margin-left: 48%;
+  margin-top: 2%;
+  color: white;
+  height: 30px !important;
+  width: 80px;
+  display: block;
+  text-align: center;
+  padding-top: 3px;
+}
+.curs{
+  cursor: pointer;
+}
+.spinner-border {
+  color: #990000;
+}
