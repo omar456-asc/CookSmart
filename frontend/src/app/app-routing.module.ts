@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'about', component: AboutusComponent },
   { path: 'cart', component: CheckoutComponent, canActivate: [AuthGuard,ChefGuard]},
   { path:'add-meal',component:AddMealComponent, canActivate: [AuthGuard]},
-  { path: 'customize/:id', component: CustomizeMealComponent, canActivate: [AuthGuard]},
+  { path: 'customize/:id', component: CustomizeMealComponent, canActivate: [AuthGuard,ChefGuard]},
   {
     path: 'payment/:id',
     component: PaymentComponent, canActivate: [AuthGuard]
