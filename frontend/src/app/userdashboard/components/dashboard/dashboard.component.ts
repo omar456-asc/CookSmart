@@ -41,6 +41,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   type2: any;
   type1: any;
 usersOrders: any;
+status=''
   //
   ingredients: any;
   summary: any;
@@ -192,18 +193,22 @@ is_chef: boolean=false;
 
   getStatusClass(status: string): string {
     if (status === 'pending') {
-      return 'badge badge-warning';
+      return 'alert text-warning';
     } else if (status === 'confirmed') {
-      return 'badge badge-success';
+      return 'alert text-success';
     } else if (status === 'rejected') {
-      return 'badge badge-danger';
-    } else if (status === 'cancelled') {
-      return 'badge badge-secondary';
+      return 'alert text-danger';
+    }else if (status === 'cancelled') {
+      return 'alert text-danger';
     } else if (status === 'payed') {
-      return 'badge badge-primary';
+      return 'alert text-info';
+    }
+    else if(status === 'accepted') {
+      return 'alert text-primary';
     }
     return 'badge ';
   }
+
 
   updateOrderStatus(id: any, status: any) {
     this.orderService.updateOrderStatus(id, status).subscribe(
@@ -231,6 +236,7 @@ is_chef: boolean=false;
       }
     );
 }
+
 }
 
 

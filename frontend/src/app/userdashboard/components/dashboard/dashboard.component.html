@@ -106,14 +106,16 @@
                     </button>
                   </td>
                   <ng-template #noAction>
-                    <td *ngIf="order.status == 'confirmed'">
-                      <button
+                    <td >
+                      <button *ngIf="order.status == 'accepted'"
                         routerLink="/payment/{{ order.orderId }}"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-success"
                       >
                         payment
                       </button>
+                      <p *ngIf="order.status != 'accepted' && order.status !='cancelled'" style="text-decoration: line-through;color: green;">pay</p>
+                      <p *ngIf="order.status =='cancelled'" style="text-decoration: line-through;color: red;">cancelled</p>
                     </td>
                     <ng-template *ngIf="order.status == 'rejected'">
                       <label class="text-danger">Rejected</label></ng-template
@@ -133,7 +135,11 @@
   <div *ngIf="is_chef" class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
       <div class="d-flex align-items-center justify-content-between mb-4">
-        <h6 class="mb-0">Latest Orders</h6>
+        <!-- <div class="suggestion-wrap d-flex flex-column flex-md-row text-center text-sm-left">
+          <a (click)="status=='pending'">Pending</a>
+          <a (click)="status=='accepted'">Accepted</a>
+          <a  (click)="status=='rejected'">Rejected</a>
+        </div> -->
       </div>
       <div class="table-responsive">
         <table
@@ -141,14 +147,13 @@
         >
           <thead>
             <tr class="text-dark">
-              <th scope="col">
-                <input class="form-check-input" type="checkbox" />
-              </th>
+
               <th scope="col">User</th>
               <th scope="col">Total Price</th>
               <th scope="col">Status</th>
               <th scope="col">Details</th>
-              <th scope="col">Action</th>
+              <th scope="col" >Accept</th>
+              <th scope="col">Reject</th>
             </tr>
           </thead>
           <tbody>
@@ -159,21 +164,34 @@
 
             </tr>
             <tr *ngFor="let order of usersOrders">
-              <td><input class="form-check-input" type="checkbox" /></td>
+
               <td>{{order.user.email}}</td>
               <td>{{order.totalPrice}}</td>
               <td><span [ngClass]="getStatusClass(order.status)">{{
                       order.status
                     }}</span></td>
               <td><a class="btn1 btn btn-sm" href="/order/{{order._id}}">Detail</a></td>
-              <td *ngIf="order.status == 'pending'; else noAction">
-                    <button
+              <td>
+
+                    <button *ngIf="order.status=='pending'"
+                      type="button"
+                      class="btn btn-success"
+                      (click)="updateOrderStatus(order._id, 'accepted')"
+                    >
+                      Accept
+                    </button>
+                    <p  *ngIf="order.status!='pending'" style="text-decoration: line-through; color: green;">Accept</p>
+                  </td>
+                  <td>
+
+                    <button *ngIf="order.status=='pending'"
                       type="button"
                       class="btn btn-danger"
-                      (click)="updateOrderStatus(order.orderId, 'cancelled')"
+                      (click)="updateOrderStatus(order._id, 'cancelled')"
                     >
                       Cancel
                     </button>
+                    <p  *ngIf="order.status!='pending'" style="text-decoration: line-through; color: red;">Cancel</p>
                   </td>
                   <ng-template #noAction>
                     <td *ngIf="order.status == 'confirmed'">
@@ -196,7 +214,7 @@
     </div>
   </div>
   <!-- Recent Sales End -->
-    <div *ngIf="is_chef" class="container-fluid pt-4 px-4">
+    <!-- <div *ngIf="is_chef" class="container-fluid pt-4 px-4">
       <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
           <h6 class="mb-0">Latest Meals</h6>
@@ -262,7 +280,7 @@
           </table>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Recent meals End -->
 </div>
 <!-- Content End -->
