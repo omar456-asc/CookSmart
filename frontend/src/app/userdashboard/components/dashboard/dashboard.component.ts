@@ -93,7 +93,7 @@ flag:any;
               this.highestRateCategory = this.category;
             }
           }
-          console.log(this.orders);
+          // console.log(this.orders);
           this.orders.push(`Order ${i + 1}`);
           this.totalPriceValues.push(this.totalPrice);
           this.totalCategory.push(this.category);
@@ -146,6 +146,7 @@ flag:any;
         };
       },
       error: (err) => {
+        this.highestRateCategory = true;
         console.log(err);
       },
     });

@@ -1,10 +1,10 @@
 .sign {
-    color: #990000;
+  color: #990000;
 }
 
 .btn1 {
-    background-color: #2e394d;
-    color: white;
+  background-color: #2e394d;
+  color: white;
 }
 
 .btn2 {
@@ -28,4 +28,38 @@
 }
 .spinner-border {
   color: #990000;
+  background-color: #990000;
+  color: white;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px;
+  font-weight: 10px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.badge-warning {
+  background-color: yellow;
+  color: #1f2d3d;
+}
+.badge-success {
+  background-color: green;
+  color: #1f2d3d;
+}
+.badge-danger {
+  background-color: #990000;
+  color: #1f2d3d;
+}
+
+.badge-secondary {
+  background-color: gray;
+  color: #1f2d3d;
+}
+.badge-primary {
+  background-color: blue;
+  color: #1f2d3d;
 }

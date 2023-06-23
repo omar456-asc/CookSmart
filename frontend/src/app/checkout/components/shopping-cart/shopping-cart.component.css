@@ -15,7 +15,7 @@ i{
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(132, 122, 122, 0.7);
+    /* background: rgba(132, 122, 122, 0.7); */
     z-index: 9;
 
 }
@@ -84,8 +84,10 @@ img {
     transition: 0.4s;
     border-radius: 50px;
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    margin: auto;
 }
+
 .quantity {
   flex-direction: column;
   justify-content: center;
