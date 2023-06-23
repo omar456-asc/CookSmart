@@ -40,7 +40,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   data2: any;
   type2: any;
   type1: any;
-
+usersOrders: any;
   //
   ingredients: any;
   summary: any;
@@ -67,7 +67,9 @@ is_chef: boolean=false;
 
 }
   ngOnInit(): void {
-    console.log(this.ID);
+    if(this.is_chef){
+      this.getAllOrder()
+    }else{
     this.UserdashboardServiceService.getOrdersByUserId(this.ID).subscribe({
       next: (data: any) => {
         this.data = data;
@@ -143,7 +145,7 @@ is_chef: boolean=false;
         console.log(err);
       },
     });
-  }
+  }}
   ngAfterViewInit() {
     const worldwideSalesCanvas = this.worldwideSalesCanvas.nativeElement;
     const salesRevenueCanvas = this.salesRevenueCanvas.nativeElement;
@@ -217,7 +219,20 @@ is_chef: boolean=false;
     );
     console.log(id, status);
   }
+  getAllOrder(){
+    this.orderService.getAllOrders().subscribe(
+      (data:any) => {
+        this.usersOrders=data
+        console.log(this.usersOrders);
+        }
+      ,
+      (err) => {
+        console.log(err);
+      }
+    );
 }
+}
+
 
 
 

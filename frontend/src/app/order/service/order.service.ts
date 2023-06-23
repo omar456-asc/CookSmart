@@ -14,7 +14,9 @@ export class OrderService {
   ) {
     this.Base_URL = this.configService.getBaseUrl('orders');
   }
-
+  getAllOrders() {
+    return this.HttpClient.get(this.Base_URL);
+  }
   CreateOrder(newOrder: any) {
     return this.HttpClient.post(this.Base_URL, newOrder);
   }

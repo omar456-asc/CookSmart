@@ -18,6 +18,7 @@ import { MealDetailsComponent } from './meals/components/meal-details/meal-detai
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AddMealComponent } from './meals/components/add-meal/add-meal.component';
 import { CustomizeMealComponent } from './checkout/components/customize-meal/customize-meal.component';
+import { ShowOrderComponent } from './order/components/show-order/show-order.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   },
   { path: 'payment', component: PaymentComponent },
   { path: 'order', component: OrderComponent },
+  {path:'order/:id',component:ShowOrderComponent},
   { path: 'profile', component: ProfileComponent},
   // { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
 

@@ -22,11 +22,12 @@ import { AuthService } from './auth/services/log-in/auth.service';
 import { TokenInterceptor } from './auth/services/log-in/Token Interceptor/TokenInterceptor';
 import { ConfigService } from './config.service';
 import { ProfileModule } from './profile/profile.module';
+import { ShowOrderComponent } from './order/components/show-order/show-order.component';
 
 
 @NgModule({
 
-  declarations: [AppComponent,MealsComponent,MealDetailsComponent, AddMealComponent],
+  declarations: [AppComponent,MealsComponent,MealDetailsComponent, AddMealComponent,ShowOrderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
