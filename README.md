@@ -90,8 +90,8 @@ The following technologies were used in the development of User Meal Planner:
 ## DEMO
 🎬
 We Hope That You are enjoying Watching Our Demo Video 
-<a href="https://www.youtube.com/">
-  <img src="" alt="Website Demo Video" width="600"/>
+<a href="https://www.youtube.com/watch?v=DpTJHoPlUJQ">
+  <img src="https://github.com/omar456-asc/CookSmart/assets/58919609/88b4155c-2bcd-4e71-8a74-c8d3ad34638d" alt="Website Demo Video" width="600"/>
 </a>
 
 # Contributers
