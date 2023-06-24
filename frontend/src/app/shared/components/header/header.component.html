@@ -19,80 +19,89 @@
     </div>
   </div> -->
 
-  <nav style="top: 0;"
+  <nav
+    style="top: 0"
     class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-0 wow fadeIn"
-
     data-wow-delay="0.1s"
   >
-    <a routerLink="" class="navbar-brand ms-4 ms-lg-0">
-      <h1 class="fw-bold m-0">Cook <span class="">Smart</span></h1>
-    </a>
-    <button
-      type="button"
-      class="navbar-toggler me-4"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarCollapse"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a routerLink="" fragment="hero" class="nav-item nav-link active"
-          >Home</a
-        >
-        <a routerLink="" fragment="why-us" class="nav-item nav-link active"
-          >Why Us
-        </a>
-        <a routerLink="" fragment="our-team" class="nav-item nav-link active"
-          >Our Team</a
-        >
-        <a routerLink="" fragment="blog" class="nav-item nav-link active"
-          >Blog</a
-        >
-        <a routerLink="" fragment="contact-us" class="nav-item nav-link active"
-          >Contact Us</a
-        >
-        <a routerLink="/about" class="nav-item nav-link active">About Us</a>
-        <a routerLink="/meals" class="nav-item nav-link active">Meals</a>
-        <a
-          routerLink=""
-          fragment="recommendation"
-          class="nav-item nav-link active"
-          >Recommendation</a
-        >
-        <div class="nav-item dropdown">
+    <div class="container">
+      <a routerLink="" class="navbar-brand ms-4 ms-lg-0">
+        <h1 class="fw-bold m-0">Cook <span class="">Smart</span></h1>
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler me-4"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a routerLink="" fragment="hero" class="nav-item nav-link active"
+            >Home</a
+          >
+          <a routerLink="" fragment="why-us" class="nav-item nav-link active"
+            >Why Us
+          </a>
+          <a routerLink="" fragment="our-team" class="nav-item nav-link active"
+            >Our Team</a
+          >
+          <a routerLink="" fragment="blog" class="nav-item nav-link active"
+            >Blog</a
+          >
           <a
-            href="#"
-            class="nav-link dropdown-toggle"
-            data-bs-toggle="dropdown"
-          ></a>
-          <div class="dropdown-menu m-0">
-            <a class="dropdown-item" (click)="logout()" *ngIf="userID"
-              >log out</a
-            >
-            <a routerLink="/auth" class="dropdown-item" *ngIf="!userID"
-              >log-in</a
-            >
-            <a routerLink="/user" class="dropdown-item">Dashboard</a>
-            <a routerLink="/profile" class="dropdown-item">
-              <small class="fa fa-user text-body"></small> Profile
-            </a>
+            routerLink=""
+            fragment="contact-us"
+            class="nav-item nav-link active"
+            >Contact Us</a
+          >
+          <a routerLink="/about" class="nav-item nav-link active">About Us</a>
+          <a routerLink="/meals" class="nav-item nav-link active">Meals</a>
+          <a
+            routerLink=""
+            fragment="recommendation"
+            class="nav-item nav-link active"
+            >Recommendation</a
+          >
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+            ></a>
+            <div class="dropdown-menu m-0">
+              <a class="dropdown-item" (click)="logout()" *ngIf="userID"
+                ><small class="fa fa-sign-in-alt text-body"></small> log out</a
+              >
+              <a routerLink="/auth" class="dropdown-item" *ngIf="!userID"
+                ><small class="fa fa-sign-in-alt text-body"></small>  log-in</a
+              >
+              <a routerLink="/user" class="dropdown-item"> <small class="fa fa-tachometer-alt"></small> Dashboard</a>
+              <a routerLink="/profile" class="dropdown-item">
+                <small class="fa fa-user text-body"></small> Profile
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="d-none d-lg-flex ms-2">
-        <!-- <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+        <div class="d-none d-lg-flex ms-2">
+          <!-- <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
           <small class="fa fa-search text-body"></small>
         </a> -->
-        <!-- <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+          <!-- <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="/profile">
           <small class="fa fa-user text-body"></small>
         </a> -->
-        <a class="btn-sm-square bg-white rounded-circle ms-3" routerLink="/cart" >
-          <small class="fa fa-shopping-bag text-body"> {{cartCount }}</small>
-        </a>
+          <a
+            class="btn-sm-square bg-white rounded-circle ms-3"
+            routerLink="/cart"
+          >
+            <small class="fa fa-shopping-bag text-body"> {{ cartCount }}</small>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
 </div>
+
 <!-- Navbar End -->
